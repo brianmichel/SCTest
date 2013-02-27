@@ -71,8 +71,6 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
 
 #pragma mark - Actions
 - (void)login:(id)sender {
-  __weak AppViewController *weakSelf = self;
-
   SCLoginViewControllerCompletionHandler handler = ^(NSError *error) {
 	if (SC_CANCELED(error)) {
 	  NSLog(@"Canceled!");

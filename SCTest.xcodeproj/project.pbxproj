@@ -11,6 +11,7 @@
 		72CA4D2416DE904F002C5A1E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CA4D2316DE904F002C5A1E /* QuartzCore.framework */; };
 		72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2616DE9152002C5A1E /* EntranceViewController.m */; };
 		72CA4D2A16DE9163002C5A1E /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2916DE9163002C5A1E /* DiscoveryViewController.m */; };
+		72CA4D3316DEA3E9002C5A1E /* UserActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D3216DEA3E9002C5A1E /* UserActivitiesViewController.m */; };
 		72FD5A2A16DE7B7000B2AA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2916DE7B7000B2AA28 /* UIKit.framework */; };
 		72FD5A2C16DE7B7000B2AA28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */; };
 		72FD5A2E16DE7B7000B2AA28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2D16DE7B7000B2AA28 /* CoreGraphics.framework */; };
@@ -32,6 +33,8 @@
 		72CA4D2616DE9152002C5A1E /* EntranceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntranceViewController.m; path = Classes/EntranceViewController.m; sourceTree = "<group>"; };
 		72CA4D2816DE9163002C5A1E /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoveryViewController.h; path = Classes/DiscoveryViewController.h; sourceTree = "<group>"; };
 		72CA4D2916DE9163002C5A1E /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoveryViewController.m; path = Classes/DiscoveryViewController.m; sourceTree = "<group>"; };
+		72CA4D3116DEA3E9002C5A1E /* UserActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserActivitiesViewController.h; path = Classes/UserActivitiesViewController.h; sourceTree = "<group>"; };
+		72CA4D3216DEA3E9002C5A1E /* UserActivitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserActivitiesViewController.m; path = Classes/UserActivitiesViewController.m; sourceTree = "<group>"; };
 		72FD5A2616DE7B7000B2AA28 /* SCTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72FD5A2916DE7B7000B2AA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -64,6 +67,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		72CA4D2B16DEA2EB002C5A1E /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				72CA4D2816DE9163002C5A1E /* DiscoveryViewController.h */,
+				72CA4D2916DE9163002C5A1E /* DiscoveryViewController.m */,
+				72CA4D3116DEA3E9002C5A1E /* UserActivitiesViewController.h */,
+				72CA4D3216DEA3E9002C5A1E /* UserActivitiesViewController.m */,
+			);
+			name = Discovery;
+			sourceTree = "<group>";
+		};
+		72CA4D2C16DEA2F3002C5A1E /* Entrance (Login) */ = {
+			isa = PBXGroup;
+			children = (
+				72CA4D2516DE9152002C5A1E /* EntranceViewController.h */,
+				72CA4D2616DE9152002C5A1E /* EntranceViewController.m */,
+			);
+			name = "Entrance (Login)";
+			sourceTree = "<group>";
+		};
+		72CA4D2D16DEA309002C5A1E /* Main App Hierarchy */ = {
+			isa = PBXGroup;
+			children = (
+				72FD5A3816DE7B7000B2AA28 /* AppDelegate.h */,
+				72FD5A3916DE7B7000B2AA28 /* AppDelegate.m */,
+				72CA4D2016DE8960002C5A1E /* AppViewController.h */,
+				72CA4D2116DE8960002C5A1E /* AppViewController.m */,
+			);
+			name = "Main App Hierarchy";
+			sourceTree = "<group>";
+		};
 		72FD5A1D16DE7B7000B2AA28 = {
 			isa = PBXGroup;
 			children = (
@@ -97,14 +131,9 @@
 		72FD5A2F16DE7B7000B2AA28 /* SCTest */ = {
 			isa = PBXGroup;
 			children = (
-				72FD5A3816DE7B7000B2AA28 /* AppDelegate.h */,
-				72FD5A3916DE7B7000B2AA28 /* AppDelegate.m */,
-				72CA4D2016DE8960002C5A1E /* AppViewController.h */,
-				72CA4D2116DE8960002C5A1E /* AppViewController.m */,
-				72CA4D2516DE9152002C5A1E /* EntranceViewController.h */,
-				72CA4D2616DE9152002C5A1E /* EntranceViewController.m */,
-				72CA4D2816DE9163002C5A1E /* DiscoveryViewController.h */,
-				72CA4D2916DE9163002C5A1E /* DiscoveryViewController.m */,
+				72CA4D2D16DEA309002C5A1E /* Main App Hierarchy */,
+				72CA4D2C16DEA2F3002C5A1E /* Entrance (Login) */,
+				72CA4D2B16DEA2EB002C5A1E /* Discovery */,
 				72FD5A3016DE7B7000B2AA28 /* Supporting Files */,
 			);
 			path = SCTest;
@@ -212,6 +241,7 @@
 				72CA4D2216DE8960002C5A1E /* AppViewController.m in Sources */,
 				72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */,
 				72CA4D2A16DE9163002C5A1E /* DiscoveryViewController.m in Sources */,
+				72CA4D3316DEA3E9002C5A1E /* UserActivitiesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
