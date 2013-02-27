@@ -1,0 +1,14 @@
+
+PODS:
+- CocoaSoundCloudAPI (1.0.1):
+  - NXOAuth2Client (= 1.2.1)
+- NXOAuth2Client (1.2.1)
+
+DEPENDENCIES:
+- CocoaSoundCloudAPI (= 1.0.1)
+
+SPEC CHECKSUMS:
+  CocoaSoundCloudAPI: 71e8ac175772ed161bbff6f46f04b171136a8292
+  NXOAuth2Client: 478bc4f9a04e7ba9908b6c40f8669321676af0ee
+
+COCOAPODS: 0.16.4
