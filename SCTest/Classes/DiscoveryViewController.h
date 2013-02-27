@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DiscoveryViewController.h
 //  SCTest
 //
 //  Created by Brian Michel on 2/27/13.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface DiscoveryViewController : UIViewController
+
+@property (strong, readonly) UIButton *logoutButton;
 
 @end
