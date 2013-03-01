@@ -8,6 +8,7 @@
 
 #import "DiscoveryViewController.h"
 #import "UserActivitiesViewController.h"
+#import "UserProfileViewController.h"
 
 @interface DiscoveryViewController()
 @property (strong) UserActivitiesViewController *activitiesVC;
@@ -15,16 +16,18 @@
 
 @implementation DiscoveryViewController
 
-@synthesize logoutButton = _logoutButton;
+@synthesize profileViewController = _profileViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-	_logoutButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[_logoutButton setTitle:@"Logout" forState:UIControlStateNormal];
-	[_logoutButton sizeToFit];
-	
-	self.activitiesVC = [[UserActivitiesViewController alloc] initWithNibName:nil bundle:nil];
+    
+    _profileViewController = [[UserProfileViewController alloc] initWithNibName:nil bundle:nil];
+    _profileViewController.view.backgroundColor = [UIColor blueColor];
+    
+    self.activitiesVC = [[UserActivitiesViewController alloc] initWithNibName:nil bundle:nil];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Open" style:UIBarButtonItemStyleBordered target:self action:@selector(open:)];
   }
   return self;
 }
@@ -32,18 +35,13 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.view.backgroundColor = [UIColor orangeColor];
-  self.activitiesVC.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
-  [self.view addSubview:self.logoutButton];
+  self.activitiesVC.view.frame = self.view.bounds;
   [self.view addSubview:self.activitiesVC.view];
 }
 
-- (void)viewDidLayoutSubviews {
-  [super viewDidLayoutSubviews];
-  _logoutButton.frame = CGRectIntegral(CGRectMake(self.view.frame.size.width/2 - _logoutButton.frame.size.width/2, self.view.frame.size.height/2 - _logoutButton.frame.size.height/2, _logoutButton.frame.size.width, _logoutButton.frame.size.height));
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:animated];
+#pragma mark - Actions
+- (void)open:(id)sender {
+  [self.sidePanelController showLeftPanelAnimated:YES];
 }
 
 - (void)dealloc {

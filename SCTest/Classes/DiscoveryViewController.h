@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class UserProfileViewController;
 @interface DiscoveryViewController : UIViewController
 
-@property (strong, readonly) UIButton *logoutButton;
+@property (strong, readonly) UserProfileViewController *profileViewController;
 
 @end

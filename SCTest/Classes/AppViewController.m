@@ -10,6 +10,7 @@
 #import <SCSoundCloud.h>
 #import <SCLoginViewController.h>
 #import <SCUI.h>
+#import <JASidePanelController.h>
 
 #import "EntranceViewController.h"
 #import "DiscoveryViewController.h"
@@ -19,7 +20,7 @@ NSString * const kSCClientSecret = @"824197cf7d317485720eae97f01a322d";
 NSString * const kSCClientRedirectURL = @"sctest://oauth";
 
 @interface AppViewController ()
-@property (strong) DiscoveryViewController *discoveryViewController;
+@property (strong) JASidePanelController *discoveryViewController;
 @property (strong) EntranceViewController *entranceViewController;
 @end
 
@@ -125,9 +126,12 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
 }
 
 - (void)setupDiscoveryViewController {
-  self.discoveryViewController = [[DiscoveryViewController alloc] initWithNibName:nil bundle:nil];
+  self.discoveryViewController = [[JASidePanelController alloc] init];
+  DiscoveryViewController *discovery = [[DiscoveryViewController alloc] initWithNibName:nil bundle:nil];
+  self.discoveryViewController.centerPanel = [[UINavigationController alloc] initWithRootViewController:discovery];
+  self.discoveryViewController.leftPanel = discovery.profileViewController;
+  
   self.discoveryViewController.view.frame = self.view.bounds;
-  [self.discoveryViewController.logoutButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
   [self addChildViewController:self.discoveryViewController];
   
   if (self.entranceViewController) {

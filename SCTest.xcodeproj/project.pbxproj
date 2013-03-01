@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7228354C16E0434400C7E6C1 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228354B16E0434400C7E6C1 /* UserProfileViewController.m */; };
 		72CA4D2216DE8960002C5A1E /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2116DE8960002C5A1E /* AppViewController.m */; };
 		72CA4D2416DE904F002C5A1E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CA4D2316DE904F002C5A1E /* QuartzCore.framework */; };
 		72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2616DE9152002C5A1E /* EntranceViewController.m */; };
@@ -26,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		4BD8A59E8D9441F2BBD7815E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7228354A16E0434400C7E6C1 /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserProfileViewController.h; path = Classes/UserProfileViewController.h; sourceTree = "<group>"; };
+		7228354B16E0434400C7E6C1 /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileViewController.m; path = Classes/UserProfileViewController.m; sourceTree = "<group>"; };
 		72CA4D2016DE8960002C5A1E /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = Classes/AppViewController.h; sourceTree = "<group>"; };
 		72CA4D2116DE8960002C5A1E /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppViewController.m; path = Classes/AppViewController.m; sourceTree = "<group>"; };
 		72CA4D2316DE904F002C5A1E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -74,6 +77,8 @@
 				72CA4D2916DE9163002C5A1E /* DiscoveryViewController.m */,
 				72CA4D3116DEA3E9002C5A1E /* UserActivitiesViewController.h */,
 				72CA4D3216DEA3E9002C5A1E /* UserActivitiesViewController.m */,
+				7228354A16E0434400C7E6C1 /* UserProfileViewController.h */,
+				7228354B16E0434400C7E6C1 /* UserProfileViewController.m */,
 			);
 			name = Discovery;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */,
 				72CA4D2A16DE9163002C5A1E /* DiscoveryViewController.m in Sources */,
 				72CA4D3316DEA3E9002C5A1E /* UserActivitiesViewController.m in Sources */,
+				7228354C16E0434400C7E6C1 /* UserProfileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

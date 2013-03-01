@@ -12,4 +12,10 @@
   #import <UIKit/UIKit.h>
   #import <Foundation/Foundation.h>
   #import <QuartzCore/QuartzCore.h>
+  #import <JASidePanelController.h>
+  #import <UIViewController+JASidePanel.h>
+  #import  "AppDelegate.h"
+  #import "AppViewController.h"
+
+  #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 #endif
