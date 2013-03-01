@@ -23,7 +23,6 @@
   if (self) {
     
     _profileViewController = [[UserProfileViewController alloc] initWithNibName:nil bundle:nil];
-    _profileViewController.view.backgroundColor = [UIColor blueColor];
     
     self.activitiesVC = [[UserActivitiesViewController alloc] initWithNibName:nil bundle:nil];
     

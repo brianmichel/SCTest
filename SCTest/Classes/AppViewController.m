@@ -57,9 +57,7 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
 
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
-  [super viewDidLoad];
-  self.view.backgroundColor = [UIColor greenColor];
-  
+  [super viewDidLoad];  
   self.entranceViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
   self.entranceViewController.view.frame = self.view.bounds;
   

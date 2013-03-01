@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7228354C16E0434400C7E6C1 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228354B16E0434400C7E6C1 /* UserProfileViewController.m */; };
+		7228355016E04E2600C7E6C1 /* ProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228354F16E04E2600C7E6C1 /* ProfileView.m */; };
+		7228355616E0664000C7E6C1 /* avatar-inset.png in Resources */ = {isa = PBXBuildFile; fileRef = 7228355416E0664000C7E6C1 /* avatar-inset.png */; };
+		7228355716E0664000C7E6C1 /* avatar-inset@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7228355516E0664000C7E6C1 /* avatar-inset@2x.png */; };
+		7228355A16E0699800C7E6C1 /* BaseProfileTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228355916E0699700C7E6C1 /* BaseProfileTableViewCell.m */; };
 		72CA4D2216DE8960002C5A1E /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2116DE8960002C5A1E /* AppViewController.m */; };
 		72CA4D2416DE904F002C5A1E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CA4D2316DE904F002C5A1E /* QuartzCore.framework */; };
 		72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2616DE9152002C5A1E /* EntranceViewController.m */; };
@@ -29,6 +33,12 @@
 		4BD8A59E8D9441F2BBD7815E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7228354A16E0434400C7E6C1 /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserProfileViewController.h; path = Classes/UserProfileViewController.h; sourceTree = "<group>"; };
 		7228354B16E0434400C7E6C1 /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileViewController.m; path = Classes/UserProfileViewController.m; sourceTree = "<group>"; };
+		7228354E16E04E2600C7E6C1 /* ProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileView.h; path = Classes/ProfileView.h; sourceTree = "<group>"; };
+		7228354F16E04E2600C7E6C1 /* ProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileView.m; path = Classes/ProfileView.m; sourceTree = "<group>"; };
+		7228355416E0664000C7E6C1 /* avatar-inset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "avatar-inset.png"; path = "Resources/avatar-inset.png"; sourceTree = "<group>"; };
+		7228355516E0664000C7E6C1 /* avatar-inset@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "avatar-inset@2x.png"; path = "Resources/avatar-inset@2x.png"; sourceTree = "<group>"; };
+		7228355816E0699700C7E6C1 /* BaseProfileTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseProfileTableViewCell.h; path = Classes/BaseProfileTableViewCell.h; sourceTree = "<group>"; };
+		7228355916E0699700C7E6C1 /* BaseProfileTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseProfileTableViewCell.m; path = Classes/BaseProfileTableViewCell.m; sourceTree = "<group>"; };
 		72CA4D2016DE8960002C5A1E /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = Classes/AppViewController.h; sourceTree = "<group>"; };
 		72CA4D2116DE8960002C5A1E /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppViewController.m; path = Classes/AppViewController.m; sourceTree = "<group>"; };
 		72CA4D2316DE904F002C5A1E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -70,15 +80,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7228354D16E04E0F00C7E6C1 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7228354A16E0434400C7E6C1 /* UserProfileViewController.h */,
+				7228354B16E0434400C7E6C1 /* UserProfileViewController.m */,
+				7228354E16E04E2600C7E6C1 /* ProfileView.h */,
+				7228354F16E04E2600C7E6C1 /* ProfileView.m */,
+				7228355816E0699700C7E6C1 /* BaseProfileTableViewCell.h */,
+				7228355916E0699700C7E6C1 /* BaseProfileTableViewCell.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		7228355116E05F2700C7E6C1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7228355416E0664000C7E6C1 /* avatar-inset.png */,
+				7228355516E0664000C7E6C1 /* avatar-inset@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		72CA4D2B16DEA2EB002C5A1E /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
+				7228354D16E04E0F00C7E6C1 /* Profile */,
 				72CA4D2816DE9163002C5A1E /* DiscoveryViewController.h */,
 				72CA4D2916DE9163002C5A1E /* DiscoveryViewController.m */,
 				72CA4D3116DEA3E9002C5A1E /* UserActivitiesViewController.h */,
 				72CA4D3216DEA3E9002C5A1E /* UserActivitiesViewController.m */,
-				7228354A16E0434400C7E6C1 /* UserProfileViewController.h */,
-				7228354B16E0434400C7E6C1 /* UserProfileViewController.m */,
 			);
 			name = Discovery;
 			sourceTree = "<group>";
@@ -136,6 +167,7 @@
 		72FD5A2F16DE7B7000B2AA28 /* SCTest */ = {
 			isa = PBXGroup;
 			children = (
+				7228355116E05F2700C7E6C1 /* Resources */,
 				72CA4D2D16DEA309002C5A1E /* Main App Hierarchy */,
 				72CA4D2C16DEA2F3002C5A1E /* Entrance (Login) */,
 				72CA4D2B16DEA2EB002C5A1E /* Discovery */,
@@ -214,6 +246,8 @@
 				72FD5A3C16DE7B7100B2AA28 /* Default.png in Resources */,
 				72FD5A3E16DE7B7100B2AA28 /* Default@2x.png in Resources */,
 				72FD5A4016DE7B7100B2AA28 /* Default-568h@2x.png in Resources */,
+				7228355616E0664000C7E6C1 /* avatar-inset.png in Resources */,
+				7228355716E0664000C7E6C1 /* avatar-inset@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +282,8 @@
 				72CA4D2A16DE9163002C5A1E /* DiscoveryViewController.m in Sources */,
 				72CA4D3316DEA3E9002C5A1E /* UserActivitiesViewController.m in Sources */,
 				7228354C16E0434400C7E6C1 /* UserProfileViewController.m in Sources */,
+				7228355016E04E2600C7E6C1 /* ProfileView.m in Sources */,
+				7228355A16E0699800C7E6C1 /* BaseProfileTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +366,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SCTest/SCTest-Prefix.pch";
 				INFOPLIST_FILE = "SCTest/SCTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -342,6 +379,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SCTest/SCTest-Prefix.pch";
 				INFOPLIST_FILE = "SCTest/SCTest-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

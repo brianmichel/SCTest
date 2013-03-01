@@ -7,8 +7,6 @@
 //
 
 #import "UserActivitiesViewController.h"
-#import <SCRequest.h>
-#import <SCSoundCloud.h>
 
 NSString * const kUserActivitiesNextHREFKey = @"next_href";
 NSString * const kUserActivitiesCollectionsKey = @"collection";

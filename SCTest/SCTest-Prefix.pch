@@ -12,8 +12,11 @@
   #import <UIKit/UIKit.h>
   #import <Foundation/Foundation.h>
   #import <QuartzCore/QuartzCore.h>
+  #import <SCRequest.h>
+  #import <SCSoundCloud.h>
   #import <JASidePanelController.h>
   #import <UIViewController+JASidePanel.h>
+  #import <UIImageView+WebCache.h>
   #import  "AppDelegate.h"
   #import "AppViewController.h"
 

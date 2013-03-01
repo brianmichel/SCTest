@@ -9,16 +9,19 @@
 #import "EntranceViewController.h"
 #import <SCGradientButton.h>
 
+@interface EntranceViewController ()
+@end
+
 @implementation EntranceViewController
 
 @synthesize loginButton = _loginButton;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-  if (self) {
-	_loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[_loginButton setTitle:@"Login" forState:UIControlStateNormal];
-	[_loginButton sizeToFit];
+  if (self) {    
+    _loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_loginButton setTitle:@"Login" forState:UIControlStateNormal];
+    [_loginButton sizeToFit];
   }
   return self;
 }
