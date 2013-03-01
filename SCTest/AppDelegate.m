@@ -19,6 +19,8 @@
   
   self.window.rootViewController = self.viewController;
   [self.window makeKeyAndVisible];
+  
+  [self setupAppearanceProxy];
   return YES;
 }
 
@@ -47,6 +49,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Actions
+- (void)setupAppearanceProxy {
+  [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageNamed:@"navbar-bkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1)] forBarMetrics:UIBarMetricsDefault];
 }
 
 @end

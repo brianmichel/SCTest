@@ -23,11 +23,12 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-	self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-	self.tableView.dataSource = self;
-	self.tableView.delegate = self;
-	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-	self.tracks = [NSMutableArray arrayWithCapacity:0];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    self.tracks = [NSMutableArray arrayWithCapacity:0];
+    self.tableView.backgroundColor = [UIColor colorWithRed:229/256.0 green:229/256.0 blue:229/256.0 alpha:1.0];
   }
   return self;
 }
@@ -54,7 +55,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
   
   if (!cell) {
-	cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
   }
   
   NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
@@ -71,13 +72,13 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%@", [track valueForKeyPath:@"origin.id"]]];
   
   if ([[UIApplication sharedApplication] canOpenURL:url]) {
-	[[UIApplication sharedApplication] openURL:url];
+    [[UIApplication sharedApplication] openURL:url];
   }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
   if (scrollView.contentOffset.y / scrollView.contentSize.height >= 0.6) {
-	[self loadNextTracks];
+    [self loadNextTracks];
   }
 }
 
@@ -87,58 +88,58 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   
   SCAccount *account = [SCSoundCloud account];
   if (account == nil) {
-	UIAlertView *alert = [[UIAlertView alloc]
-						  initWithTitle:@"Not Logged In"
-						  message:@"You must login first"
-						  delegate:nil
-						  cancelButtonTitle:@"OK"
-						  otherButtonTitles:nil];
-	[alert show];
-	return;
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"Not Logged In"
+                          message:@"You must login first"
+                          delegate:nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles:nil];
+    [alert show];
+    return;
   }
   
   //if we've retreived tracks before, but were unable
   //get the next url cursor, bail.
   if ([self.tracks count] && !self.nextHREFToLoad) {
-	return;
+    return;
   }
   
   NSURL *resourceURL = !self.nextHREFToLoad ? [NSURL URLWithString:@"https://api.soundcloud.com/me/activities.json"] : self.nextHREFToLoad;
   
   SCRequestResponseHandler handler;
   handler = ^(NSURLResponse *response, NSData *data, NSError *error) {
-	NSError *jsonError = nil;
-	NSJSONSerialization *jsonResponse = [NSJSONSerialization
-										 JSONObjectWithData:data
-										 options:0
-										 error:&jsonError];
-	
-	if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
-	  NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
-	  NSString *nextHREF = dictionaryResponse[kUserActivitiesNextHREFKey];
-	  
-	  /*begin ghetto
-	   It looks like the next_href doesn't respect the initial request type.
-	  */
-	  NSArray *comps = [nextHREF componentsSeparatedByString:@"?"];
-	  if ([comps count] == 2) {
-		nextHREF = [NSString stringWithFormat:@"%@.json?%@", comps[0], comps[1]];
-	  }
-	  //end ghetto
-	  NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
-	  self.nextHREFToLoad = !nextHREF ? nil : [NSURL URLWithString:nextHREF];
-	  [self mergeNewTracks:collection];
-	  self.loadingMore = NO;
-	}
+    NSError *jsonError = nil;
+    NSJSONSerialization *jsonResponse = [NSJSONSerialization
+                                         JSONObjectWithData:data
+                                         options:0
+                                         error:&jsonError];
+    
+    if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
+      NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
+      NSString *nextHREF = dictionaryResponse[kUserActivitiesNextHREFKey];
+      
+      /*begin ghetto
+       It looks like the next_href doesn't respect the initial request type.
+       */
+      NSArray *comps = [nextHREF componentsSeparatedByString:@"?"];
+      if ([comps count] == 2) {
+        nextHREF = [NSString stringWithFormat:@"%@.json?%@", comps[0], comps[1]];
+      }
+      //end ghetto
+      NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
+      self.nextHREFToLoad = !nextHREF ? nil : [NSURL URLWithString:nextHREF];
+      [self mergeNewTracks:collection];
+      self.loadingMore = NO;
+    }
   };
   
   self.loadingMore = YES;
   [SCRequest performMethod:SCRequestMethodGET
-				onResource:resourceURL
-		   usingParameters:nil
-			   withAccount:account
-	sendingProgressHandler:nil
-		   responseHandler:handler];
+                onResource:resourceURL
+           usingParameters:nil
+               withAccount:account
+    sendingProgressHandler:nil
+           responseHandler:handler];
 }
 
 - (void)mergeNewTracks:(NSArray *)tracksCollection {

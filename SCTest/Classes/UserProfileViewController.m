@@ -57,7 +57,7 @@ NSString * const kUserProfileAPIURLString = @"https://api.soundcloud.com/me.json
   [super viewDidLoad];
   [self.view addSubview:self.profileView];
   [self.view addSubview:self.tableView];
-  self.view.backgroundColor = [UIColor colorWithWhite:0.22 alpha:1.0];
+  self.view.backgroundColor = [UIColor colorWithWhite:0.27 alpha:1.0];
 	// Do any additional setup after loading the view.
   if (!self.profileView.userInformationDictionary) {
     [self loadUserProfile];
@@ -72,6 +72,10 @@ NSString * const kUserProfileAPIURLString = @"https://api.soundcloud.com/me.json
 }
 
 #pragma mark - UITableView Datasource / Delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return 60.0;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
@@ -89,7 +93,17 @@ NSString * const kUserProfileAPIURLString = @"https://api.soundcloud.com/me.json
     cell = [[BaseProfileTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
   }
   
-  cell.textLabel.text = indexPath.row == 0 ? @"Open Soundcloud" : @"Logout";
+  switch (indexPath.row) {
+    case 0:
+      cell.textLabel.text = @"Open Soundcloud";
+      cell.textLabel.textAlignment = UITextAlignmentLeft;
+      break;
+    case 1:
+      cell.textLabel.text = @"Logout";
+      cell.textLabel.textAlignment = UITextAlignmentCenter;
+    default:
+      break;
+  }
   return cell;
 }
 

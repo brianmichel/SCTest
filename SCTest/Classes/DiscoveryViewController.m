@@ -26,7 +26,13 @@
     
     self.activitiesVC = [[UserActivitiesViewController alloc] initWithNibName:nil bundle:nil];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Open" style:UIBarButtonItemStyleBordered target:self action:@selector(open:)];
+    UIButton *hamburgerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [hamburgerButton setImage:[UIImage imageNamed:@"hamburger-icon"] forState:UIControlStateNormal];
+    hamburgerButton.showsTouchWhenHighlighted = YES;
+    hamburgerButton.adjustsImageWhenHighlighted = YES;
+    [hamburgerButton addTarget:self action:@selector(open:) forControlEvents:UIControlEventTouchUpInside];
+    [hamburgerButton sizeToFit];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:hamburgerButton];
   }
   return self;
 }
