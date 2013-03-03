@@ -27,6 +27,8 @@
 		72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2616DE9152002C5A1E /* EntranceViewController.m */; };
 		72CA4D2A16DE9163002C5A1E /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2916DE9163002C5A1E /* DiscoveryViewController.m */; };
 		72CA4D3316DEA3E9002C5A1E /* UserActivitiesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D3216DEA3E9002C5A1E /* UserActivitiesViewController.m */; };
+		72CA4D3616E3A5B7002C5A1E /* avatar-holder-bkg.png in Resources */ = {isa = PBXBuildFile; fileRef = 72CA4D3416E3A5B7002C5A1E /* avatar-holder-bkg.png */; };
+		72CA4D3716E3A5B7002C5A1E /* avatar-holder-bkg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72CA4D3516E3A5B7002C5A1E /* avatar-holder-bkg@2x.png */; };
 		72FD5A2A16DE7B7000B2AA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2916DE7B7000B2AA28 /* UIKit.framework */; };
 		72FD5A2C16DE7B7000B2AA28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */; };
 		72FD5A2E16DE7B7000B2AA28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2D16DE7B7000B2AA28 /* CoreGraphics.framework */; };
@@ -73,6 +75,8 @@
 		72CA4D2916DE9163002C5A1E /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoveryViewController.m; path = Classes/DiscoveryViewController.m; sourceTree = "<group>"; };
 		72CA4D3116DEA3E9002C5A1E /* UserActivitiesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserActivitiesViewController.h; path = Classes/UserActivitiesViewController.h; sourceTree = "<group>"; };
 		72CA4D3216DEA3E9002C5A1E /* UserActivitiesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserActivitiesViewController.m; path = Classes/UserActivitiesViewController.m; sourceTree = "<group>"; };
+		72CA4D3416E3A5B7002C5A1E /* avatar-holder-bkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "avatar-holder-bkg.png"; path = "Resources/avatar-holder-bkg.png"; sourceTree = "<group>"; };
+		72CA4D3516E3A5B7002C5A1E /* avatar-holder-bkg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "avatar-holder-bkg@2x.png"; path = "Resources/avatar-holder-bkg@2x.png"; sourceTree = "<group>"; };
 		72FD5A2616DE7B7000B2AA28 /* SCTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72FD5A2916DE7B7000B2AA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -121,6 +125,8 @@
 		7228355116E05F2700C7E6C1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				72CA4D3416E3A5B7002C5A1E /* avatar-holder-bkg.png */,
+				72CA4D3516E3A5B7002C5A1E /* avatar-holder-bkg@2x.png */,
 				7228356416E0835800C7E6C1 /* soundcloud-header-icon.png */,
 				7228356516E0835800C7E6C1 /* soundcloud-header-icon@2x.png */,
 				7228356016E07E2A00C7E6C1 /* hamburger-icon.png */,
@@ -165,7 +171,7 @@
 				7228357316E2E20900C7E6C1 /* FSNData.m */,
 			);
 			name = FSNetworking;
-			path = Dependencies/FSNetworking/src;
+			path = Depedencies/FSNetworking/src;
 			sourceTree = SOURCE_ROOT;
 		};
 		72CA4D2B16DEA2EB002C5A1E /* Discovery */ = {
@@ -319,6 +325,8 @@
 				7228356316E07E2B00C7E6C1 /* hamburger-icon@2x.png in Resources */,
 				7228356616E0835800C7E6C1 /* soundcloud-header-icon.png in Resources */,
 				7228356716E0835800C7E6C1 /* soundcloud-header-icon@2x.png in Resources */,
+				72CA4D3616E3A5B7002C5A1E /* avatar-holder-bkg.png in Resources */,
+				72CA4D3716E3A5B7002C5A1E /* avatar-holder-bkg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

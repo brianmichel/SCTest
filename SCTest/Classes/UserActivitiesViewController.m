@@ -79,9 +79,13 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   NSLog(@"TRACK: %@", track);
   
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%@", [track valueForKeyPath:@"origin.id"]]];
+  NSURL *permaLink = [NSURL URLWithString:[track valueForKeyPath:@"origin.permalink_url"]];
   
+  //Give priority to SC App, fail over to web.
   if ([[UIApplication sharedApplication] canOpenURL:url]) {
     [[UIApplication sharedApplication] openURL:url];
+  } else if	(permaLink) {
+	[[UIApplication sharedApplication] openURL:permaLink];
   }
 }
 

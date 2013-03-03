@@ -77,7 +77,7 @@
   NSString *lastPath = [waveFormURL lastPathComponent];
   NSArray *lastPathComponents = [lastPath componentsSeparatedByString:@"_"];
   if ([lastPathComponents count] == 2) {
-    lastPath = [NSString stringWithFormat:@"%@_s.png", lastPathComponents[0]];
+    lastPath = [NSString stringWithFormat:@"%@_m.png", lastPathComponents[0]];
   }
   waveFormURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://wis.sndcdn.com/%@", lastPath]];
   

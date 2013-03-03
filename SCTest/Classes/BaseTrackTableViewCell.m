@@ -148,7 +148,7 @@ static SORelativeDateTransformer *relativeDateTransformer;
   NSString *artworkURL = [_trackInformationDictionary valueForKeyPath:@"origin.artwork_url"] ? [_trackInformationDictionary valueForKeyPath:@"origin.artwork_url"] : [_trackInformationDictionary valueForKeyPath:@"origin.user.avatar_url"];
   
   if (artworkURL && ![artworkURL isKindOfClass:[NSNull class]]) {
-    [self.imageView setImageWithURL:[NSURL URLWithString:artworkURL]];
+	[self.imageView setImageWithURL:[NSURL URLWithString:artworkURL] placeholderImage:[UIImage imageNamed:@"avatar-holder-bkg"]];
   }
   
   NSString *waveFormURL = [_trackInformationDictionary valueForKeyPath:@"origin.waveform_url"];
