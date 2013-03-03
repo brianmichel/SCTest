@@ -38,7 +38,7 @@ static SORelativeDateTransformer *relativeDateTransformer;
   height += [title sizeWithFont:kBaseTrackDetailFont constrainedToSize:constrainSize lineBreakMode:UILineBreakModeWordWrap].height;
   height += [user sizeWithFont:kBaseTrackTitleFont constrainedToSize:constrainSize lineBreakMode:UILineBreakModeWordWrap].height;
   
-  height += 10;
+  height += 10 + 30;
   
   return height >= 44 ? height : 44;
 }
@@ -91,7 +91,7 @@ static SORelativeDateTransformer *relativeDateTransformer;
   self.imageView.frame = CGRectMake(5, 5, kBaseTrackTableViewCellImageHW, kBaseTrackTableViewCellImageHW);
   self.textLabel.frame = CGRectMake(CGRectGetMaxX(self.imageView.frame) + 5, 5, self.textLabel.frame.size.width, self.textLabel.frame.size.height);
   self.detailTextLabel.frame = CGRectMake(self.textLabel.frame.origin.x, CGRectGetMaxY(self.textLabel.frame), self.detailTextLabel.frame.size.width, self.detailTextLabel.frame.size.height);
-  self.waveFormView.frame = self.bounds;
+  self.waveFormView.frame = CGRectMake(0, CGRectGetMaxY(self.bounds) - 60, self.frame.size.width, 60);
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

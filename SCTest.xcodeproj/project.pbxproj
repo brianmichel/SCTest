@@ -19,6 +19,9 @@
 		7228356616E0835800C7E6C1 /* soundcloud-header-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7228356416E0835800C7E6C1 /* soundcloud-header-icon.png */; };
 		7228356716E0835800C7E6C1 /* soundcloud-header-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7228356516E0835800C7E6C1 /* soundcloud-header-icon@2x.png */; };
 		7228356B16E1244900C7E6C1 /* WaveFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228356A16E1244900C7E6C1 /* WaveFormView.m */; };
+		7228357416E2E20900C7E6C1 /* FSN_categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228356F16E2E20900C7E6C1 /* FSN_categories.m */; };
+		7228357516E2E20900C7E6C1 /* FSNConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228357116E2E20900C7E6C1 /* FSNConnection.m */; };
+		7228357616E2E20900C7E6C1 /* FSNData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228357316E2E20900C7E6C1 /* FSNData.m */; };
 		72CA4D2216DE8960002C5A1E /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2116DE8960002C5A1E /* AppViewController.m */; };
 		72CA4D2416DE904F002C5A1E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CA4D2316DE904F002C5A1E /* QuartzCore.framework */; };
 		72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2616DE9152002C5A1E /* EntranceViewController.m */; };
@@ -55,6 +58,12 @@
 		7228356516E0835800C7E6C1 /* soundcloud-header-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud-header-icon@2x.png"; path = "Resources/soundcloud-header-icon@2x.png"; sourceTree = "<group>"; };
 		7228356916E1244900C7E6C1 /* WaveFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveFormView.h; path = Classes/WaveFormView.h; sourceTree = "<group>"; };
 		7228356A16E1244900C7E6C1 /* WaveFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaveFormView.m; path = Classes/WaveFormView.m; sourceTree = "<group>"; };
+		7228356E16E2E20900C7E6C1 /* FSN_categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSN_categories.h; sourceTree = "<group>"; };
+		7228356F16E2E20900C7E6C1 /* FSN_categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSN_categories.m; sourceTree = "<group>"; };
+		7228357016E2E20900C7E6C1 /* FSNConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSNConnection.h; sourceTree = "<group>"; };
+		7228357116E2E20900C7E6C1 /* FSNConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSNConnection.m; sourceTree = "<group>"; };
+		7228357216E2E20900C7E6C1 /* FSNData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSNData.h; sourceTree = "<group>"; };
+		7228357316E2E20900C7E6C1 /* FSNData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSNData.m; sourceTree = "<group>"; };
 		72CA4D2016DE8960002C5A1E /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = Classes/AppViewController.h; sourceTree = "<group>"; };
 		72CA4D2116DE8960002C5A1E /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppViewController.m; path = Classes/AppViewController.m; sourceTree = "<group>"; };
 		72CA4D2316DE904F002C5A1E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -136,6 +145,29 @@
 			name = Tracks;
 			sourceTree = "<group>";
 		};
+		7228356C16E2E1EA00C7E6C1 /* Non-Pod Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				7228356D16E2E20900C7E6C1 /* FSNetworking */,
+			);
+			name = "Non-Pod Dependencies";
+			path = SCTest;
+			sourceTree = "<group>";
+		};
+		7228356D16E2E20900C7E6C1 /* FSNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				7228356E16E2E20900C7E6C1 /* FSN_categories.h */,
+				7228356F16E2E20900C7E6C1 /* FSN_categories.m */,
+				7228357016E2E20900C7E6C1 /* FSNConnection.h */,
+				7228357116E2E20900C7E6C1 /* FSNConnection.m */,
+				7228357216E2E20900C7E6C1 /* FSNData.h */,
+				7228357316E2E20900C7E6C1 /* FSNData.m */,
+			);
+			name = FSNetworking;
+			path = Dependencies/FSNetworking/src;
+			sourceTree = SOURCE_ROOT;
+		};
 		72CA4D2B16DEA2EB002C5A1E /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				72FD5A2F16DE7B7000B2AA28 /* SCTest */,
+				7228356C16E2E1EA00C7E6C1 /* Non-Pod Dependencies */,
 				72FD5A2816DE7B7000B2AA28 /* Frameworks */,
 				72FD5A2716DE7B7000B2AA28 /* Products */,
 				AE8FDE79CDDD48589078307E /* Pods.xcconfig */,
@@ -324,6 +357,9 @@
 				7228355A16E0699800C7E6C1 /* BaseProfileTableViewCell.m in Sources */,
 				7228355D16E0738200C7E6C1 /* BaseTrackTableViewCell.m in Sources */,
 				7228356B16E1244900C7E6C1 /* WaveFormView.m in Sources */,
+				7228357416E2E20900C7E6C1 /* FSN_categories.m in Sources */,
+				7228357516E2E20900C7E6C1 /* FSNConnection.m in Sources */,
+				7228357616E2E20900C7E6C1 /* FSNData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
