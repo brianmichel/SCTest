@@ -31,7 +31,10 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
     self.tableView.delegate = self;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.tableView.backgroundColor = [UIColor colorWithRed:229/256.0 green:229/256.0 blue:229/256.0 alpha:1.0];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+	self.tableView.separatorColor = [UIColor lightGrayColor];
+	
+	self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 	
 	VinylPullToRefreshControl *pullToRefreshControl = [[VinylPullToRefreshControl alloc] init];
 	[pullToRefreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
@@ -50,7 +53,6 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   [super viewDidLoad];
   self.tableView.frame = self.view.bounds;
   [self.view addSubview:self.tableView];
-  //[self loadNextTracks];
 }
 
 #pragma mark - UITableView Datasource / Delegate
@@ -129,6 +131,8 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   
   NSURL *resourceURL = !self.nextHREFToLoad ? [NSURL URLWithString:@"https://api.soundcloud.com/me/activities.json"] : self.nextHREFToLoad;
   
+  
+  __weak UserActivitiesViewController *weakSelf = self;
   SCRequestResponseHandler handler;
   handler = ^(NSURLResponse *response, NSData *data, NSError *error) {
     NSError *jsonError = nil;
@@ -150,9 +154,11 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
       }
       //end ghetto
       NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
-      self.nextHREFToLoad = !nextHREF ? nil : [NSURL URLWithString:nextHREF];
-      [self mergeNewTracks:collection];
-      self.loadingMore = NO;
+      weakSelf.nextHREFToLoad = !nextHREF ? nil : [NSURL URLWithString:nextHREF];
+      [weakSelf mergeNewTracks:collection];
+	  
+      weakSelf.loadingMore = NO;
+	  [weakSelf.tableView flashScrollIndicators];
     }
   };
   
@@ -166,17 +172,26 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 }
 
 - (void)mergeNewTracks:(NSArray *)tracksCollection {
+  [self.tableView beginUpdates];
+  NSInteger beginIndex = [self.tracks count];
+  NSMutableArray *indiciesToInsert = [NSMutableArray arrayWithCapacity:[tracksCollection count]];
+  for (id track in tracksCollection) {
+	[indiciesToInsert addObject:[NSIndexPath indexPathForRow:beginIndex++ inSection:0]];
+  }
+  [self.tableView insertRowsAtIndexPaths:indiciesToInsert withRowAnimation:UITableViewRowAnimationAutomatic];
   [self.tracks addObjectsFromArray:tracksCollection];
-  [self.tableView reloadData];
+  [self.tableView endUpdates];
 }
 
 - (void)refresh:(id)sender {
   VinylPullToRefreshControl *control = sender;
   [control beginRefreshing];
+  self.tableView.displayString = @"Loading...";
   double delayInSeconds = 4.0;
   dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
   dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
     [control endRefreshing];
+	self.tableView.displayString = @"No Tracks";
   });
 }
 

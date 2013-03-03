@@ -13,6 +13,10 @@
 #define kBaseTrackDetailFont [UIFont fontWithName:@"GillSans" size:15.0]
 #define kBaseTrackDateFont [UIFont fontWithName:@"GillSans-Light" size:12.0];
 
+@interface OrangeGradientView : UIView
+
+@end
+
 const CGFloat kBaseTrackTableViewCellImageHW = 30.0;
 
 static NSDateFormatter *trackTableDateFormatter;
@@ -57,7 +61,8 @@ static SORelativeDateTransformer *relativeDateTransformer;
       relativeDateTransformer = [[SORelativeDateTransformer alloc] init];
     });
     
-    
+	self.selectedBackgroundView = [[OrangeGradientView alloc] initWithFrame:self.bounds];
+	
     self.imageView.layer.cornerRadius = 2.0;
     self.imageView.layer.borderColor = [UIColor colorWithWhite:0.12 alpha:0.35].CGColor;
     self.imageView.layer.borderWidth = 2.0;
@@ -68,6 +73,8 @@ static SORelativeDateTransformer *relativeDateTransformer;
     
     self.detailTextLabel.font = kBaseTrackDetailFont;
     self.textLabel.font = kBaseTrackTitleFont;
+	self.detailTextLabel.backgroundColor = [UIColor clearColor];
+	self.textLabel.backgroundColor = [UIColor clearColor];
     
     self.dateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.dateLabel.font = kBaseTrackDateFont;
@@ -105,35 +112,6 @@ static SORelativeDateTransformer *relativeDateTransformer;
   [self setNeedsDisplay];
 }
 
-- (void)drawRect:(CGRect)rect {
-  CGContextRef ctx = UIGraphicsGetCurrentContext();
-  
-  CGContextSaveGState(ctx);
-  {
-    CGContextSetLineWidth(ctx, 1);
-    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 1), 0.12, [UIColor whiteColor].CGColor);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0.12 alpha:0.55].CGColor);
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 10, CGRectGetMaxY(self.bounds));
-    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.bounds) - 10, CGRectGetMaxY(self.bounds));
-    
-    CGContextAddPath(ctx, path);
-    CGContextStrokePath(ctx);
-    CGPathRelease(path);
-  }
-  CGContextRestoreGState(ctx);
-  
-  if (self.highlighted || self.selected) {
-    CGContextSaveGState(ctx);
-    {
-      CGRect fillRect = CGRectMake(10, 0, CGRectGetMaxX(self.bounds) - 10, self.frame.size.height);
-      CGContextSetFillColorWithColor(ctx, [UIColor colorWithWhite:1.0 alpha:0.05].CGColor);
-      CGContextFillRect(ctx, fillRect);
-    }
-    CGContextRestoreGState(ctx);
-  }
-}
-
 #pragma mark - Setters / Getters
 - (void)setTrackInformationDictionary:(NSDictionary *)trackInformationDictionary {
   if ([_trackInformationDictionary isEqualToDictionary:trackInformationDictionary]) {return;}
@@ -166,8 +144,38 @@ static SORelativeDateTransformer *relativeDateTransformer;
   return _trackInformationDictionary;
 }
 
-- (void)prepareForReuse {
-  [self.imageView cancelCurrentImageLoad];
+@end
+
+@implementation OrangeGradientView
+
+- (id)initWithFrame:(CGRect)frame {
+  self = [super initWithFrame:frame];
+  if (self) {
+	self.backgroundColor = [UIColor clearColor];
+  }
+  return self;
+}
+
+- (void)drawRect:(CGRect)rect {
+  CGContextRef ctx = UIGraphicsGetCurrentContext();
+  
+  CGContextSaveGState(ctx);
+  {
+	CGContextSetAlpha(ctx, 0.54);
+	CGRect fillRect = self.bounds;
+	CGContextSetFillColorWithColor(ctx, [UIColor colorWithRed:254/256.0 green:75/256.0 blue:0 alpha:1].CGColor);
+	CGContextFillRect(ctx, fillRect);
+	CGContextClipToRect(ctx, fillRect);
+	
+	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+	CGFloat colors[4] = {1.0, 0.8, 0.0, 0.8};
+	CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
+	CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, colors, NULL, 2);
+	CGContextDrawLinearGradient(ctx, gradient, CGPointMake(CGRectGetMidX(self.bounds), 0), CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMaxY(self.bounds)), kCGGradientDrawsAfterEndLocation|kCGGradientDrawsBeforeStartLocation);
+	CGColorSpaceRelease(colorSpace);
+	CGGradientRelease(gradient);
+  }
+  CGContextRestoreGState(ctx);
 }
 
 @end

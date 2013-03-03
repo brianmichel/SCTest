@@ -25,6 +25,7 @@
     if (self) {
         // Initialization code
       self.backgroundColor = [UIColor clearColor];
+	  self.clipsToBounds = YES;
     }
     return self;
 }
@@ -119,8 +120,5 @@
 - (UIImage *)waveFormImage {
   return _waveFormImage;
 }
-
-#pragma mark - Actions
-
 
 @end

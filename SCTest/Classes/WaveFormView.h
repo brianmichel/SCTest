@@ -13,6 +13,4 @@
 @property (strong) UIImage *waveFormImage;
 @property (strong) NSURL *waveFormURL;
 
-@property (assign) BOOL selected;
-
 @end
