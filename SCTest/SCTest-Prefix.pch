@@ -17,6 +17,7 @@
   #import <JASidePanelController.h>
   #import <UIViewController+JASidePanel.h>
   #import <UIImageView+WebCache.h>
+  #import <SORelativeDateTransformer.h>
   #import  "AppDelegate.h"
   #import "AppViewController.h"
 

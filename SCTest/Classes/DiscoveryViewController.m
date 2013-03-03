@@ -33,6 +33,10 @@
     [hamburgerButton addTarget:self action:@selector(open:) forControlEvents:UIControlEventTouchUpInside];
     [hamburgerButton sizeToFit];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:hamburgerButton];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"soundcloud-header-icon"]];
+    [imageView sizeToFit];
+    self.navigationItem.titleView = imageView;
   }
   return self;
 }

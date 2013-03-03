@@ -64,8 +64,8 @@ const CGFloat kProfileViewAvatarHW = 100.0;
     CGContextSetShadowWithColor(ctx, CGSizeMake(0, 1), 0.12, [UIColor whiteColor].CGColor);
     CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0.12 alpha:0.55].CGColor);
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 5, CGRectGetMaxY(self.frame));
-    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.frame) - 10, CGRectGetMaxY(self.frame));
+    CGPathMoveToPoint(path, NULL, 5, CGRectGetMaxY(self.bounds));
+    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.bounds) - 10, CGRectGetMaxY(self.bounds));
     
     CGContextAddPath(ctx, path);
     CGContextStrokePath(ctx);

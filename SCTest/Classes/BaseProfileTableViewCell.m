@@ -30,12 +30,12 @@
   
   CGContextSaveGState(ctx);
   {
-    CGContextSetLineWidth(ctx, 1);
-    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 1), 0, [UIColor whiteColor].CGColor);
+    CGContextSetLineWidth(ctx, 4);
+    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 1), 0.12, [UIColor whiteColor].CGColor);
     CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0.12 alpha:0.55].CGColor);
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 5, CGRectGetMaxY(self.frame) - 1);
-    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.frame) - 10, CGRectGetMaxY(self.frame) - 1);
+    CGPathMoveToPoint(path, NULL, 5, CGRectGetMaxY(self.bounds));
+    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.bounds) - 10, CGRectGetMaxY(self.bounds));
     
     CGContextAddPath(ctx, path);
     CGContextStrokePath(ctx);
@@ -46,7 +46,7 @@
   if (self.highlighted || self.selected) {
     CGContextSaveGState(ctx);
     {
-      CGRect fillRect = CGRectMake(5, 0, CGRectGetMaxX(self.frame) - 15, self.frame.size.height);
+      CGRect fillRect = CGRectMake(5, 0, CGRectGetMaxX(self.bounds) - 15, self.frame.size.height);
       CGContextSetFillColorWithColor(ctx, [UIColor colorWithWhite:1.0 alpha:0.05].CGColor);
       CGContextFillRect(ctx, fillRect);
     }

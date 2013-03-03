@@ -10,4 +10,8 @@
 
 @interface BaseTrackTableViewCell : UITableViewCell
 
+@property (strong) NSDictionary *trackInformationDictionary;
+
++ (CGFloat)heightForTrackTableViewCellWithInformation:(NSDictionary *)trackInformation containedToSize:(CGSize)size;
+
 @end

@@ -16,6 +16,9 @@
 		7228355F16E07A9000C7E6C1 /* navbar-bkg.png in Resources */ = {isa = PBXBuildFile; fileRef = 7228355E16E07A9000C7E6C1 /* navbar-bkg.png */; };
 		7228356216E07E2B00C7E6C1 /* hamburger-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7228356016E07E2A00C7E6C1 /* hamburger-icon.png */; };
 		7228356316E07E2B00C7E6C1 /* hamburger-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7228356116E07E2A00C7E6C1 /* hamburger-icon@2x.png */; };
+		7228356616E0835800C7E6C1 /* soundcloud-header-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7228356416E0835800C7E6C1 /* soundcloud-header-icon.png */; };
+		7228356716E0835800C7E6C1 /* soundcloud-header-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7228356516E0835800C7E6C1 /* soundcloud-header-icon@2x.png */; };
+		7228356B16E1244900C7E6C1 /* WaveFormView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228356A16E1244900C7E6C1 /* WaveFormView.m */; };
 		72CA4D2216DE8960002C5A1E /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2116DE8960002C5A1E /* AppViewController.m */; };
 		72CA4D2416DE904F002C5A1E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CA4D2316DE904F002C5A1E /* QuartzCore.framework */; };
 		72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2616DE9152002C5A1E /* EntranceViewController.m */; };
@@ -48,6 +51,10 @@
 		7228355E16E07A9000C7E6C1 /* navbar-bkg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "navbar-bkg.png"; path = "Resources/navbar-bkg.png"; sourceTree = "<group>"; };
 		7228356016E07E2A00C7E6C1 /* hamburger-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hamburger-icon.png"; path = "Resources/hamburger-icon.png"; sourceTree = "<group>"; };
 		7228356116E07E2A00C7E6C1 /* hamburger-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "hamburger-icon@2x.png"; path = "Resources/hamburger-icon@2x.png"; sourceTree = "<group>"; };
+		7228356416E0835800C7E6C1 /* soundcloud-header-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud-header-icon.png"; path = "Resources/soundcloud-header-icon.png"; sourceTree = "<group>"; };
+		7228356516E0835800C7E6C1 /* soundcloud-header-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud-header-icon@2x.png"; path = "Resources/soundcloud-header-icon@2x.png"; sourceTree = "<group>"; };
+		7228356916E1244900C7E6C1 /* WaveFormView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveFormView.h; path = Classes/WaveFormView.h; sourceTree = "<group>"; };
+		7228356A16E1244900C7E6C1 /* WaveFormView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaveFormView.m; path = Classes/WaveFormView.m; sourceTree = "<group>"; };
 		72CA4D2016DE8960002C5A1E /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = Classes/AppViewController.h; sourceTree = "<group>"; };
 		72CA4D2116DE8960002C5A1E /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppViewController.m; path = Classes/AppViewController.m; sourceTree = "<group>"; };
 		72CA4D2316DE904F002C5A1E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -105,6 +112,8 @@
 		7228355116E05F2700C7E6C1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7228356416E0835800C7E6C1 /* soundcloud-header-icon.png */,
+				7228356516E0835800C7E6C1 /* soundcloud-header-icon@2x.png */,
 				7228356016E07E2A00C7E6C1 /* hamburger-icon.png */,
 				7228356116E07E2A00C7E6C1 /* hamburger-icon@2x.png */,
 				7228355E16E07A9000C7E6C1 /* navbar-bkg.png */,
@@ -114,16 +123,26 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		7228356816E1241900C7E6C1 /* Tracks */ = {
+			isa = PBXGroup;
+			children = (
+				72CA4D3116DEA3E9002C5A1E /* UserActivitiesViewController.h */,
+				72CA4D3216DEA3E9002C5A1E /* UserActivitiesViewController.m */,
+				7228355B16E0738200C7E6C1 /* BaseTrackTableViewCell.h */,
+				7228355C16E0738200C7E6C1 /* BaseTrackTableViewCell.m */,
+				7228356916E1244900C7E6C1 /* WaveFormView.h */,
+				7228356A16E1244900C7E6C1 /* WaveFormView.m */,
+			);
+			name = Tracks;
+			sourceTree = "<group>";
+		};
 		72CA4D2B16DEA2EB002C5A1E /* Discovery */ = {
 			isa = PBXGroup;
 			children = (
-				7228355B16E0738200C7E6C1 /* BaseTrackTableViewCell.h */,
-				7228355C16E0738200C7E6C1 /* BaseTrackTableViewCell.m */,
+				7228356816E1241900C7E6C1 /* Tracks */,
 				7228354D16E04E0F00C7E6C1 /* Profile */,
 				72CA4D2816DE9163002C5A1E /* DiscoveryViewController.h */,
 				72CA4D2916DE9163002C5A1E /* DiscoveryViewController.m */,
-				72CA4D3116DEA3E9002C5A1E /* UserActivitiesViewController.h */,
-				72CA4D3216DEA3E9002C5A1E /* UserActivitiesViewController.m */,
 			);
 			name = Discovery;
 			sourceTree = "<group>";
@@ -265,6 +284,8 @@
 				7228355F16E07A9000C7E6C1 /* navbar-bkg.png in Resources */,
 				7228356216E07E2B00C7E6C1 /* hamburger-icon.png in Resources */,
 				7228356316E07E2B00C7E6C1 /* hamburger-icon@2x.png in Resources */,
+				7228356616E0835800C7E6C1 /* soundcloud-header-icon.png in Resources */,
+				7228356716E0835800C7E6C1 /* soundcloud-header-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +323,7 @@
 				7228355016E04E2600C7E6C1 /* ProfileView.m in Sources */,
 				7228355A16E0699800C7E6C1 /* BaseProfileTableViewCell.m in Sources */,
 				7228355D16E0738200C7E6C1 /* BaseTrackTableViewCell.m in Sources */,
+				7228356B16E1244900C7E6C1 /* WaveFormView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +408,7 @@
 				INFOPLIST_FILE = "SCTest/SCTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -399,6 +422,7 @@
 				INFOPLIST_FILE = "SCTest/SCTest-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

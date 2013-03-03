@@ -7,6 +7,7 @@
 //
 
 #import "UserActivitiesViewController.h"
+#import "BaseTrackTableViewCell.h"
 
 NSString * const kUserActivitiesNextHREFKey = @"next_href";
 NSString * const kUserActivitiesCollectionsKey = @"collection";
@@ -27,8 +28,10 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.tracks = [NSMutableArray arrayWithCapacity:0];
     self.tableView.backgroundColor = [UIColor colorWithRed:229/256.0 green:229/256.0 blue:229/256.0 alpha:1.0];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.tracks = [NSMutableArray arrayWithCapacity:0];
   }
   return self;
 }
@@ -49,18 +52,22 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   return [self.tracks count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
+  return [BaseTrackTableViewCell heightForTrackTableViewCellWithInformation:track containedToSize:CGSizeMake(self.tableView.frame.size.width, CGFLOAT_MAX)];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString * cellId = @"cell";
   
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+  BaseTrackTableViewCell *cell = (BaseTrackTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
   
   if (!cell) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
+    cell = [[BaseTrackTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
   }
   
   NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
-  cell.textLabel.text = [track valueForKeyPath:@"origin.title"];
-  cell.detailTextLabel.text = [track valueForKeyPath:@"origin.user.username"];
+  cell.trackInformationDictionary = track;
   
   return cell;
 }
@@ -68,6 +75,8 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
+  
+  NSLog(@"TRACK: %@", track);
   
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%@", [track valueForKeyPath:@"origin.id"]]];
   
