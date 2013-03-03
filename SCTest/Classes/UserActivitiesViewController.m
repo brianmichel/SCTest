@@ -8,13 +8,15 @@
 
 #import "UserActivitiesViewController.h"
 #import "BaseTrackTableViewCell.h"
+#import "StatusBackgroundTableView.h"
+#import "VinylPullToRefreshControl.h"
 
 NSString * const kUserActivitiesNextHREFKey = @"next_href";
 NSString * const kUserActivitiesCollectionsKey = @"collection";
 
 @interface UserActivitiesViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (strong) NSURL *nextHREFToLoad;
-@property (strong) UITableView *tableView;
+@property (strong) StatusBackgroundTableView *tableView;
 @property (strong) NSMutableArray *tracks;
 @property (assign) BOOL loadingMore;
 @end
@@ -24,12 +26,20 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView = [[StatusBackgroundTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.tableView.backgroundColor = [UIColor colorWithRed:229/256.0 green:229/256.0 blue:229/256.0 alpha:1.0];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	
+	VinylPullToRefreshControl *pullToRefreshControl = [[VinylPullToRefreshControl alloc] init];
+	[pullToRefreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+	self.tableView.tableHeaderView = pullToRefreshControl;
+	self.tableView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0);
+	
+	self.tableView.displayImage = [UIImage imageNamed:@"no-data-bkg"];
+	self.tableView.displayString = NSLocalizedString(@"No Tracks", @"No Tracks To Display Placeholder");
     
     self.tracks = [NSMutableArray arrayWithCapacity:0];
   }
@@ -40,7 +50,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   [super viewDidLoad];
   self.tableView.frame = self.view.bounds;
   [self.view addSubview:self.tableView];
-  [self loadNextTracks];
+  //[self loadNextTracks];
 }
 
 #pragma mark - UITableView Datasource / Delegate
@@ -158,6 +168,16 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 - (void)mergeNewTracks:(NSArray *)tracksCollection {
   [self.tracks addObjectsFromArray:tracksCollection];
   [self.tableView reloadData];
+}
+
+- (void)refresh:(id)sender {
+  VinylPullToRefreshControl *control = sender;
+  [control beginRefreshing];
+  double delayInSeconds = 4.0;
+  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+  dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    [control endRefreshing];
+  });
 }
 
 - (void)dealloc {
