@@ -189,7 +189,7 @@
 				7228357316E2E20900C7E6C1 /* FSNData.m */,
 			);
 			name = FSNetworking;
-			path = Depedencies/FSNetworking/src;
+			path = Dependencies/FSNetworking/src;
 			sourceTree = SOURCE_ROOT;
 		};
 		72CA4D2B16DEA2EB002C5A1E /* Discovery */ = {

@@ -127,7 +127,7 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
   self.discoveryViewController = [[JASidePanelController alloc] init];
   DiscoveryViewController *discovery = [[DiscoveryViewController alloc] initWithNibName:nil bundle:nil];
   self.discoveryViewController.centerPanel = [[UINavigationController alloc] initWithRootViewController:discovery];
-  self.discoveryViewController.leftPanel = discovery.profileViewController;
+  self.discoveryViewController.leftPanel = (UIViewController *)discovery.profileViewController;
   
   self.discoveryViewController.view.frame = self.view.bounds;
   [self addChildViewController:self.discoveryViewController];
