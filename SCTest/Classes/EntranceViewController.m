@@ -18,8 +18,22 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-  if (self) {    
+  if (self) {
+    
+    UIImage *highlightedImage = [[UIImage imageNamed:@"signin-highlighted-btn"] resizableImageWithCapInsets:UIEdgeInsetsMake(22, 22, 22, 22)];
+    UIImage *normalImage = [[UIImage imageNamed:@"signin-normal-btn"] resizableImageWithCapInsets:UIEdgeInsetsMake(22, 22, 22, 22)];
+    
     _loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [_loginButton setBackgroundImage:normalImage forState:UIControlStateNormal];
+    [_loginButton setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
+    [_loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _loginButton.titleLabel.font = [UIFont fontWithName:@"GillSans" size:20.0];
+    _loginButton.titleLabel.shadowColor = [UIColor blackColor];
+    _loginButton.titleLabel.shadowOffset = CGSizeMake(0, 1);
+    _loginButton.imageEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+    [_loginButton setImage:[UIImage imageNamed:@"soundcloud-icon-white"] forState:UIControlStateNormal];
+
+    
     [_loginButton setTitle:@"Login" forState:UIControlStateNormal];
     [_loginButton sizeToFit];
   }
@@ -28,13 +42,13 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.view.backgroundColor = [UIColor magentaColor];
+  self.view.backgroundColor = [UIColor darkGrayColor];
   [self.view addSubview:self.loginButton];
 }
 
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
-  _loginButton.frame = CGRectIntegral(CGRectMake(self.view.frame.size.width/2 - _loginButton.frame.size.width/2, self.view.frame.size.height/2 - _loginButton.frame.size.height/2, _loginButton.frame.size.width, _loginButton.frame.size.height));
+  _loginButton.frame = CGRectIntegral(CGRectMake(self.view.frame.size.width/2 - 160/2, self.view.frame.size.height/2 - 50/2, 160, 50));
 }
 
 @end

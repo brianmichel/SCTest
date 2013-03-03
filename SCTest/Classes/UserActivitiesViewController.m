@@ -147,6 +147,9 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
       
       /*begin ghetto
        It looks like the next_href doesn't respect the initial request type.
+       If we could set the accepts header on the request we'd be fine too, 
+       but we can't because it's private. We could ALSO register a new URL
+       protocol handler, but that's really not worth it.
        */
       NSArray *comps = [nextHREF componentsSeparatedByString:@"?"];
       if ([comps count] == 2) {

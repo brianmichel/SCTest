@@ -22,6 +22,12 @@
 		7228357416E2E20900C7E6C1 /* FSN_categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228356F16E2E20900C7E6C1 /* FSN_categories.m */; };
 		7228357516E2E20900C7E6C1 /* FSNConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228357116E2E20900C7E6C1 /* FSNConnection.m */; };
 		7228357616E2E20900C7E6C1 /* FSNData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228357316E2E20900C7E6C1 /* FSNData.m */; };
+		726379E516E3FCBD00C16DBE /* signin-highlighted-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E116E3FCBD00C16DBE /* signin-highlighted-btn.png */; };
+		726379E616E3FCBD00C16DBE /* signin-highlighted-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E216E3FCBD00C16DBE /* signin-highlighted-btn@2x.png */; };
+		726379E716E3FCBD00C16DBE /* signin-normal-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E316E3FCBD00C16DBE /* signin-normal-btn.png */; };
+		726379E816E3FCBD00C16DBE /* signin-normal-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E416E3FCBD00C16DBE /* signin-normal-btn@2x.png */; };
+		726379EB16E4045600C16DBE /* soundcloud-icon-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E916E4045600C16DBE /* soundcloud-icon-white.png */; };
+		726379EC16E4045600C16DBE /* soundcloud-icon-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379EA16E4045600C16DBE /* soundcloud-icon-white@2x.png */; };
 		72CA4D2216DE8960002C5A1E /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2116DE8960002C5A1E /* AppViewController.m */; };
 		72CA4D2416DE904F002C5A1E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CA4D2316DE904F002C5A1E /* QuartzCore.framework */; };
 		72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2616DE9152002C5A1E /* EntranceViewController.m */; };
@@ -72,6 +78,12 @@
 		7228357116E2E20900C7E6C1 /* FSNConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSNConnection.m; sourceTree = "<group>"; };
 		7228357216E2E20900C7E6C1 /* FSNData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSNData.h; sourceTree = "<group>"; };
 		7228357316E2E20900C7E6C1 /* FSNData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSNData.m; sourceTree = "<group>"; };
+		726379E116E3FCBD00C16DBE /* signin-highlighted-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-highlighted-btn.png"; path = "Resources/signin-highlighted-btn.png"; sourceTree = "<group>"; };
+		726379E216E3FCBD00C16DBE /* signin-highlighted-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-highlighted-btn@2x.png"; path = "Resources/signin-highlighted-btn@2x.png"; sourceTree = "<group>"; };
+		726379E316E3FCBD00C16DBE /* signin-normal-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-normal-btn.png"; path = "Resources/signin-normal-btn.png"; sourceTree = "<group>"; };
+		726379E416E3FCBD00C16DBE /* signin-normal-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-normal-btn@2x.png"; path = "Resources/signin-normal-btn@2x.png"; sourceTree = "<group>"; };
+		726379E916E4045600C16DBE /* soundcloud-icon-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud-icon-white.png"; path = "Resources/soundcloud-icon-white.png"; sourceTree = "<group>"; };
+		726379EA16E4045600C16DBE /* soundcloud-icon-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud-icon-white@2x.png"; path = "Resources/soundcloud-icon-white@2x.png"; sourceTree = "<group>"; };
 		72CA4D2016DE8960002C5A1E /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = Classes/AppViewController.h; sourceTree = "<group>"; };
 		72CA4D2116DE8960002C5A1E /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppViewController.m; path = Classes/AppViewController.m; sourceTree = "<group>"; };
 		72CA4D2316DE904F002C5A1E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -139,19 +151,7 @@
 		7228355116E05F2700C7E6C1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				72CA4D4016E3B637002C5A1E /* record-icon.png */,
-				72CA4D4116E3B637002C5A1E /* record-icon@2x.png */,
-				72CA4D3816E3A8F6002C5A1E /* no-data-bkg.png */,
-				72CA4D3916E3A8F6002C5A1E /* no-data-bkg@2x.png */,
-				72CA4D3416E3A5B7002C5A1E /* avatar-holder-bkg.png */,
-				72CA4D3516E3A5B7002C5A1E /* avatar-holder-bkg@2x.png */,
-				7228356416E0835800C7E6C1 /* soundcloud-header-icon.png */,
-				7228356516E0835800C7E6C1 /* soundcloud-header-icon@2x.png */,
-				7228356016E07E2A00C7E6C1 /* hamburger-icon.png */,
-				7228356116E07E2A00C7E6C1 /* hamburger-icon@2x.png */,
-				7228355E16E07A9000C7E6C1 /* navbar-bkg.png */,
-				7228355416E0664000C7E6C1 /* avatar-inset.png */,
-				7228355516E0664000C7E6C1 /* avatar-inset@2x.png */,
+				726379ED16E408C100C16DBE /* Icons */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -191,6 +191,32 @@
 			name = FSNetworking;
 			path = Dependencies/FSNetworking/src;
 			sourceTree = SOURCE_ROOT;
+		};
+		726379ED16E408C100C16DBE /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				726379E916E4045600C16DBE /* soundcloud-icon-white.png */,
+				726379EA16E4045600C16DBE /* soundcloud-icon-white@2x.png */,
+				726379E116E3FCBD00C16DBE /* signin-highlighted-btn.png */,
+				726379E216E3FCBD00C16DBE /* signin-highlighted-btn@2x.png */,
+				726379E316E3FCBD00C16DBE /* signin-normal-btn.png */,
+				726379E416E3FCBD00C16DBE /* signin-normal-btn@2x.png */,
+				72CA4D4016E3B637002C5A1E /* record-icon.png */,
+				72CA4D4116E3B637002C5A1E /* record-icon@2x.png */,
+				72CA4D3816E3A8F6002C5A1E /* no-data-bkg.png */,
+				72CA4D3916E3A8F6002C5A1E /* no-data-bkg@2x.png */,
+				72CA4D3416E3A5B7002C5A1E /* avatar-holder-bkg.png */,
+				72CA4D3516E3A5B7002C5A1E /* avatar-holder-bkg@2x.png */,
+				7228356416E0835800C7E6C1 /* soundcloud-header-icon.png */,
+				7228356516E0835800C7E6C1 /* soundcloud-header-icon@2x.png */,
+				7228356016E07E2A00C7E6C1 /* hamburger-icon.png */,
+				7228356116E07E2A00C7E6C1 /* hamburger-icon@2x.png */,
+				7228355E16E07A9000C7E6C1 /* navbar-bkg.png */,
+				7228355416E0664000C7E6C1 /* avatar-inset.png */,
+				7228355516E0664000C7E6C1 /* avatar-inset@2x.png */,
+			);
+			name = Icons;
+			sourceTree = "<group>";
 		};
 		72CA4D2B16DEA2EB002C5A1E /* Discovery */ = {
 			isa = PBXGroup;
@@ -361,6 +387,12 @@
 				72CA4D3B16E3A8F6002C5A1E /* no-data-bkg@2x.png in Resources */,
 				72CA4D4216E3B637002C5A1E /* record-icon.png in Resources */,
 				72CA4D4316E3B637002C5A1E /* record-icon@2x.png in Resources */,
+				726379E516E3FCBD00C16DBE /* signin-highlighted-btn.png in Resources */,
+				726379E616E3FCBD00C16DBE /* signin-highlighted-btn@2x.png in Resources */,
+				726379E716E3FCBD00C16DBE /* signin-normal-btn.png in Resources */,
+				726379E816E3FCBD00C16DBE /* signin-normal-btn@2x.png in Resources */,
+				726379EB16E4045600C16DBE /* soundcloud-icon-white.png in Resources */,
+				726379EC16E4045600C16DBE /* soundcloud-icon-white@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

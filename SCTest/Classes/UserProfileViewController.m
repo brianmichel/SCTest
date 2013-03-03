@@ -95,11 +95,11 @@ NSString * const kUserProfileAPIURLString = @"https://api.soundcloud.com/me.json
   
   switch (indexPath.row) {
     case 0:
-      cell.textLabel.text = @"Open Soundcloud";
+      cell.textLabel.text = NSLocalizedString(@"Open Soundcloud", @"Open Soundcloud Application");
       cell.textLabel.textAlignment = UITextAlignmentLeft;
       break;
     case 1:
-      cell.textLabel.text = @"Logout";
+      cell.textLabel.text = NSLocalizedString(@"Logout", @"Logout");
       cell.textLabel.textAlignment = UITextAlignmentCenter;
     default:
       break;
@@ -110,8 +110,20 @@ NSString * const kUserProfileAPIURLString = @"https://api.soundcloud.com/me.json
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
-  if (indexPath.row == 1) {
-    [APP_DELEGATE.viewController logout];
+  switch (indexPath.row) {
+    case 0: {
+      NSURL *soundcloudAppURL = [NSURL URLWithString:@"soundcloud:"];
+      if ([[UIApplication sharedApplication] canOpenURL:soundcloudAppURL]) {
+        [[UIApplication sharedApplication] openURL:soundcloudAppURL];
+      } else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.soundcloud.com"]];
+      }
+    } break;
+    case 1: {
+      [APP_DELEGATE.viewController logout];
+    }
+    default:
+      break;
   }
 }
 

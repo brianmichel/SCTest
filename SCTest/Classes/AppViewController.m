@@ -34,7 +34,7 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
 - (id)initWithCoder:(NSCoder *)aDecoder {
   self = [super initWithCoder:aDecoder];
   if (self) {
-	[self commonInit];
+    [self commonInit];
   }
   return self;
 }
@@ -42,7 +42,7 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-	[self commonInit];
+    [self commonInit];
   }
   return self;
 }
@@ -50,60 +50,60 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
 - (id)init {
   self = [super init];
   if (self) {
-	[self commonInit];
+    [self commonInit];
   }
   return self;
 }
 
 #pragma mark - View Lifecycle
 - (void)viewDidLoad {
-  [super viewDidLoad];  
+  [super viewDidLoad];
   self.entranceViewController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
   self.entranceViewController.view.frame = self.view.bounds;
   
   if (![SCSoundCloud account]) {
-	[self setupEntranceViewController];
+    [self setupEntranceViewController];
   } else {
-	[self setupDiscoveryViewController];
+    [self setupDiscoveryViewController];
   }
 }
 
 #pragma mark - Actions
 - (void)login:(id)sender {
   SCLoginViewControllerCompletionHandler handler = ^(NSError *error) {
-	if (SC_CANCELED(error)) {
-	  NSLog(@"Canceled!");
-	} else if (error) {
-	  NSLog(@"Error: %@", [error localizedDescription]);
-	} else {
-	  NSLog(@"Done!");
-	  _currentState = ApplicationStateDiscovery;
-	  [self setupDiscoveryViewController];
-	}
-	[self grow:nil];
+    if (SC_CANCELED(error)) {
+      NSLog(@"Canceled!");
+    } else if (error) {
+      NSLog(@"Error: %@", [error localizedDescription]);
+    } else {
+      NSLog(@"Done!");
+      _currentState = ApplicationStateDiscovery;
+      [self setupDiscoveryViewController];
+    }
+    [self grow:nil];
   };
   
   [SCSoundCloud requestAccessWithPreparedAuthorizationURLHandler:^(NSURL *preparedURL) {
-	SCLoginViewController *loginViewController;
-	
-	[self shrink:nil];
-	
-	loginViewController = [SCLoginViewController
-						   loginViewControllerWithPreparedURL:preparedURL
-						   completionHandler:handler];
-	
-	[self presentViewController:loginViewController animated:YES completion:^{
-	  _currentState = ApplicationStateEntrance;
-	  [self.discoveryViewController removeFromParentViewController];
-	  self.discoveryViewController = nil;
-	}];
+    SCLoginViewController *loginViewController;
+    
+    [self shrink:nil];
+    
+    loginViewController = [SCLoginViewController
+                           loginViewControllerWithPreparedURL:preparedURL
+                           completionHandler:handler];
+    
+    [self presentViewController:loginViewController animated:YES completion:^{
+      _currentState = ApplicationStateEntrance;
+      [self.discoveryViewController removeFromParentViewController];
+      self.discoveryViewController = nil;
+    }];
   }];
 }
 
 - (void)logout {
   [self shrink:^{
-	[self setupEntranceViewController];
-	[self grow:nil];
+    [self setupEntranceViewController];
+    [self grow:nil];
   }];
 }
 
@@ -114,12 +114,12 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
   [self addChildViewController:self.entranceViewController];
   
   if (self.discoveryViewController) {
-	[self transitionFromViewController:self.discoveryViewController toViewController:self.entranceViewController duration:0.3 options:UIViewAnimationOptionTransitionFlipFromRight animations:nil completion:^(BOOL finished) {
-	  [self.discoveryViewController removeFromParentViewController];
-	  self.discoveryViewController = nil;
-	}];
+    [self transitionFromViewController:self.discoveryViewController toViewController:self.entranceViewController duration:0.3 options:UIViewAnimationOptionTransitionFlipFromRight animations:nil completion:^(BOOL finished) {
+      [self.discoveryViewController removeFromParentViewController];
+      self.discoveryViewController = nil;
+    }];
   } else {
-	[self.view addSubview:self.entranceViewController.view];
+    [self.view addSubview:self.entranceViewController.view];
   }
 }
 
@@ -133,37 +133,41 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
   [self addChildViewController:self.discoveryViewController];
   
   if (self.entranceViewController) {
-	[self transitionFromViewController:self.entranceViewController toViewController:self.discoveryViewController duration:0.3 options:UIViewAnimationOptionTransitionFlipFromLeft animations:nil completion:^(BOOL finished) {
-	  [self.entranceViewController removeFromParentViewController];
-	  self.entranceViewController = nil;
-	}];
+    [self transitionFromViewController:self.entranceViewController toViewController:self.discoveryViewController duration:0.3 options:UIViewAnimationOptionTransitionFlipFromLeft animations:nil completion:^(BOOL finished) {
+      [self.entranceViewController removeFromParentViewController];
+      self.entranceViewController = nil;
+    }];
   } else {
-	[self.view addSubview:self.discoveryViewController.view];
+    [self.view addSubview:self.discoveryViewController.view];
   }
 }
 
 #pragma mark - Animation
 - (void)shrink:(void(^)(void))callback {
+  self.view.clipsToBounds = YES;
+  self.view.layer.masksToBounds = YES;
   [UIView animateWithDuration:0.3 animations:^{
-	self.view.transform = CGAffineTransformMakeScale(0.90, 0.90);
-	self.view.alpha = 0.75;
-	self.view.layer.cornerRadius = 4.0;
+    self.view.transform = CGAffineTransformMakeScale(0.90, 0.90);
+    self.view.alpha = 0.75;
+    self.view.layer.cornerRadius = 4.0;
   } completion:^(BOOL finished) {
-	if (callback) {
-	  callback();
-	}
+    if (callback) {
+      callback();
+    }
   }];
 }
 
 - (void)grow:(void(^)(void))callback {
+  self.view.clipsToBounds = YES;
+  self.view.layer.masksToBounds = YES;
   [UIView animateWithDuration:0.3 animations:^{
-	self.view.transform = CGAffineTransformIdentity;
-	self.view.alpha = 1.0;
-	self.view.layer.cornerRadius = 0.0;
+    self.view.transform = CGAffineTransformIdentity;
+    self.view.alpha = 1.0;
+    self.view.layer.cornerRadius = 0.0;
   } completion:^(BOOL finished) {
-	if (callback) {
-	  callback();
-	}
+    if (callback) {
+      callback();
+    }
   }];
 }
 @end
