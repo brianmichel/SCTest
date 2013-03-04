@@ -122,10 +122,10 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   SCAccount *account = [SCSoundCloud account];
   if (account == nil) {
     UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"Not Logged In"
-                          message:@"You must login first"
+                          initWithTitle:NSLocalizedString(@"Not Logged In", @"Not Logged In Alert Title")
+                          message:NSLocalizedString(@"You must login first", @"Not Logged In Alert Body")
                           delegate:nil
-                          cancelButtonTitle:@"OK"
+                          cancelButtonTitle:NSLocalizedString (@"OK", nil)
                           otherButtonTitles:nil];
     [alert show];
     return;

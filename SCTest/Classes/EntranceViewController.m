@@ -36,7 +36,7 @@
     [_loginButton setImage:[UIImage imageNamed:@"soundcloud-icon-white"] forState:UIControlStateNormal];
 
     
-    [_loginButton setTitle:@"Login" forState:UIControlStateNormal];
+    [_loginButton setTitle:NSLocalizedString(@"Login", nil) forState:UIControlStateNormal];
     [_loginButton sizeToFit];
   }
   return self;

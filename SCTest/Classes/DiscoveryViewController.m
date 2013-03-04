@@ -30,6 +30,7 @@
 	[hamburgerButton addTarget:self action:@selector(open:) forControlEvents:UIControlEventTouchUpInside];
     [hamburgerButton setImage:[UIImage imageNamed:@"hamburger-icon"] forState:UIControlStateNormal];
     hamburgerButton.showsTouchWhenHighlighted = YES;
+	hamburgerButton.accessibilityLabel = NSLocalizedString(@"Reveal Navigation", @"Reveal Navigation Button");
     [hamburgerButton sizeToFit];
 	
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:hamburgerButton];
