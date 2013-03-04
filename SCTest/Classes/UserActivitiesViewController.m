@@ -143,22 +143,31 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   __weak UserActivitiesViewController *weakSelf = self;
   SCRequestResponseHandler handler;
   handler = ^(NSURLResponse *response, NSData *data, NSError *error) {
-    NSError *jsonError = nil;
-    NSJSONSerialization *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-    
-    if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
-      NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
-      NSString *nextHREF = [self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesNextHREFKey]];
-	  weakSelf.futureHREF = [NSURL URLWithString:[self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesFutureHREFKey]]];
+	if (!error) {
+	  NSError *jsonError = nil;
+	  NSJSONSerialization *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
 	  
-  
-      NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
-      weakSelf.nextHREFToLoad = !nextHREF ? nil : [NSURL URLWithString:nextHREF];
-      [weakSelf mergeNewTracks:collection onTop:NO];
-	  
-      weakSelf.loadingMore = NO;
-	  [weakSelf.tableView flashScrollIndicators];
-    }
+	  if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
+		NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
+		NSString *nextHREF = [self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesNextHREFKey]];
+		NSURL	*futureHREF = [NSURL URLWithString:[self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesFutureHREFKey]]];
+		
+		//pretty sure we only need to set this once...
+		if (!weakSelf.futureHREF && futureHREF) {
+		  weakSelf.futureHREF = futureHREF;
+		}
+		
+		NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
+		if (!collection || !nextHREF) {
+		  NSLog(@"DICT: %@", dictionaryResponse);
+		}
+		weakSelf.nextHREFToLoad = !nextHREF ? nil : [NSURL URLWithString:nextHREF];
+		[weakSelf mergeNewTracks:collection onTop:NO];
+		
+		weakSelf.loadingMore = NO;
+		[weakSelf.tableView flashScrollIndicators];
+	  }
+	}
   };
   
   self.loadingMore = YES;
