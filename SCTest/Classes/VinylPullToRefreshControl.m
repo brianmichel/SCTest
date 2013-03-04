@@ -85,6 +85,7 @@ const CGFloat kVinylPullToRefreshControlHeight = 50.0;
   if (_refreshing) {
 	return;
   }
+  _refreshing = YES;
   
   [self.vinylImage.layer addAnimation:[self rotationAnimation] forKey:nil];
   
@@ -148,7 +149,6 @@ const CGFloat kVinylPullToRefreshControlHeight = 50.0;
 	
 	if (offset < -(kPullToRefreshBeginningThreshold * 2.0)) {
 	  [self sendActionsForControlEvents:UIControlEventValueChanged];
-	  _refreshing = YES;
 	}
   }
 }

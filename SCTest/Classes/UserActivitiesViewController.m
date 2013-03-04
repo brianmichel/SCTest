@@ -192,10 +192,11 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 
 - (void)refresh:(id)sender {
   VinylPullToRefreshControl *control = sender;
-  [control beginRefreshing];
-  self.tableView.displayString = @"Loading...";
-  
+
   if (self.futureHREF) {
+	[control beginRefreshing];
+	self.tableView.displayString = @"Loading...";
+	
 	SCAccount *account = [SCSoundCloud account];
 	__weak UserActivitiesViewController *weakSelf = self;
 	SCRequestResponseHandler handler;
@@ -222,6 +223,8 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 			   withAccount:account
 	sendingProgressHandler:nil
 		   responseHandler:handler];
+  } else {
+	[control endRefreshing];
   }
 }
 

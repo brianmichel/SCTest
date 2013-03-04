@@ -265,13 +265,6 @@
 			name = "Misc UI Components";
 			sourceTree = "<group>";
 		};
-		72CA4D4E16E520B0002C5A1E /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Protocols;
-			sourceTree = "<group>";
-		};
 		72FD5A1D16DE7B7000B2AA28 = {
 			isa = PBXGroup;
 			children = (
@@ -306,7 +299,6 @@
 		72FD5A2F16DE7B7000B2AA28 /* SCTest */ = {
 			isa = PBXGroup;
 			children = (
-				72CA4D4E16E520B0002C5A1E /* Protocols */,
 				72CA4D3C16E3A909002C5A1E /* Misc UI Components */,
 				72CA4D2D16DEA309002C5A1E /* Main App Hierarchy */,
 				72CA4D2C16DEA2F3002C5A1E /* Entrance (Login) */,
