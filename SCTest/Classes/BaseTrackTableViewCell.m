@@ -117,7 +117,7 @@ static SORelativeDateTransformer *relativeDateTransformer;
   NSDate *created_date = [trackTableDateFormatter dateFromString:_trackInformationDictionary[@"created_at"]];
   self.dateLabel.text = [relativeDateTransformer transformedValue:created_date];
   
-  NSString *artworkURL = [_trackInformationDictionary valueForKeyPath:@"origin.artwork_url"] ? [_trackInformationDictionary valueForKeyPath:@"origin.artwork_url"] : [_trackInformationDictionary valueForKeyPath:@"origin.user.avatar_url"];
+  NSString *artworkURL = [_trackInformationDictionary valueForKeyPath:@"origin.user.avatar_url"];
   
   if (artworkURL && ![artworkURL isKindOfClass:[NSNull class]]) {
 	[self.imageView setImageWithURL:[NSURL URLWithString:artworkURL] placeholderImage:[UIImage imageNamed:@"avatar-holder-bkg"]];

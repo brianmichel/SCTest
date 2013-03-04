@@ -12,10 +12,12 @@
 #import "VinylPullToRefreshControl.h"
 
 NSString * const kUserActivitiesNextHREFKey = @"next_href";
+NSString * const kUserActivitiesFutureHREFKey = @"future_href";
 NSString * const kUserActivitiesCollectionsKey = @"collection";
 
 @interface UserActivitiesViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 @property (strong) NSURL *nextHREFToLoad;
+@property (strong) NSURL *futureHREF;
 @property (strong) StatusBackgroundTableView *tableView;
 @property (strong) NSMutableArray *tracks;
 @property (assign) BOOL loadingMore;
@@ -142,29 +144,17 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   SCRequestResponseHandler handler;
   handler = ^(NSURLResponse *response, NSData *data, NSError *error) {
     NSError *jsonError = nil;
-    NSJSONSerialization *jsonResponse = [NSJSONSerialization
-                                         JSONObjectWithData:data
-                                         options:0
-                                         error:&jsonError];
+    NSJSONSerialization *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
     
     if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
       NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
-      NSString *nextHREF = dictionaryResponse[kUserActivitiesNextHREFKey];
-      
-      /*begin ghetto
-       It looks like the next_href doesn't respect the initial request type.
-       If we could set the accepts header on the request we'd be fine too, 
-       but we can't because it's private. We could ALSO register a new URL
-       protocol handler, but that's really not worth it.
-       */
-      NSArray *comps = [nextHREF componentsSeparatedByString:@"?"];
-      if ([comps count] == 2) {
-        nextHREF = [NSString stringWithFormat:@"%@.json?%@", comps[0], comps[1]];
-      }
-      //end ghetto
+      NSString *nextHREF = [self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesNextHREFKey]];
+	  weakSelf.futureHREF = [NSURL URLWithString:[self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesFutureHREFKey]]];
+	  
+  
       NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
       weakSelf.nextHREFToLoad = !nextHREF ? nil : [NSURL URLWithString:nextHREF];
-      [weakSelf mergeNewTracks:collection];
+      [weakSelf mergeNewTracks:collection onTop:NO];
 	  
       weakSelf.loadingMore = NO;
 	  [weakSelf.tableView flashScrollIndicators];
@@ -180,15 +170,23 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
            responseHandler:handler];
 }
 
-- (void)mergeNewTracks:(NSArray *)tracksCollection {
+- (void)mergeNewTracks:(NSArray *)tracksCollection onTop:(BOOL)onTop {
   [self.tableView beginUpdates];
-  NSInteger beginIndex = [self.tracks count];
+  NSInteger beginIndex = onTop ? 0 :[self.tracks count];
   NSMutableArray *indiciesToInsert = [NSMutableArray arrayWithCapacity:[tracksCollection count]];
+  
   for (id track in tracksCollection) {
+	
 	[indiciesToInsert addObject:[NSIndexPath indexPathForRow:beginIndex++ inSection:0]];
   }
   [self.tableView insertRowsAtIndexPaths:indiciesToInsert withRowAnimation:UITableViewRowAnimationAutomatic];
-  [self.tracks addObjectsFromArray:tracksCollection];
+  
+  if (onTop) {
+	[self.tracks insertObjects:tracksCollection atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [tracksCollection count])]];
+  } else {
+	[self.tracks addObjectsFromArray:tracksCollection];
+  }
+  
   [self.tableView endUpdates];
 }
 
@@ -196,12 +194,51 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   VinylPullToRefreshControl *control = sender;
   [control beginRefreshing];
   self.tableView.displayString = @"Loading...";
-  double delayInSeconds = 4.0;
-  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-  dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    [control endRefreshing];
-	self.tableView.displayString = @"No Tracks";
-  });
+  
+  if (self.futureHREF) {
+	SCAccount *account = [SCSoundCloud account];
+	__weak UserActivitiesViewController *weakSelf = self;
+	SCRequestResponseHandler handler;
+	handler = ^(NSURLResponse *response, NSData *data, NSError *error) {
+	  if (!error) {
+		NSError *jsonError = nil;
+		NSJSONSerialization *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+
+		if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
+		  NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
+		  weakSelf.futureHREF = [NSURL URLWithString:dictionaryResponse[kUserActivitiesFutureHREFKey]];
+		  NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
+		  [weakSelf mergeNewTracks:collection onTop:YES];
+		  
+		  [weakSelf.tableView flashScrollIndicators];
+		}
+	  }
+	  [control endRefreshing];
+  };
+  
+  [SCRequest performMethod:SCRequestMethodGET
+				onResource:self.futureHREF
+		   usingParameters:nil
+			   withAccount:account
+	sendingProgressHandler:nil
+		   responseHandler:handler];
+  }
+}
+
+- (NSString *)splitStringAndAddJSON:(NSString *)urlString {
+  /*begin ghetto
+   It looks like the next_href doesn't respect the initial request type.
+   If we could set the accepts header on the request we'd be fine too,
+   but we can't because it's private. We could ALSO register a new URL
+   protocol handler, but that's really not worth it.
+   */
+  NSArray *comps = [urlString componentsSeparatedByString:@"?"];
+  NSString *returnString = nil;
+  if ([comps count] == 2) {
+	returnString = [NSString stringWithFormat:@"%@.json?%@", comps[0], comps[1]];
+  }
+  //end ghetto
+  return returnString;
 }
 
 - (void)dealloc {
