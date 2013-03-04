@@ -16,9 +16,9 @@ NSString * const kThemeOrnamentFontName = @"BodoniOrnamentsITCTT";
 const CGFloat kThemeStandardDarkColorWhitePoint = 0.12;
 
 const struct MarginSizes MarginSizes = {
-  .small = 5,
-  .medium = 7,
-  .large = 11
+  .small = 5.0,
+  .medium = 7.0,
+  .large = 11.0
 };
 
 @implementation Theme

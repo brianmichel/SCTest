@@ -34,7 +34,7 @@
 	
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:hamburgerButton];
     
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"soundcloud-header-icon"]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"soundcloud-icon-gray"]];
     [imageView sizeToFit];
     self.navigationItem.titleView = imageView;
   }

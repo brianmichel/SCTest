@@ -68,7 +68,11 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
   NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
-  return [BaseTrackTableViewCell heightForTrackTableViewCellWithInformation:track containedToSize:CGSizeMake(self.tableView.frame.size.width, CGFLOAT_MAX)];
+  //cheaply filter out the activities that aren't of type 'track'
+  if ([track[@"type"] isEqualToString:@"track"]) {
+	return [BaseTrackTableViewCell heightForTrackTableViewCellWithInformation:track containedToSize:CGSizeMake(self.tableView.frame.size.width, CGFLOAT_MAX)];
+  }
+  return 0.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
