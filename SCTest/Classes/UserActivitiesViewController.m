@@ -27,19 +27,21 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     self.tableView = [[StatusBackgroundTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.tableView.backgroundColor = [UIColor colorWithRed:229/256.0 green:229/256.0 blue:229/256.0 alpha:1.0];
+    self.tableView.backgroundColor = [Theme	standardLightWhiteColorWithAlpha:1.0];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 	self.tableView.separatorColor = [UIColor lightGrayColor];
 	
+	self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+	
+	//remove cell lines...
 	self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 	
 	VinylPullToRefreshControl *pullToRefreshControl = [[VinylPullToRefreshControl alloc] init];
 	[pullToRefreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
 	self.tableView.tableHeaderView = pullToRefreshControl;
-	self.tableView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0);
+	self.tableView.contentInset = UIEdgeInsetsMake(-(kVinylPullToRefreshControlHeight), 0, 0, 0);
 	
 	self.tableView.displayImage = [UIImage imageNamed:@"no-data-bkg"];
 	self.tableView.displayString = NSLocalizedString(@"No Tracks", @"No Tracks To Display Placeholder");

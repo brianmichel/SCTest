@@ -15,6 +15,8 @@
 #import "EntranceViewController.h"
 #import "DiscoveryViewController.h"
 
+#define kAppViewControllerDefaultTransform 
+
 NSString * const kSCClientId = @"8918dfe0d65f3c9d0d6841ff1bcb7d46";
 NSString * const kSCClientSecret = @"824197cf7d317485720eae97f01a322d";
 NSString * const kSCClientRedirectURL = @"sctest://oauth";

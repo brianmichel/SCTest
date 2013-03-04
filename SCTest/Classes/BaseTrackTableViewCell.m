@@ -13,6 +13,9 @@
 #define kBaseTrackDetailFont [UIFont fontWithName:@"GillSans" size:15.0]
 #define kBaseTrackDateFont [UIFont fontWithName:@"GillSans-Light" size:12.0];
 
+const CGFloat kTrackCellWaveformHeight = 60.0;
+const CGFloat kTrackCellStandardHeight = 44.0;
+
 @interface OrangeGradientView : UIView
 
 @end
@@ -32,19 +35,19 @@ static SORelativeDateTransformer *relativeDateTransformer;
 @synthesize trackInformationDictionary = _trackInformationDictionary;
 
 + (CGFloat)heightForTrackTableViewCellWithInformation:(NSDictionary *)trackInformation containedToSize:(CGSize)size {
-  CGFloat height = 5;
+  CGFloat height = MarginSizes.small;
   NSString * title = [trackInformation valueForKeyPath:@"origin.title"];
   NSString * user = [trackInformation valueForKeyPath:@"origin.user.username"];
   
   
-  CGSize constrainSize = CGSizeMake(320 - kBaseTrackTableViewCellImageHW - 10, CGFLOAT_MAX);
+  CGSize constrainSize = CGSizeMake(320 - kBaseTrackTableViewCellImageHW - (MarginSizes.small * 2.0), CGFLOAT_MAX);
   
   height += [title sizeWithFont:kBaseTrackDetailFont constrainedToSize:constrainSize lineBreakMode:UILineBreakModeWordWrap].height;
   height += [user sizeWithFont:kBaseTrackTitleFont constrainedToSize:constrainSize lineBreakMode:UILineBreakModeWordWrap].height;
   
-  height += 10 + 30;
+  height += (MarginSizes.small * 2.0) + (kTrackCellWaveformHeight / 2);
   
-  return height >= 44 ? height : 44;
+  return height >= kTrackCellStandardHeight ? height : kTrackCellStandardHeight;
 }
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -63,10 +66,10 @@ static SORelativeDateTransformer *relativeDateTransformer;
     
 	self.selectedBackgroundView = [[OrangeGradientView alloc] initWithFrame:self.bounds];
 	
+	self.imageView.layer.masksToBounds = YES;
     self.imageView.layer.cornerRadius = 2.0;
-    self.imageView.layer.borderColor = [UIColor colorWithWhite:0.12 alpha:0.35].CGColor;
     self.imageView.layer.borderWidth = 2.0;
-    self.imageView.layer.masksToBounds = YES;
+	self.imageView.layer.borderColor = [Theme standardDarkColorWithAlpha:0.35].CGColor;
     
     self.detailTextLabel.numberOfLines =  0;
     self.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
@@ -94,22 +97,13 @@ static SORelativeDateTransformer *relativeDateTransformer;
 - (void)layoutSubviews {
   [super layoutSubviews];
   
-  self.dateLabel.frame = CGRectMake(self.contentView.frame.size.width - self.dateLabel.frame.size.width - 5, 5, self.dateLabel.frame.size.width, self.dateLabel.frame.size.height);
-  self.imageView.frame = CGRectMake(5, 5, kBaseTrackTableViewCellImageHW, kBaseTrackTableViewCellImageHW);
-  self.textLabel.frame = CGRectMake(CGRectGetMaxX(self.imageView.frame) + 5, 5, self.textLabel.frame.size.width, self.textLabel.frame.size.height);
+  CGFloat defaultInset = MarginSizes.small;
+  
+  self.dateLabel.frame = CGRectMake(self.contentView.frame.size.width - self.dateLabel.frame.size.width - defaultInset, defaultInset, self.dateLabel.frame.size.width, self.dateLabel.frame.size.height);
+  self.imageView.frame = CGRectMake(defaultInset, defaultInset, kBaseTrackTableViewCellImageHW, kBaseTrackTableViewCellImageHW);
+  self.textLabel.frame = CGRectMake(CGRectGetMaxX(self.imageView.frame) + defaultInset, defaultInset, self.textLabel.frame.size.width, self.textLabel.frame.size.height);
   self.detailTextLabel.frame = CGRectMake(self.textLabel.frame.origin.x, CGRectGetMaxY(self.textLabel.frame), self.detailTextLabel.frame.size.width, self.detailTextLabel.frame.size.height);
-  self.waveFormView.frame = CGRectMake(0, CGRectGetMaxY(self.bounds) - 60, self.frame.size.width, 60);
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-  [super setSelected:selected animated:animated];
-  [self setNeedsDisplay];
-}
-
-- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
-  [super setHighlighted:highlighted animated:animated];
-  [self setNeedsDisplay];
+  self.waveFormView.frame = CGRectMake(0, CGRectGetMaxY(self.bounds) - kTrackCellWaveformHeight, self.frame.size.width, kTrackCellWaveformHeight);
 }
 
 #pragma mark - Setters / Getters

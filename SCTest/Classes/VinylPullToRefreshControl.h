@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+OBJC_EXTERN const CGFloat kVinylPullToRefreshControlHeight;
+
 @interface VinylPullToRefreshControl : UIControl
 
 @property (assign, readonly, getter = isRefreshing) BOOL refreshing;

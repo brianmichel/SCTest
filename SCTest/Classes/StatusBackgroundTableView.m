@@ -23,10 +23,10 @@
   self.statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
   self.statusLabel.backgroundColor = [UIColor clearColor];
   self.statusLabel.textAlignment = UITextAlignmentCenter;
-  self.statusLabel.font = [UIFont fontWithName:@"GillSans" size:20.0];
+  self.statusLabel.font = [Theme regularFontWithSize:20.0];
   self.statusLabel.shadowColor = [UIColor whiteColor];
   self.statusLabel.shadowOffset = CGSizeMake(0, 1);
-  self.statusLabel.textColor = [UIColor colorWithWhite:0.12 alpha:0.2];
+  self.statusLabel.textColor = [Theme standardDarkColorWithAlpha:0.2];;
   
   self.imageView.alpha = 0.0;
   self.statusLabel.alpha = 0.0;
@@ -56,7 +56,7 @@
   
   CGPoint beginLayoutPoint = CGPointMake(0, round(self.frame.size.height/2 - totalHeight/2));
   self.imageView.frame = CGRectIntegral(CGRectMake(self.frame.size.width/2 - self.imageView.frame.size.width/2, beginLayoutPoint.y, self.imageView.frame.size.width, self.imageView.frame.size.height));
-  self.statusLabel.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) + 5, self.frame.size.width, self.statusLabel.frame.size.height);
+  self.statusLabel.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) + MarginSizes.small, self.frame.size.width, self.statusLabel.frame.size.height);
 }
 
 #pragma mark - Actions

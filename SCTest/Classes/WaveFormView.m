@@ -43,11 +43,11 @@
   CGContextSaveGState(ctx);
   {
     CGContextSetLineWidth(ctx, 1);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0.12 alpha:0.11].CGColor);
+    CGContextSetStrokeColorWithColor(ctx, [Theme standardDarkColorWithAlpha:0.11].CGColor);
     
     NSInteger numSamples = [samples count] / self.frame.size.width;
     NSInteger sampleAccumulatorStartPosition = 0;
-
+	//resample data to fit our width
     for (NSInteger i = 0; i < self.frame.size.width; i++) {
       CGFloat lineHeightAccumulator = 0;
       for (NSInteger j = sampleAccumulatorStartPosition; j <  (sampleAccumulatorStartPosition + numSamples); j++) {

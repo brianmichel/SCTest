@@ -41,6 +41,7 @@
 		72CA4D4216E3B637002C5A1E /* record-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 72CA4D4016E3B637002C5A1E /* record-icon.png */; };
 		72CA4D4316E3B637002C5A1E /* record-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72CA4D4116E3B637002C5A1E /* record-icon@2x.png */; };
 		72CA4D4616E3B65D002C5A1E /* VinylPullToRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D4516E3B65D002C5A1E /* VinylPullToRefreshControl.m */; };
+		72CA4D4916E50439002C5A1E /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D4816E50439002C5A1E /* Theme.m */; };
 		72FD5A2A16DE7B7000B2AA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2916DE7B7000B2AA28 /* UIKit.framework */; };
 		72FD5A2C16DE7B7000B2AA28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */; };
 		72FD5A2E16DE7B7000B2AA28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2D16DE7B7000B2AA28 /* CoreGraphics.framework */; };
@@ -103,6 +104,8 @@
 		72CA4D4116E3B637002C5A1E /* record-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "record-icon@2x.png"; path = "Resources/record-icon@2x.png"; sourceTree = "<group>"; };
 		72CA4D4416E3B65D002C5A1E /* VinylPullToRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VinylPullToRefreshControl.h; path = Classes/VinylPullToRefreshControl.h; sourceTree = "<group>"; };
 		72CA4D4516E3B65D002C5A1E /* VinylPullToRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VinylPullToRefreshControl.m; path = Classes/VinylPullToRefreshControl.m; sourceTree = "<group>"; };
+		72CA4D4716E50439002C5A1E /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Theme.h; path = Classes/Theme.h; sourceTree = "<group>"; };
+		72CA4D4816E50439002C5A1E /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Theme.m; path = Classes/Theme.m; sourceTree = "<group>"; };
 		72FD5A2616DE7B7000B2AA28 /* SCTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72FD5A2916DE7B7000B2AA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -256,6 +259,8 @@
 				72CA4D3E16E3A92A002C5A1E /* StatusBackgroundTableView.m */,
 				72CA4D4416E3B65D002C5A1E /* VinylPullToRefreshControl.h */,
 				72CA4D4516E3B65D002C5A1E /* VinylPullToRefreshControl.m */,
+				72CA4D4716E50439002C5A1E /* Theme.h */,
+				72CA4D4816E50439002C5A1E /* Theme.m */,
 			);
 			name = "UI Components";
 			sourceTree = "<group>";
@@ -436,6 +441,7 @@
 				7228357616E2E20900C7E6C1 /* FSNData.m in Sources */,
 				72CA4D3F16E3A92A002C5A1E /* StatusBackgroundTableView.m in Sources */,
 				72CA4D4616E3B65D002C5A1E /* VinylPullToRefreshControl.m in Sources */,
+				72CA4D4916E50439002C5A1E /* Theme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #import "VinylPullToRefreshControl.h"
 
 const CGFloat kPullToRefreshBeginningThreshold = 20.0;
+const CGFloat kVinylPullToRefreshControlHeight = 50.0;
 
 @interface VinylPullToRefreshControl ()
 @property (strong) UIImageView *vinylImage;
@@ -61,7 +62,7 @@ const CGFloat kPullToRefreshBeginningThreshold = 20.0;
   if ([self.superview isKindOfClass:[UIScrollView class]]) {
 	[self.superview addObserver:self forKeyPath:@"contentOffset" options:0 context:NULL];
 	
-	self.frame = CGRectMake(0, -50, self.superview.frame.size.width, 50);
+	self.frame = CGRectMake(0, -(kVinylPullToRefreshControlHeight), self.superview.frame.size.width, kVinylPullToRefreshControlHeight);
 	self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	[self setNeedsLayout];
   }
@@ -108,7 +109,7 @@ const CGFloat kPullToRefreshBeginningThreshold = 20.0;
   if ([self.superview isKindOfClass:[UIScrollView class]]) {
 	UIScrollView *scrollView = (UIScrollView *)self.superview;
 	[UIView animateWithDuration:0.3 animations:^{
-	  scrollView.contentInset = UIEdgeInsetsMake(-50, 0, 0, 0);
+	  scrollView.contentInset = UIEdgeInsetsMake(-(kVinylPullToRefreshControlHeight), 0, 0, 0);
 	} completion:^(BOOL finished) {
 	  [self reset];
 	}];

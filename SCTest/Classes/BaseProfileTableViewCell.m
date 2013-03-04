@@ -15,10 +15,10 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-      self.textLabel.font = [UIFont fontWithName:@"GillSans-Light" size:18.0];
+      self.textLabel.font = [Theme lightFontWithSize:18.0];
       self.textLabel.textColor = [UIColor whiteColor];
+	  self.textLabel.shadowColor = [UIColor blackColor];
       self.textLabel.shadowOffset = CGSizeMake(0, 1);
-      self.textLabel.shadowColor = [UIColor blackColor];
       
       self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -34,8 +34,8 @@
     CGContextSetShadowWithColor(ctx, CGSizeMake(0, 1), 0.12, [UIColor whiteColor].CGColor);
     CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0.12 alpha:0.55].CGColor);
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 5, CGRectGetMaxY(self.bounds));
-    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.bounds) - 10, CGRectGetMaxY(self.bounds));
+    CGPathMoveToPoint(path, NULL, MarginSizes.small, CGRectGetMaxY(self.bounds));
+    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.bounds) - (MarginSizes.small * 2), CGRectGetMaxY(self.bounds));
     
     CGContextAddPath(ctx, path);
     CGContextStrokePath(ctx);
@@ -46,7 +46,7 @@
   if (self.highlighted || self.selected) {
     CGContextSaveGState(ctx);
     {
-      CGRect fillRect = CGRectMake(5, 0, CGRectGetMaxX(self.bounds) - 15, self.frame.size.height);
+      CGRect fillRect = CGRectMake(MarginSizes.small, 0, CGRectGetMaxX(self.bounds) - (MarginSizes.small * 3), self.frame.size.height);
       CGContextSetFillColorWithColor(ctx, [UIColor colorWithWhite:1.0 alpha:0.05].CGColor);
       CGContextFillRect(ctx, fillRect);
     }

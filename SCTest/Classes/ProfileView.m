@@ -49,8 +49,8 @@ const CGFloat kProfileViewAvatarHW = 100.0;
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  self.avatarImageView.frame = CGRectIntegral(CGRectMake(self.frame.size.width/2 - kProfileViewAvatarHW/2, 5, kProfileViewAvatarHW, kProfileViewAvatarHW));
-  self.nameLabel.frame = CGRectMake(0, CGRectGetMaxY(self.avatarImageView.frame) + 5, self.frame.size.width, self.nameLabel.frame.size.height);
+  self.avatarImageView.frame = CGRectIntegral(CGRectMake(self.frame.size.width/2 - kProfileViewAvatarHW/2, MarginSizes.small, kProfileViewAvatarHW, kProfileViewAvatarHW));
+  self.nameLabel.frame = CGRectMake(0, CGRectGetMaxY(self.avatarImageView.frame) + MarginSizes.small, self.frame.size.width, self.nameLabel.frame.size.height);
   self.avatarImageView.layer.cornerRadius = self.avatarImageView.frame.size.height/2;
   self.avatarInsetImageView.frame = self.avatarImageView.frame;
 }
@@ -64,8 +64,8 @@ const CGFloat kProfileViewAvatarHW = 100.0;
     CGContextSetShadowWithColor(ctx, CGSizeMake(0, 1), 0.12, [UIColor whiteColor].CGColor);
     CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0.12 alpha:0.55].CGColor);
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, 5, CGRectGetMaxY(self.bounds));
-    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.bounds) - 10, CGRectGetMaxY(self.bounds));
+    CGPathMoveToPoint(path, NULL, MarginSizes.small, CGRectGetMaxY(self.bounds));
+    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.bounds) - (MarginSizes.small * 2), CGRectGetMaxY(self.bounds));
     
     CGContextAddPath(ctx, path);
     CGContextStrokePath(ctx);

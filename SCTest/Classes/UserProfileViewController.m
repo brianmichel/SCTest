@@ -13,6 +13,7 @@
 #import "BaseProfileTableViewCell.h"
 
 NSString * const kUserProfileAPIURLString = @"https://api.soundcloud.com/me.json";
+const CGFloat kUserProfileViewHeight = 150;
 
 @interface UserProfileViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong) UITableView *tableView;
@@ -38,13 +39,14 @@ NSString * const kUserProfileAPIURLString = @"https://api.soundcloud.com/me.json
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     UILabel *footerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    footerLabel.text = @"n";
+	footerLabel.textAlignment = UITextAlignmentCenter;
     footerLabel.backgroundColor = [UIColor clearColor];
-    footerLabel.textColor = [UIColor colorWithWhite:0.0 alpha:0.35];
+    footerLabel.textColor = [Theme standardDarkColorWithAlpha:0.35];
     footerLabel.shadowColor = [UIColor colorWithWhite:1.0 alpha:0.35];
     footerLabel.shadowOffset = CGSizeMake(0, 1);
-    footerLabel.font = [UIFont fontWithName:@"BodoniOrnamentsITCTT" size:18.0];
-    footerLabel.textAlignment = UITextAlignmentCenter;
+    footerLabel.font = [Theme ornamentFontWithSize:18.0];
+	footerLabel.text = @"n";
+	
     [footerLabel sizeToFit];
     
     self.tableView.tableFooterView = footerLabel;
@@ -67,7 +69,7 @@ NSString * const kUserProfileAPIURLString = @"https://api.soundcloud.com/me.json
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
   CGFloat maxWidth = self.sidePanelController.leftVisibleWidth;
-  self.profileView.frame = CGRectMake(0, 0, maxWidth, 150);
+  self.profileView.frame = CGRectMake(0, 0, maxWidth, kUserProfileViewHeight);
   self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.profileView.frame), maxWidth, self.view.frame.size.height - maxWidth);
 }
 
@@ -169,6 +171,10 @@ NSString * const kUserProfileAPIURLString = @"https://api.soundcloud.com/me.json
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+  NSLog(@"PDEALLOC");
 }
 
 @end

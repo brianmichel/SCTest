@@ -21,6 +21,7 @@
   #import <SORelativeDateTransformer.h>
   #import  "AppDelegate.h"
   #import "AppViewController.h"
+  #import "Theme.h"
 
   #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 #endif
