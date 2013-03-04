@@ -167,6 +167,8 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 		weakSelf.loadingMore = NO;
 		[weakSelf.tableView flashScrollIndicators];
 	  }
+	} else {
+	  weakSelf.loadingMore = NO;
 	}
   };
   
@@ -216,7 +218,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 
 		if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
 		  NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
-		  weakSelf.futureHREF = [NSURL URLWithString:dictionaryResponse[kUserActivitiesFutureHREFKey]];
+		  weakSelf.futureHREF = [NSURL URLWithString:[self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesFutureHREFKey]]];
 		  NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
 		  [weakSelf mergeNewTracks:collection onTop:YES];
 		  
