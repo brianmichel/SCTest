@@ -80,6 +80,7 @@ const CGFloat kVinylImageHW = 50;
       break;
     case VinylSpeed45:
       animationSpeed = kVinylSpeed45;
+      break;
     default:
       animationSpeed = kVinylSpeed45;
       break;
