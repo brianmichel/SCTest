@@ -30,12 +30,12 @@
   
   CGContextSaveGState(ctx);
   {
-    CGContextSetLineWidth(ctx, 4);
-    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 1), 0.12, [UIColor whiteColor].CGColor);
+    CGContextSetLineWidth(ctx, 1);
+    CGContextSetShadowWithColor(ctx, CGSizeMake(0, 1), 0, [UIColor whiteColor].CGColor);
     CGContextSetStrokeColorWithColor(ctx, [UIColor colorWithWhite:0.12 alpha:0.55].CGColor);
     CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, MarginSizes.small, CGRectGetMaxY(self.bounds));
-    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.bounds) - (MarginSizes.small * 2), CGRectGetMaxY(self.bounds));
+    CGPathMoveToPoint(path, NULL, MarginSizes.small, CGRectGetMaxY(self.bounds) - 1);
+    CGPathAddLineToPoint(path, NULL, CGRectGetMaxX(self.bounds) - (MarginSizes.small * 2), CGRectGetMaxY(self.bounds) - 1);
     
     CGContextAddPath(ctx, path);
     CGContextStrokePath(ctx);

@@ -27,6 +27,8 @@
 		726379E816E3FCBD00C16DBE /* signin-normal-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E416E3FCBD00C16DBE /* signin-normal-btn@2x.png */; };
 		726379EB16E4045600C16DBE /* soundcloud-icon-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E916E4045600C16DBE /* soundcloud-icon-white.png */; };
 		726379EC16E4045600C16DBE /* soundcloud-icon-white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379EA16E4045600C16DBE /* soundcloud-icon-white@2x.png */; };
+		72B32CD116E57055006237B5 /* VinylActivityIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B32CD016E57055006237B5 /* VinylActivityIndicatorView.m */; };
+		72B32CD416E582D1006237B5 /* LoadingAndTracksTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B32CD316E582D1006237B5 /* LoadingAndTracksTableFooterView.m */; };
 		72CA4D2216DE8960002C5A1E /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2116DE8960002C5A1E /* AppViewController.m */; };
 		72CA4D2416DE904F002C5A1E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CA4D2316DE904F002C5A1E /* QuartzCore.framework */; };
 		72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2616DE9152002C5A1E /* EntranceViewController.m */; };
@@ -85,6 +87,10 @@
 		726379E416E3FCBD00C16DBE /* signin-normal-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-normal-btn@2x.png"; path = "Resources/signin-normal-btn@2x.png"; sourceTree = "<group>"; };
 		726379E916E4045600C16DBE /* soundcloud-icon-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud-icon-white.png"; path = "Resources/soundcloud-icon-white.png"; sourceTree = "<group>"; };
 		726379EA16E4045600C16DBE /* soundcloud-icon-white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud-icon-white@2x.png"; path = "Resources/soundcloud-icon-white@2x.png"; sourceTree = "<group>"; };
+		72B32CCF16E57055006237B5 /* VinylActivityIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VinylActivityIndicatorView.h; path = Classes/VinylActivityIndicatorView.h; sourceTree = "<group>"; };
+		72B32CD016E57055006237B5 /* VinylActivityIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VinylActivityIndicatorView.m; path = Classes/VinylActivityIndicatorView.m; sourceTree = "<group>"; };
+		72B32CD216E582D1006237B5 /* LoadingAndTracksTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadingAndTracksTableFooterView.h; path = Classes/LoadingAndTracksTableFooterView.h; sourceTree = "<group>"; };
+		72B32CD316E582D1006237B5 /* LoadingAndTracksTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadingAndTracksTableFooterView.m; path = Classes/LoadingAndTracksTableFooterView.m; sourceTree = "<group>"; };
 		72CA4D2016DE8960002C5A1E /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = Classes/AppViewController.h; sourceTree = "<group>"; };
 		72CA4D2116DE8960002C5A1E /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppViewController.m; path = Classes/AppViewController.m; sourceTree = "<group>"; };
 		72CA4D2316DE904F002C5A1E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -264,6 +270,10 @@
 				72CA4D4516E3B65D002C5A1E /* VinylPullToRefreshControl.m */,
 				72CA4D4716E50439002C5A1E /* Theme.h */,
 				72CA4D4816E50439002C5A1E /* Theme.m */,
+				72B32CCF16E57055006237B5 /* VinylActivityIndicatorView.h */,
+				72B32CD016E57055006237B5 /* VinylActivityIndicatorView.m */,
+				72B32CD216E582D1006237B5 /* LoadingAndTracksTableFooterView.h */,
+				72B32CD316E582D1006237B5 /* LoadingAndTracksTableFooterView.m */,
 			);
 			name = "Misc UI Components";
 			sourceTree = "<group>";
@@ -446,6 +456,8 @@
 				72CA4D3F16E3A92A002C5A1E /* StatusBackgroundTableView.m in Sources */,
 				72CA4D4616E3B65D002C5A1E /* VinylPullToRefreshControl.m in Sources */,
 				72CA4D4916E50439002C5A1E /* Theme.m in Sources */,
+				72B32CD116E57055006237B5 /* VinylActivityIndicatorView.m in Sources */,
+				72B32CD416E582D1006237B5 /* LoadingAndTracksTableFooterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

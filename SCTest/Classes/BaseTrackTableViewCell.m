@@ -64,20 +64,20 @@ static SORelativeDateTransformer *relativeDateTransformer;
       relativeDateTransformer = [[SORelativeDateTransformer alloc] init];
     });
     
-	self.selectedBackgroundView = [[OrangeGradientView alloc] initWithFrame:self.bounds];
-	
-	self.imageView.layer.masksToBounds = YES;
+    self.selectedBackgroundView = [[OrangeGradientView alloc] initWithFrame:self.bounds];
+    
+    self.imageView.layer.masksToBounds = YES;
     self.imageView.layer.cornerRadius = 2.0;
     self.imageView.layer.borderWidth = 2.0;
-	self.imageView.layer.borderColor = [Theme standardDarkColorWithAlpha:0.35].CGColor;
+    self.imageView.layer.borderColor = [Theme standardDarkColorWithAlpha:0.35].CGColor;
     
     self.detailTextLabel.numberOfLines =  0;
     self.detailTextLabel.lineBreakMode = UILineBreakModeWordWrap;
     
     self.detailTextLabel.font = kBaseTrackDetailFont;
     self.textLabel.font = kBaseTrackTitleFont;
-	self.detailTextLabel.backgroundColor = [UIColor clearColor];
-	self.textLabel.backgroundColor = [UIColor clearColor];
+    self.detailTextLabel.backgroundColor = [UIColor clearColor];
+    self.textLabel.backgroundColor = [UIColor clearColor];
     
     self.dateLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.dateLabel.font = kBaseTrackDateFont;
@@ -120,7 +120,7 @@ static SORelativeDateTransformer *relativeDateTransformer;
   NSString *artworkURL = [_trackInformationDictionary valueForKeyPath:@"origin.user.avatar_url"];
   
   if (artworkURL && ![artworkURL isKindOfClass:[NSNull class]]) {
-	[self.imageView setImageWithURL:[NSURL URLWithString:artworkURL] placeholderImage:[UIImage imageNamed:@"avatar-holder-bkg"]];
+    [self.imageView setImageWithURL:[NSURL URLWithString:artworkURL] placeholderImage:[UIImage imageNamed:@"avatar-holder-bkg"]];
   }
   
   NSString *waveFormURL = [_trackInformationDictionary valueForKeyPath:@"origin.waveform_url"];
@@ -145,7 +145,7 @@ static SORelativeDateTransformer *relativeDateTransformer;
 - (id)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
-	self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor clearColor];
   }
   return self;
 }
@@ -155,19 +155,19 @@ static SORelativeDateTransformer *relativeDateTransformer;
   
   CGContextSaveGState(ctx);
   {
-	CGContextSetAlpha(ctx, 0.54);
-	CGRect fillRect = self.bounds;
-	CGContextSetFillColorWithColor(ctx, [UIColor colorWithRed:254/256.0 green:75/256.0 blue:0 alpha:1].CGColor);
-	CGContextFillRect(ctx, fillRect);
-	CGContextClipToRect(ctx, fillRect);
-	
-	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
-	CGFloat colors[4] = {1.0, 0.8, 0.0, 0.8};
-	CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
-	CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, colors, NULL, 2);
-	CGContextDrawLinearGradient(ctx, gradient, CGPointMake(CGRectGetMidX(self.bounds), 0), CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMaxY(self.bounds)), kCGGradientDrawsAfterEndLocation|kCGGradientDrawsBeforeStartLocation);
-	CGColorSpaceRelease(colorSpace);
-	CGGradientRelease(gradient);
+    CGContextSetAlpha(ctx, 0.54);
+    CGRect fillRect = self.bounds;
+    CGContextSetFillColorWithColor(ctx, [Theme soundCloudOrangeWithAlpha:1.0].CGColor);
+    CGContextFillRect(ctx, fillRect);
+    CGContextClipToRect(ctx, fillRect);
+    
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+    CGFloat colors[4] = {1.0, 0.8, 0.0, 0.8};
+    CGContextSetBlendMode(ctx, kCGBlendModeOverlay);
+    CGGradientRef gradient = CGGradientCreateWithColorComponents(colorSpace, colors, NULL, 2);
+    CGContextDrawLinearGradient(ctx, gradient, CGPointMake(CGRectGetMidX(self.bounds), 0), CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMaxY(self.bounds)), kCGGradientDrawsAfterEndLocation|kCGGradientDrawsBeforeStartLocation);
+    CGColorSpaceRelease(colorSpace);
+    CGGradientRelease(gradient);
   }
   CGContextRestoreGState(ctx);
 }

@@ -7,12 +7,13 @@
 //
 
 #import "VinylPullToRefreshControl.h"
+#import "VinylActivityIndicatorView.h"
 
 const CGFloat kPullToRefreshBeginningThreshold = 20.0;
 const CGFloat kVinylPullToRefreshControlHeight = 50.0;
 
 @interface VinylPullToRefreshControl ()
-@property (strong) UIImageView *vinylImage;
+@property (strong) VinylActivityIndicatorView *vinylIndicator;
 @property (strong) UIView *holeView;
 @property (assign) BOOL animating;
 @end
@@ -24,10 +25,10 @@ const CGFloat kVinylPullToRefreshControlHeight = 50.0;
 - (id)init {
   self = [super init];
   if (self) {
-	self.vinylImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"record-icon"]];
-	[self.vinylImage sizeToFit];
+    self.vinylIndicator = [[VinylActivityIndicatorView alloc] initWithSpeed:VinylSpeed33];
+	[self.vinylIndicator sizeToFit];
 	
-	self.holeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.vinylImage.frame.size.width + 5, 1)];
+	self.holeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.vinylIndicator.frame.size.width + MarginSizes.small, 1)];
 	self.holeView.backgroundColor = [UIColor blackColor];
 	self.holeView.alpha = 0.0;
 	self.holeView.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -35,7 +36,7 @@ const CGFloat kVinylPullToRefreshControlHeight = 50.0;
 	self.holeView.layer.shadowRadius = 3.0;
 	self.holeView.layer.shadowOpacity = 0.75;
 	
-	[self addSubview:self.vinylImage];
+	[self addSubview:self.vinylIndicator];
 	[self addSubview:self.holeView];
 	
 	self.clipsToBounds = YES;
@@ -48,7 +49,7 @@ const CGFloat kVinylPullToRefreshControlHeight = 50.0;
   if (self.animating || self.refreshing) {
 	return;
   }
-  self.vinylImage.frame = CGRectIntegral(CGRectMake(self.frame.size.width/2 - self.vinylImage.frame.size.width/2, self.frame.size.height, self.vinylImage.frame.size.width, self.vinylImage.frame.size.height));
+  self.vinylIndicator.frame = CGRectIntegral(CGRectMake(self.frame.size.width/2 - self.vinylIndicator.frame.size.width/2, self.frame.size.height, self.vinylIndicator.frame.size.width, self.vinylIndicator.frame.size.height));
   self.holeView.frame = CGRectIntegral(CGRectMake(self.frame.size.width/2 - self.holeView.frame.size.width/2, self.frame.size.height - self.holeView.frame.size.height, self.holeView.frame.size.width, self.holeView.frame.size.height));
 }
 
@@ -87,13 +88,12 @@ const CGFloat kVinylPullToRefreshControlHeight = 50.0;
   }
   _refreshing = YES;
   
-  [self.vinylImage.layer addAnimation:[self rotationAnimation] forKey:nil];
-  
+  [self.vinylIndicator startAnimating];
   if ([self.superview isKindOfClass:[UIScrollView class]]) {
 	UIScrollView *scrollView = (UIScrollView *)self.superview;
 	[UIView animateWithDuration:0.3 animations:^{
 	  scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-	  self.vinylImage.frame = CGRectIntegral(CGRectMake(self.frame.size.width/2 - self.vinylImage.frame.size.width/2, self.vinylImage.frame.size.height/2, self.vinylImage.frame.size.width, self.vinylImage.frame.size.height));
+	  self.vinylIndicator.frame = CGRectIntegral(CGRectMake(self.frame.size.width/2 - self.vinylIndicator.frame.size.width/2, self.vinylIndicator.frame.size.height/2, self.vinylIndicator.frame.size.width, self.vinylIndicator.frame.size.height));
 	}];
   }
 }
@@ -105,8 +105,7 @@ const CGFloat kVinylPullToRefreshControlHeight = 50.0;
   
   _refreshing = NO;
   
-  [self.vinylImage.layer removeAllAnimations];
-  
+  [self.vinylIndicator stopAnimating];
   if ([self.superview isKindOfClass:[UIScrollView class]]) {
 	UIScrollView *scrollView = (UIScrollView *)self.superview;
 	[UIView animateWithDuration:0.3 animations:^{
@@ -115,20 +114,6 @@ const CGFloat kVinylPullToRefreshControlHeight = 50.0;
 	  [self reset];
 	}];
   }
-}
-
-- (CAAnimation *)rotationAnimation {
-  CATransform3D transform = CATransform3DMakeRotation(M_PI, 0.0, 0.0, 1.0);
-  
-  CABasicAnimation *animation;
-  animation = [CABasicAnimation animationWithKeyPath:@"transform"];
-
-  animation.fromValue = 0;
-  animation.toValue = [NSValue valueWithCATransform3D:transform];
-  animation.duration = 1.2;
-  animation.cumulative = YES;
-  animation.repeatCount = HUGE_VALF;
-  return animation;
 }
 
 #pragma mark - KVO Stuff
@@ -144,7 +129,7 @@ const CGFloat kVinylPullToRefreshControlHeight = 50.0;
 	if (offset < -kPullToRefreshBeginningThreshold) {
 	  CGFloat alpha = fabsf(offset + kPullToRefreshBeginningThreshold) / 100.0;
 	  self.holeView.alpha = alpha;
-	  self.vinylImage.frame = CGRectMake(self.vinylImage.frame.origin.x, self.frame.size.height - abs(offset + kPullToRefreshBeginningThreshold), self.vinylImage.frame.size.width, self.vinylImage.frame.size.height);
+	  self.vinylIndicator.frame = CGRectMake(self.vinylIndicator.frame.origin.x, self.frame.size.height - abs(offset + kPullToRefreshBeginningThreshold), self.vinylIndicator.frame.size.width, self.vinylIndicator.frame.size.height);
 	}
 	
 	if (offset < -(kPullToRefreshBeginningThreshold * 2.0)) {

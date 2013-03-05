@@ -25,5 +25,7 @@ OBJC_EXTERN const struct MarginSizes {
 
 + (UIColor *)standardDarkColorWithAlpha:(CGFloat)alpha;
 + (UIColor *)standardLightWhiteColorWithAlpha:(CGFloat)alpha;
++ (UIColor *)standardRedColorWithAlpha:(CGFloat)alpha;
++ (UIColor *)soundCloudOrangeWithAlpha:(CGFloat)alpha;
 
 @end

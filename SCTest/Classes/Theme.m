@@ -56,6 +56,14 @@ const struct MarginSizes MarginSizes = {
  return [UIColor colorWithRed:229/256.0 green:229/256.0 blue:229/256.0 alpha:alpha];
 }
 
++ (UIColor *)standardRedColorWithAlpha:(CGFloat)alpha {
+  return [UIColor colorWithRed:240/256.0 green:75/256.0 blue:75/256.0 alpha:alpha];
+}
+
++ (UIColor *)soundCloudOrangeWithAlpha:(CGFloat)alpha {
+  return [UIColor colorWithRed:254/256.0 green:75/256.0 blue:0 alpha:alpha];
+}
+
 - (id)init {
   self = [super init];
   if (self) {

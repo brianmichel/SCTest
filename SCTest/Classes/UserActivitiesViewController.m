@@ -10,6 +10,7 @@
 #import "BaseTrackTableViewCell.h"
 #import "StatusBackgroundTableView.h"
 #import "VinylPullToRefreshControl.h"
+#import "LoadingAndTracksTableFooterView.h"
 
 NSString * const kUserActivitiesNextHREFKey = @"next_href";
 NSString * const kUserActivitiesFutureHREFKey = @"future_href";
@@ -32,21 +33,21 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.tableView.backgroundColor = [Theme	standardLightWhiteColorWithAlpha:1.0];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-	self.tableView.separatorColor = [UIColor lightGrayColor];
-	
-	self.tableView.dataSource = self;
+    self.tableView.separatorColor = [UIColor lightGrayColor];
+    
+    self.tableView.tableFooterView = [[LoadingAndTracksTableFooterView alloc] initWithFrame:CGRectMake(0, 0, 0, kVinylPullToRefreshControlHeight)];
+    self.tableView.tableFooterView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
+    self.tableView.dataSource = self;
     self.tableView.delegate = self;
-	
-	//remove cell lines...
-	self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-	
-	VinylPullToRefreshControl *pullToRefreshControl = [[VinylPullToRefreshControl alloc] init];
-	[pullToRefreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-	self.tableView.tableHeaderView = pullToRefreshControl;
-	self.tableView.contentInset = UIEdgeInsetsMake(-(kVinylPullToRefreshControlHeight), 0, 0, 0);
-	
-	self.tableView.displayImage = [UIImage imageNamed:@"no-data-bkg"];
-	self.tableView.displayString = NSLocalizedString(@"No Tracks", @"No Tracks To Display Placeholder");
+    
+    VinylPullToRefreshControl *pullToRefreshControl = [[VinylPullToRefreshControl alloc] init];
+    [pullToRefreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    self.tableView.tableHeaderView = pullToRefreshControl;
+    self.tableView.contentInset = UIEdgeInsetsMake(-(kVinylPullToRefreshControlHeight), 0, 0, 0);
+    
+    self.tableView.displayImage = [UIImage imageNamed:@"no-data-bkg"];
+    self.tableView.displayString = NSLocalizedString(@"No Tracks", @"No Tracks To Display Placeholder");
     
     self.tracks = [NSMutableArray arrayWithCapacity:0];
   }
@@ -57,6 +58,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   [super viewDidLoad];
   self.tableView.frame = self.view.bounds;
   [self.view addSubview:self.tableView];
+  [self loadNextTracks];
 }
 
 #pragma mark - UITableView Datasource / Delegate
@@ -72,7 +74,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
   //cheaply filter out the activities that aren't of type 'track'
   if ([track[@"type"] isEqualToString:@"track"]) {
-	return [BaseTrackTableViewCell heightForTrackTableViewCellWithInformation:track containedToSize:CGSizeMake(self.tableView.frame.size.width, CGFLOAT_MAX)];
+    return [BaseTrackTableViewCell heightForTrackTableViewCellWithInformation:track containedToSize:CGSizeMake(self.tableView.frame.size.width, CGFLOAT_MAX)];
   }
   return 0.0;
 }
@@ -105,7 +107,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   if ([[UIApplication sharedApplication] canOpenURL:url]) {
     [[UIApplication sharedApplication] openURL:url];
   } else if	(permaLink) {
-	[[UIApplication sharedApplication] openURL:permaLink];
+    [[UIApplication sharedApplication] openURL:permaLink];
   }
 }
 
@@ -136,40 +138,46 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   if ([self.tracks count] && !self.nextHREFToLoad) {
     return;
   }
+  __weak UserActivitiesViewController *weakSelf = self;
+
+  LoadingAndTracksTableFooterView *indicator = (LoadingAndTracksTableFooterView *)self.tableView.tableFooterView;
+  indicator.retryBlock = ^{
+    [weakSelf loadNextTracks];
+  };
+  [indicator startLoading];
   
   NSURL *resourceURL = !self.nextHREFToLoad ? [NSURL URLWithString:@"https://api.soundcloud.com/me/activities.json"] : self.nextHREFToLoad;
   
-  
-  __weak UserActivitiesViewController *weakSelf = self;
   SCRequestResponseHandler handler;
   handler = ^(NSURLResponse *response, NSData *data, NSError *error) {
-	if (!error) {
-	  NSError *jsonError = nil;
-	  NSJSONSerialization *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-	  
-	  if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
-		NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
-		NSString *nextHREF = [self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesNextHREFKey]];
-		NSURL	*futureHREF = [NSURL URLWithString:[self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesFutureHREFKey]]];
-		
-		//pretty sure we only need to set this once...
-		if (!weakSelf.futureHREF && futureHREF) {
-		  weakSelf.futureHREF = futureHREF;
-		}
-		
-		NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
-		if (!collection || !nextHREF) {
-		  NSLog(@"DICT: %@", dictionaryResponse);
-		}
-		weakSelf.nextHREFToLoad = !nextHREF ? nil : [NSURL URLWithString:nextHREF];
-		[weakSelf mergeNewTracks:collection onTop:NO];
-		
-		weakSelf.loadingMore = NO;
-		[weakSelf.tableView flashScrollIndicators];
-	  }
-	} else {
-	  weakSelf.loadingMore = NO;
-	}
+    if (!error) {
+      NSError *jsonError = nil;
+      NSJSONSerialization *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+      
+      if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
+        NSString *nextHREF = [self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesNextHREFKey]];
+        NSURL	*futureHREF = [NSURL URLWithString:[self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesFutureHREFKey]]];
+        
+        //pretty sure we only need to set this once...
+        if (!weakSelf.futureHREF && futureHREF) {
+          weakSelf.futureHREF = futureHREF;
+        }
+        
+        NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
+        if (!collection || !nextHREF) {
+          NSLog(@"DICT: %@", dictionaryResponse);
+        }
+        weakSelf.nextHREFToLoad = !nextHREF ? nil : [NSURL URLWithString:nextHREF];
+        [weakSelf mergeNewTracks:collection onTop:NO];
+        
+        weakSelf.loadingMore = NO;
+        [weakSelf.tableView flashScrollIndicators];
+      }
+    } else {
+      weakSelf.loadingMore = NO;
+    }
+    [indicator stopLoadingWithError:error];
   };
   
   self.loadingMore = YES;
@@ -187,55 +195,58 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   NSMutableArray *indiciesToInsert = [NSMutableArray arrayWithCapacity:[tracksCollection count]];
   
   for (id track in tracksCollection) {
-	
-	[indiciesToInsert addObject:[NSIndexPath indexPathForRow:beginIndex++ inSection:0]];
+    
+    [indiciesToInsert addObject:[NSIndexPath indexPathForRow:beginIndex++ inSection:0]];
   }
   [self.tableView insertRowsAtIndexPaths:indiciesToInsert withRowAnimation:UITableViewRowAnimationAutomatic];
   
   if (onTop) {
-	[self.tracks insertObjects:tracksCollection atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [tracksCollection count])]];
+    [self.tracks insertObjects:tracksCollection atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [tracksCollection count])]];
   } else {
-	[self.tracks addObjectsFromArray:tracksCollection];
+    [self.tracks addObjectsFromArray:tracksCollection];
   }
   
   [self.tableView endUpdates];
+  
+  LoadingAndTracksTableFooterView *footer = (LoadingAndTracksTableFooterView *)self.tableView.tableFooterView;
+  footer.soundCount = [self.tracks count];
 }
 
 - (void)refresh:(id)sender {
   VinylPullToRefreshControl *control = sender;
-
-  if (self.futureHREF) {
-	[control beginRefreshing];
-	self.tableView.displayString = @"Loading...";
-	
-	SCAccount *account = [SCSoundCloud account];
-	__weak UserActivitiesViewController *weakSelf = self;
-	SCRequestResponseHandler handler;
-	handler = ^(NSURLResponse *response, NSData *data, NSError *error) {
-	  if (!error) {
-		NSError *jsonError = nil;
-		NSJSONSerialization *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
-
-		if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
-		  NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
-		  weakSelf.futureHREF = [NSURL URLWithString:[self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesFutureHREFKey]]];
-		  NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
-		  [weakSelf mergeNewTracks:collection onTop:YES];
-		  
-		  [weakSelf.tableView flashScrollIndicators];
-		}
-	  }
-	  [control endRefreshing];
-  };
   
-  [SCRequest performMethod:SCRequestMethodGET
-				onResource:self.futureHREF
-		   usingParameters:nil
-			   withAccount:account
-	sendingProgressHandler:nil
-		   responseHandler:handler];
+  if (self.futureHREF) {
+    [control beginRefreshing];
+    self.tableView.displayString = @"Loading...";
+    
+    SCAccount *account = [SCSoundCloud account];
+    __weak UserActivitiesViewController *weakSelf = self;
+    SCRequestResponseHandler handler;
+    handler = ^(NSURLResponse *response, NSData *data, NSError *error) {
+      if (!error) {
+        NSError *jsonError = nil;
+        NSJSONSerialization *jsonResponse = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        
+        if (!jsonError && [jsonResponse isKindOfClass:[NSDictionary class]]) {
+          NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
+          weakSelf.futureHREF = [NSURL URLWithString:[self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesFutureHREFKey]]];
+          NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
+          [weakSelf mergeNewTracks:collection onTop:YES];
+          
+          [weakSelf.tableView flashScrollIndicators];
+        }
+      }
+      [control endRefreshing];
+    };
+    
+    [SCRequest performMethod:SCRequestMethodGET
+                  onResource:self.futureHREF
+             usingParameters:nil
+                 withAccount:account
+      sendingProgressHandler:nil
+             responseHandler:handler];
   } else {
-	[control endRefreshing];
+    [control endRefreshing];
   }
 }
 
@@ -249,7 +260,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   NSArray *comps = [urlString componentsSeparatedByString:@"?"];
   NSString *returnString = nil;
   if ([comps count] == 2) {
-	returnString = [NSString stringWithFormat:@"%@.json?%@", comps[0], comps[1]];
+    returnString = [NSString stringWithFormat:@"%@.json?%@", comps[0], comps[1]];
   }
   //end ghetto
   return returnString;
