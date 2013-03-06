@@ -11,6 +11,7 @@
 #import "StatusBackgroundTableView.h"
 #import "VinylPullToRefreshControl.h"
 #import "LoadingAndTracksTableFooterView.h"
+#import "SCActivity.h"
 
 NSString * const kUserActivitiesNextHREFKey = @"next_href";
 NSString * const kUserActivitiesFutureHREFKey = @"future_href";
@@ -74,8 +75,9 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
   //cheaply filter out the activities that aren't of type 'track'
   if ([track[@"type"] isEqualToString:@"track"]) {
-    return [BaseTrackTableViewCell heightForTrackTableViewCellWithInformation:track containedToSize:CGSizeMake(self.tableView.frame.size.width, CGFLOAT_MAX)];
   }
+  return [BaseTrackTableViewCell heightForTrackTableViewCellWithInformation:track containedToSize:CGSizeMake(self.tableView.frame.size.width, CGFLOAT_MAX)];
+
   return 0.0;
 }
 
@@ -195,7 +197,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   NSMutableArray *indiciesToInsert = [NSMutableArray arrayWithCapacity:[tracksCollection count]];
   
   for (id track in tracksCollection) {
-    
+    SCActivity *activity = [[SCActivity alloc] initWithDictionary:track];
     [indiciesToInsert addObject:[NSIndexPath indexPathForRow:beginIndex++ inSection:0]];
   }
   [self.tableView insertRowsAtIndexPaths:indiciesToInsert withRowAnimation:UITableViewRowAnimationAutomatic];
