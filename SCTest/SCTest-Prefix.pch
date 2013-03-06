@@ -12,6 +12,7 @@
   #import <UIKit/UIKit.h>
   #import <Foundation/Foundation.h>
   #import <QuartzCore/QuartzCore.h>
+  #import <AVFoundation/AVFoundation.h>
   #import <SCRequest.h>
   #import <SCSoundCloud.h>
   #import <JASidePanelController.h>
@@ -24,6 +25,7 @@
   #import "Theme.h"
   #import "NSDictionary+Helpers.h"
   #import "NSDate+Helpers.h"
+  #import "SCPlayer.h"
 
   #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 #endif

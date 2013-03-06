@@ -101,6 +101,13 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   SCActivity *activity = [self.activities objectAtIndex:indexPath.row];
   
+  if (activity.media.mediaType == SC_MEDIA_TYPE_TRACK) {
+	SCTrack *track = (SCTrack *)activity.media;
+	[[SCPlayer sharedPlayer] playTrack:track];
+  }
+  
+  return;
+  
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%i", activity.media.mediaID]];
   NSURL *permaLink = activity.media.permalinkURL;
   

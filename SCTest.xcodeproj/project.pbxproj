@@ -23,6 +23,8 @@
 		723258C516E7C94F00A9F9C1 /* SCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 723258C416E7C94F00A9F9C1 /* SCUser.m */; };
 		7235AA3216E7D5D40094C44C /* NSDictionary+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7235AA3116E7D5D40094C44C /* NSDictionary+Helpers.m */; };
 		7235AA3516E7D9570094C44C /* NSDate+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7235AA3416E7D9570094C44C /* NSDate+Helpers.m */; };
+		7235AA3916E7F35E0094C44C /* SCPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7235AA3816E7F35E0094C44C /* SCPlayer.m */; };
+		7235AA3B16E7F3CD0094C44C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7235AA3A16E7F3CD0094C44C /* AVFoundation.framework */; };
 		723BD4CF16E541AA00841271 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 723BD4CE16E541AA00841271 /* Localizable.strings */; };
 		726379E516E3FCBD00C16DBE /* signin-highlighted-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E116E3FCBD00C16DBE /* signin-highlighted-btn.png */; };
 		726379E616E3FCBD00C16DBE /* signin-highlighted-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E216E3FCBD00C16DBE /* signin-highlighted-btn@2x.png */; };
@@ -91,6 +93,9 @@
 		7235AA3116E7D5D40094C44C /* NSDictionary+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Helpers.m"; path = "Classes/NSDictionary+Helpers.m"; sourceTree = "<group>"; };
 		7235AA3316E7D9570094C44C /* NSDate+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Helpers.h"; path = "Classes/NSDate+Helpers.h"; sourceTree = "<group>"; };
 		7235AA3416E7D9570094C44C /* NSDate+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Helpers.m"; path = "Classes/NSDate+Helpers.m"; sourceTree = "<group>"; };
+		7235AA3716E7F35E0094C44C /* SCPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCPlayer.h; path = Classes/SCPlayer.h; sourceTree = "<group>"; };
+		7235AA3816E7F35E0094C44C /* SCPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCPlayer.m; path = Classes/SCPlayer.m; sourceTree = "<group>"; };
+		7235AA3A16E7F3CD0094C44C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		723BD4CE16E541AA00841271 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Resources/Localizable.strings; sourceTree = "<group>"; };
 		726379E116E3FCBD00C16DBE /* signin-highlighted-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-highlighted-btn.png"; path = "Resources/signin-highlighted-btn.png"; sourceTree = "<group>"; };
 		726379E216E3FCBD00C16DBE /* signin-highlighted-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-highlighted-btn@2x.png"; path = "Resources/signin-highlighted-btn@2x.png"; sourceTree = "<group>"; };
@@ -150,6 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7235AA3B16E7F3CD0094C44C /* AVFoundation.framework in Frameworks */,
 				72CA4D2416DE904F002C5A1E /* QuartzCore.framework in Frameworks */,
 				72FD5A2A16DE7B7000B2AA28 /* UIKit.framework in Frameworks */,
 				72FD5A2C16DE7B7000B2AA28 /* Foundation.framework in Frameworks */,
@@ -228,6 +234,15 @@
 				7235AA3416E7D9570094C44C /* NSDate+Helpers.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		7235AA3616E7F34F0094C44C /* Playback */ = {
+			isa = PBXGroup;
+			children = (
+				7235AA3716E7F35E0094C44C /* SCPlayer.h */,
+				7235AA3816E7F35E0094C44C /* SCPlayer.m */,
+			);
+			name = Playback;
 			sourceTree = "<group>";
 		};
 		726379ED16E408C100C16DBE /* Icons */ = {
@@ -339,6 +354,7 @@
 		72FD5A2816DE7B7000B2AA28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7235AA3A16E7F3CD0094C44C /* AVFoundation.framework */,
 				72CA4D2316DE904F002C5A1E /* QuartzCore.framework */,
 				72FD5A2916DE7B7000B2AA28 /* UIKit.framework */,
 				72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */,
@@ -351,6 +367,7 @@
 		72FD5A2F16DE7B7000B2AA28 /* SCTest */ = {
 			isa = PBXGroup;
 			children = (
+				7235AA3616E7F34F0094C44C /* Playback */,
 				7235AA2F16E7D5BD0094C44C /* Categories */,
 				72B32D3F16E78289006237B5 /* Model */,
 				72CA4D3C16E3A909002C5A1E /* Misc UI Components */,
@@ -504,6 +521,7 @@
 				723258C516E7C94F00A9F9C1 /* SCUser.m in Sources */,
 				7235AA3216E7D5D40094C44C /* NSDictionary+Helpers.m in Sources */,
 				7235AA3516E7D9570094C44C /* NSDate+Helpers.m in Sources */,
+				7235AA3916E7F35E0094C44C /* SCPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
