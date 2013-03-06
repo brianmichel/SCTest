@@ -91,7 +91,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
     cell = [[BaseTrackTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
   }
   
-  SCActivity *activity = [self.activities objectAtIndex:indexPath.row];
+  SCActivity *activity = [self.activities objectAtIndex:indexPath.row]; 
   cell.trackActivity = activity;
   
   return cell;
@@ -99,12 +99,10 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  SCActivity *track = [self.activities objectAtIndex:indexPath.row];
+  SCActivity *activity = [self.activities objectAtIndex:indexPath.row];
   
-  NSLog(@"TRACK: %@", track);
-  
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%i", track.media.mediaID]];
-  NSURL *permaLink = track.media.permalinkURL;
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%i", activity.media.mediaID]];
+  NSURL *permaLink = activity.media.permalinkURL;
   
   //Give priority to SC App, fail over to web.
   if ([[UIApplication sharedApplication] canOpenURL:url]) {

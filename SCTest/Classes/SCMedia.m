@@ -125,12 +125,30 @@ NSString * const kSCMediaKindPlaylist = @"playlist";
 #pragma mark - SCTrack Begin
 const struct kSCTrackPropertyKeys {
   __unsafe_unretained NSString *waveformURL;
+  __unsafe_unretained NSString *streamURL;
   __unsafe_unretained NSString *commentable;
+  __unsafe_unretained NSString *beatsPerMinute;
+  __unsafe_unretained NSString *keySignature;
+  __unsafe_unretained NSString *isrc;
+  __unsafe_unretained NSString *commentCount;
+  __unsafe_unretained NSString *downloadCount;
+  __unsafe_unretained NSString *playbackCount;
+  __unsafe_unretained NSString *favoritingsCount;
+  __unsafe_unretained NSString *userFavorite;
 } kSCTrackPropertyKeys;
 
 const struct kSCTrackPropertyKeys TrackPropertyKeys = {
   .waveformURL = @"waveform_url",
-  .commentable = @"commentable"
+  .streamURL = @"stream_url",
+  .commentable = @"commentable",
+  .beatsPerMinute = @"bpm",
+  .keySignature = @"key_signature",
+  .isrc = @"isrc",
+  .commentCount = @"comment_count",
+  .downloadCount = @"download_count",
+  .playbackCount = @"playback_count",
+  .favoritingsCount = @"favoritings_count",
+  .userFavorite = @"user_favorite"
 };
 
 @implementation SCTrack
@@ -147,7 +165,16 @@ const struct kSCTrackPropertyKeys TrackPropertyKeys = {
 - (void)_processDictionary:(NSDictionary *)dictionary {
   [super _processDictionary:dictionary];
   _waveformURL = [self processPotentialURL:dictionary[TrackPropertyKeys.waveformURL]];
+  _streamURL = [self processPotentialURL:dictionary[TrackPropertyKeys.streamURL]];
   _commentable = [SVK(dictionary, TrackPropertyKeys.commentable) boolValue];
+  _userFavorite = [SVK(dictionary, TrackPropertyKeys.userFavorite) boolValue];
+  _beatsPerMinute = [SVK(dictionary, TrackPropertyKeys.beatsPerMinute) integerValue];
+  _keySignature = dictionary[TrackPropertyKeys.keySignature];
+  _isrc = dictionary[TrackPropertyKeys.isrc];
+  _commentCount = [SVK(dictionary, TrackPropertyKeys.commentCount) integerValue];
+  _downloadCount = [SVK(dictionary, TrackPropertyKeys.downloadCount) integerValue];
+  _playbackCount = [SVK(dictionary, TrackPropertyKeys.playbackCount) integerValue];
+  _favoritingsCount = [SVK(dictionary, TrackPropertyKeys.favoritingsCount) integerValue];
 }
 
 #pragma mark - Getters
@@ -156,15 +183,23 @@ const struct kSCTrackPropertyKeys TrackPropertyKeys = {
   return _commentable;
 }
 
+- (BOOL)isUserFavorite {
+  return _userFavorite;
+}
+
 @end
 
 #pragma mark - SCPlaylist Begin
 const struct kSCPlaylistPropertyKeys {
+  __unsafe_unretained NSString *trackCount;
   __unsafe_unretained NSString *tracks;
+  __unsafe_unretained NSString *ean;
 } kSCPlaylistPropertyKeys;
 
 const struct kSCPlaylistPropertyKeys PlaylistPropertyKeys = {
-  .tracks = @"tracks"
+  .trackCount = @"track_count",
+  .tracks = @"tracks",
+  .ean = @"ean"
 };
 
 @implementation SCPlaylist
@@ -181,6 +216,7 @@ const struct kSCPlaylistPropertyKeys PlaylistPropertyKeys = {
 - (void)_processDictionary:(NSDictionary *)dictionary {
   [super _processDictionary:dictionary];
   NSArray *tracks = dictionary[PlaylistPropertyKeys.tracks];
+  _trackCount = [SVK(dictionary, PlaylistPropertyKeys.trackCount) integerValue];
   NSMutableArray *tracksAccumulator = [NSMutableArray arrayWithCapacity:[tracks count]];
   for (NSDictionary *track in tracks) {
 	SCMedia *media = [SCMedia mediaObjectForDictionary:track];
@@ -189,7 +225,7 @@ const struct kSCPlaylistPropertyKeys PlaylistPropertyKeys = {
 	}
   }
   _tracks = [tracksAccumulator count] ? [NSArray arrayWithArray:tracksAccumulator] : nil;
-  
+  _ean = SVK(dictionary, PlaylistPropertyKeys.ean);
 }
 
 - (BOOL)isMini {

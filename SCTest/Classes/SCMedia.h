@@ -75,16 +75,28 @@ struct SCReleaseInfo {
 @interface SCTrack : SCMedia {
   @protected
   BOOL _commentable;
+  BOOL _userFavorite;
 }
 
 @property (assign, readonly, getter = isCommentable) BOOL commentable;
+@property (assign, readonly, getter = isUserFavorite) BOOL userFavorite;
+@property (assign, readonly) NSUInteger beatsPerMinute;
+
+@property (assign, readonly) NSUInteger commentCount;
+@property (assign, readonly) NSUInteger downloadCount;
+@property (assign, readonly) NSUInteger playbackCount;
+@property (assign, readonly) NSUInteger favoritingsCount;
 
 @property (strong, readonly) NSURL *waveformURL;
-
+@property (strong, readonly) NSURL *streamURL;
+@property (copy, readonly) NSString *keySignature;
+@property (copy, readonly) NSString *isrc;
 @end
 
 @interface SCPlaylist : SCMedia
 
-@property (strong, readonly) NSArray *tracks;
+@property (assign, readonly) NSUInteger trackCount;
 
+@property (strong, readonly) NSArray *tracks;
+@property (copy, readonly) NSString *ean;
 @end
