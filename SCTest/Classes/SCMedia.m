@@ -7,6 +7,7 @@
 //
 
 #import "SCMedia.h"
+#import "SCUser.h"
 
 #pragma mark - SCMedia Begin
 const struct kSCMediaBaseSharedPropertyKeys {
@@ -21,6 +22,8 @@ const struct kSCMediaBaseSharedPropertyKeys {
   __unsafe_unretained NSString *streamable;
   __unsafe_unretained NSString *downloadable;
   __unsafe_unretained NSString *sharing;
+  __unsafe_unretained NSString *user;
+  __unsafe_unretained NSString *artworkURL;
 } kSCMediaBaseSharedPropertyKeys;
 
 const struct kSCMediaBaseSharedPropertyKeys BaseSharedKeys = {
@@ -33,7 +36,9 @@ const struct kSCMediaBaseSharedPropertyKeys BaseSharedKeys = {
   .permalinkURL = @"permalink_url",
   .streamable = @"streamable",
   .downloadable = @"downloadable",
-  .sharing = @"sharing"
+  .sharing = @"sharing",
+  .user = @"user",
+  .artworkURL = @"artwork_url"
 };
 
 NSString * const kSCMediaKindKey = @"kind";
@@ -74,19 +79,22 @@ NSString * const kSCMediaKindPlaylist = @"playlist";
 }
 
 - (void)_processDictionary:(NSDictionary *)dictionary {
-  //stuff...  
+  //stuff...
   _title = dictionary[BaseSharedKeys.title];
   _trackDescription = dictionary[BaseSharedKeys.description];
   
   _permalinkURL = [self processPotentialURL:dictionary[BaseSharedKeys.permalinkURL]];
   _purchaseURL = [self processPotentialURL:dictionary[BaseSharedKeys.purchaseURL]];
-  _mediaID = [dictionary[BaseSharedKeys.mediaID] integerValue];
-  _userID = [dictionary[BaseSharedKeys.userID] integerValue];
-  _downloadable = [dictionary[BaseSharedKeys.downloadable] boolValue];
-  _streamable = [dictionary[BaseSharedKeys.streamable] boolValue];
-  _durationInMilliseconds = [dictionary[BaseSharedKeys.durationInMilliseconds] doubleValue];
+  _mediaID = [SVK(dictionary, BaseSharedKeys.mediaID) integerValue];
+  _userID = [SVK(dictionary, BaseSharedKeys.userID) integerValue];
+  _downloadable = [SVK(dictionary, BaseSharedKeys.downloadable) boolValue];
+  _streamable = [SVK(dictionary ,BaseSharedKeys.streamable) boolValue];
+  _durationInMilliseconds = [SVK(dictionary, BaseSharedKeys.durationInMilliseconds) doubleValue];
+  _user = [[SCUser alloc] initWithDictionary:dictionary[BaseSharedKeys.user]];
+  _artworkURL = [self processPotentialURL:dictionary[BaseSharedKeys.artworkURL]];
+  _createdAt = [NSDate dateFromSoundcloudString:dictionary[BaseSharedKeys.createdAt]];
   
-  NSString *sharingString = dictionary[BaseSharedKeys.sharing];
+  NSString *sharingString = SVK(dictionary, BaseSharedKeys.sharing);
   _sharing = [sharingString isEqualToString:@"public"] ? SC_SHARING_TYPE_PUBLIC : SC_SHARING_TYPE_PRIVATE;
 }
 
@@ -99,17 +107,30 @@ NSString * const kSCMediaKindPlaylist = @"playlist";
   return tempURL;
 }
 
+#pragma mark - Getters
+- (BOOL)isMini {
+  return _mini;
+}
+
+- (BOOL)isStreamable {
+  return _streamable;
+}
+
+- (BOOL)isDownloadable {
+  return _downloadable;
+}
+
 @end
 
 #pragma mark - SCTrack Begin
 const struct kSCTrackPropertyKeys {
   __unsafe_unretained NSString *waveformURL;
-  __unsafe_unretained NSString *artworkURL;
+  __unsafe_unretained NSString *commentable;
 } kSCTrackPropertyKeys;
 
 const struct kSCTrackPropertyKeys TrackPropertyKeys = {
   .waveformURL = @"waveform_url",
-  .artworkURL = @"artwork_url"
+  .commentable = @"commentable"
 };
 
 @implementation SCTrack
@@ -117,6 +138,7 @@ const struct kSCTrackPropertyKeys TrackPropertyKeys = {
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
   self = [super init];
   if (self) {
+	_mediaType = SC_MEDIA_TYPE_TRACK;
 	[self _processDictionary:dictionary];
   }
   return self;
@@ -124,8 +146,14 @@ const struct kSCTrackPropertyKeys TrackPropertyKeys = {
 
 - (void)_processDictionary:(NSDictionary *)dictionary {
   [super _processDictionary:dictionary];
-  _artworkURL = [self processPotentialURL:dictionary[TrackPropertyKeys.artworkURL]];
   _waveformURL = [self processPotentialURL:dictionary[TrackPropertyKeys.waveformURL]];
+  _commentable = [SVK(dictionary, TrackPropertyKeys.commentable) boolValue];
+}
+
+#pragma mark - Getters
+
+- (BOOL)isCommentable {
+  return _commentable;
 }
 
 @end
@@ -144,6 +172,7 @@ const struct kSCPlaylistPropertyKeys PlaylistPropertyKeys = {
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary {
   self = [super init];
   if (self) {
+	_mediaType = SC_MEDIA_TYPE_PLAYLIST;
 	[self _processDictionary:dictionary];
   }
   return self;
@@ -160,6 +189,7 @@ const struct kSCPlaylistPropertyKeys PlaylistPropertyKeys = {
 	}
   }
   _tracks = [tracksAccumulator count] ? [NSArray arrayWithArray:tracksAccumulator] : nil;
+  
 }
 
 - (BOOL)isMini {
@@ -167,3 +197,4 @@ const struct kSCPlaylistPropertyKeys PlaylistPropertyKeys = {
 }
 
 @end
+

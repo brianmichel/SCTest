@@ -46,6 +46,7 @@ NSString * const kSCActivityCreatedAtKey = @"created_at";
     _activityType = SC_ACTIVITY_TYPE_UNKNOWN;
   }
   
+  _createdAt = [NSDate dateFromSoundcloudString:dictionary[kSCActivityCreatedAtKey]];
   _media = [SCMedia mediaObjectForDictionary:origin];
 }
 

@@ -8,6 +8,9 @@
 
 #import "BaseTrackTableViewCell.h"
 #import "WaveFormView.h"
+#import "SCActivity.h"
+#import "SCMedia.h"
+#import "SCUser.h"
 
 #define kBaseTrackTitleFont [UIFont fontWithName:@"GillSans" size:12.0]
 #define kBaseTrackDetailFont [UIFont fontWithName:@"GillSans" size:15.0]
@@ -22,7 +25,6 @@ const CGFloat kTrackCellStandardHeight = 44.0;
 
 const CGFloat kBaseTrackTableViewCellImageHW = 30.0;
 
-static NSDateFormatter *trackTableDateFormatter;
 static SORelativeDateTransformer *relativeDateTransformer;
 
 @interface BaseTrackTableViewCell ()
@@ -32,18 +34,15 @@ static SORelativeDateTransformer *relativeDateTransformer;
 
 @implementation BaseTrackTableViewCell
 
-@synthesize trackInformationDictionary = _trackInformationDictionary;
+@synthesize trackActivity = _trackActivity;
 
-+ (CGFloat)heightForTrackTableViewCellWithInformation:(NSDictionary *)trackInformation containedToSize:(CGSize)size {
++ (CGFloat)heightForTrackTableViewCellWithInformation:(SCActivity *)trackActivity containedToSize:(CGSize)size {
   CGFloat height = MarginSizes.small;
-  NSString * title = [trackInformation valueForKeyPath:@"origin.title"];
-  NSString * user = [trackInformation valueForKeyPath:@"origin.user.username"];
-  
-  
+
   CGSize constrainSize = CGSizeMake(320 - kBaseTrackTableViewCellImageHW - (MarginSizes.small * 2.0), CGFLOAT_MAX);
   
-  height += [title sizeWithFont:kBaseTrackDetailFont constrainedToSize:constrainSize lineBreakMode:UILineBreakModeWordWrap].height;
-  height += [user sizeWithFont:kBaseTrackTitleFont constrainedToSize:constrainSize lineBreakMode:UILineBreakModeWordWrap].height;
+  height += [trackActivity.media.title sizeWithFont:kBaseTrackDetailFont constrainedToSize:constrainSize lineBreakMode:UILineBreakModeWordWrap].height;
+  height += [trackActivity.media.user.username sizeWithFont:kBaseTrackTitleFont constrainedToSize:constrainSize lineBreakMode:UILineBreakModeWordWrap].height;
   
   height += (MarginSizes.small * 2.0) + (kTrackCellWaveformHeight / 2);
   
@@ -59,8 +58,6 @@ static SORelativeDateTransformer *relativeDateTransformer;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-      trackTableDateFormatter = [[NSDateFormatter alloc] init];
-      [trackTableDateFormatter setDateFormat:@"yyyy/MM/dd HH:mm:ss +zzzz"];
       relativeDateTransformer = [[SORelativeDateTransformer alloc] init];
     });
     
@@ -107,35 +104,38 @@ static SORelativeDateTransformer *relativeDateTransformer;
 }
 
 #pragma mark - Setters / Getters
-- (void)setTrackInformationDictionary:(NSDictionary *)trackInformationDictionary {
-  if ([_trackInformationDictionary isEqualToDictionary:trackInformationDictionary]) {return;}
+- (void)setTrackActivity:(SCActivity *)trackActivity {
+  if ([_trackActivity isEqual:trackActivity]) {return;}
   
-  _trackInformationDictionary = trackInformationDictionary;
+  _trackActivity = trackActivity;
   
-  self.detailTextLabel.text = [_trackInformationDictionary valueForKeyPath:@"origin.title"];
-  self.textLabel.text = [_trackInformationDictionary valueForKeyPath:@"origin.user.username"];
-  NSDate *created_date = [trackTableDateFormatter dateFromString:_trackInformationDictionary[@"created_at"]];
-  self.dateLabel.text = [relativeDateTransformer transformedValue:created_date];
+  self.detailTextLabel.text = _trackActivity.media.title;
+  self.textLabel.text = _trackActivity.media.user.username;
+  self.dateLabel.text = [relativeDateTransformer transformedValue:_trackActivity.createdAt];
   
-  NSString *artworkURL = [_trackInformationDictionary valueForKeyPath:@"origin.user.avatar_url"];
-  
-  if (artworkURL && ![artworkURL isKindOfClass:[NSNull class]]) {
-    [self.imageView setImageWithURL:[NSURL URLWithString:artworkURL] placeholderImage:[UIImage imageNamed:@"avatar-holder-bkg"]];
+  if (_trackActivity.media.artworkURL) {
+	[self.imageView setImageWithURL:_trackActivity.media.artworkURL placeholderImage:[UIImage imageNamed:@"avatar-holder-bkg"]];
   }
   
-  NSString *waveFormURL = [_trackInformationDictionary valueForKeyPath:@"origin.waveform_url"];
-  
-  if (waveFormURL) {
-    self.waveFormView.waveFormURL = [NSURL URLWithString:waveFormURL];
+  switch (_trackActivity.media.mediaType) {
+	case SC_MEDIA_TYPE_TRACK: {
+	  SCTrack *track = (SCTrack *)_trackActivity.media;
+	  if (track.waveformURL) {
+		self.waveFormView.waveFormURL = track.waveformURL;
+	  }
+	} break;
+	default:
+	  break;
   }
+  
   
   [self.dateLabel sizeToFit];
   [self.detailTextLabel sizeToFit];
   [self.textLabel sizeToFit];
 }
 
-- (NSDictionary *)trackInformationDictionary {
-  return _trackInformationDictionary;
+- (SCActivity *)trackActivity {
+  return _trackActivity;
 }
 
 @end

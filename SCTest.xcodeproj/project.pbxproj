@@ -20,6 +20,9 @@
 		7228357416E2E20900C7E6C1 /* FSN_categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228356F16E2E20900C7E6C1 /* FSN_categories.m */; };
 		7228357516E2E20900C7E6C1 /* FSNConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228357116E2E20900C7E6C1 /* FSNConnection.m */; };
 		7228357616E2E20900C7E6C1 /* FSNData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228357316E2E20900C7E6C1 /* FSNData.m */; };
+		723258C516E7C94F00A9F9C1 /* SCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 723258C416E7C94F00A9F9C1 /* SCUser.m */; };
+		7235AA3216E7D5D40094C44C /* NSDictionary+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7235AA3116E7D5D40094C44C /* NSDictionary+Helpers.m */; };
+		7235AA3516E7D9570094C44C /* NSDate+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7235AA3416E7D9570094C44C /* NSDate+Helpers.m */; };
 		723BD4CF16E541AA00841271 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 723BD4CE16E541AA00841271 /* Localizable.strings */; };
 		726379E516E3FCBD00C16DBE /* signin-highlighted-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E116E3FCBD00C16DBE /* signin-highlighted-btn.png */; };
 		726379E616E3FCBD00C16DBE /* signin-highlighted-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E216E3FCBD00C16DBE /* signin-highlighted-btn@2x.png */; };
@@ -82,6 +85,12 @@
 		7228357116E2E20900C7E6C1 /* FSNConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSNConnection.m; sourceTree = "<group>"; };
 		7228357216E2E20900C7E6C1 /* FSNData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSNData.h; sourceTree = "<group>"; };
 		7228357316E2E20900C7E6C1 /* FSNData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSNData.m; sourceTree = "<group>"; };
+		723258C316E7C94F00A9F9C1 /* SCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCUser.h; path = Classes/SCUser.h; sourceTree = "<group>"; };
+		723258C416E7C94F00A9F9C1 /* SCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCUser.m; path = Classes/SCUser.m; sourceTree = "<group>"; };
+		7235AA3016E7D5D40094C44C /* NSDictionary+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Helpers.h"; path = "Classes/NSDictionary+Helpers.h"; sourceTree = "<group>"; };
+		7235AA3116E7D5D40094C44C /* NSDictionary+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Helpers.m"; path = "Classes/NSDictionary+Helpers.m"; sourceTree = "<group>"; };
+		7235AA3316E7D9570094C44C /* NSDate+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+Helpers.h"; path = "Classes/NSDate+Helpers.h"; sourceTree = "<group>"; };
+		7235AA3416E7D9570094C44C /* NSDate+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+Helpers.m"; path = "Classes/NSDate+Helpers.m"; sourceTree = "<group>"; };
 		723BD4CE16E541AA00841271 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Resources/Localizable.strings; sourceTree = "<group>"; };
 		726379E116E3FCBD00C16DBE /* signin-highlighted-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-highlighted-btn.png"; path = "Resources/signin-highlighted-btn.png"; sourceTree = "<group>"; };
 		726379E216E3FCBD00C16DBE /* signin-highlighted-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-highlighted-btn@2x.png"; path = "Resources/signin-highlighted-btn@2x.png"; sourceTree = "<group>"; };
@@ -210,6 +219,17 @@
 			path = Depedencies/FSNetworking/src;
 			sourceTree = SOURCE_ROOT;
 		};
+		7235AA2F16E7D5BD0094C44C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				7235AA3016E7D5D40094C44C /* NSDictionary+Helpers.h */,
+				7235AA3116E7D5D40094C44C /* NSDictionary+Helpers.m */,
+				7235AA3316E7D9570094C44C /* NSDate+Helpers.h */,
+				7235AA3416E7D9570094C44C /* NSDate+Helpers.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		726379ED16E408C100C16DBE /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -243,6 +263,8 @@
 				72B32D4416E78577006237B5 /* SCMedia.m */,
 				72B32D4616E78F34006237B5 /* SCActivity.h */,
 				72B32D4716E78F34006237B5 /* SCActivity.m */,
+				723258C316E7C94F00A9F9C1 /* SCUser.h */,
+				723258C416E7C94F00A9F9C1 /* SCUser.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -329,6 +351,7 @@
 		72FD5A2F16DE7B7000B2AA28 /* SCTest */ = {
 			isa = PBXGroup;
 			children = (
+				7235AA2F16E7D5BD0094C44C /* Categories */,
 				72B32D3F16E78289006237B5 /* Model */,
 				72CA4D3C16E3A909002C5A1E /* Misc UI Components */,
 				72CA4D2D16DEA309002C5A1E /* Main App Hierarchy */,
@@ -478,6 +501,9 @@
 				72B32CD416E582D1006237B5 /* LoadingAndTracksTableFooterView.m in Sources */,
 				72B32D4516E78577006237B5 /* SCMedia.m in Sources */,
 				72B32D4816E78F34006237B5 /* SCActivity.m in Sources */,
+				723258C516E7C94F00A9F9C1 /* SCUser.m in Sources */,
+				7235AA3216E7D5D40094C44C /* NSDictionary+Helpers.m in Sources */,
+				7235AA3516E7D9570094C44C /* NSDate+Helpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

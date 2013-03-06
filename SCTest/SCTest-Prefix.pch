@@ -19,9 +19,11 @@
   #import <UIImageView+WebCache.h>
   #import <SDImageCache.h>
   #import <SORelativeDateTransformer.h>
-  #import  "AppDelegate.h"
+  #import "AppDelegate.h"
   #import "AppViewController.h"
   #import "Theme.h"
+  #import "NSDictionary+Helpers.h"
+  #import "NSDate+Helpers.h"
 
   #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
 #endif

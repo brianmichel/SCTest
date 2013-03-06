@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class SCActivity;
 @interface BaseTrackTableViewCell : UITableViewCell
 
-@property (strong) NSDictionary *trackInformationDictionary;
+@property (strong) SCActivity *trackActivity;
 
-+ (CGFloat)heightForTrackTableViewCellWithInformation:(NSDictionary *)trackInformation containedToSize:(CGSize)size;
++ (CGFloat)heightForTrackTableViewCellWithInformation:(SCActivity *)trackActivity containedToSize:(CGSize)size;
 
 @end

@@ -12,6 +12,7 @@
 #import "VinylPullToRefreshControl.h"
 #import "LoadingAndTracksTableFooterView.h"
 #import "SCActivity.h"
+#import "SCMedia.h"
 
 NSString * const kUserActivitiesNextHREFKey = @"next_href";
 NSString * const kUserActivitiesFutureHREFKey = @"future_href";
@@ -21,7 +22,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 @property (strong) NSURL *nextHREFToLoad;
 @property (strong) NSURL *futureHREF;
 @property (strong) StatusBackgroundTableView *tableView;
-@property (strong) NSMutableArray *tracks;
+@property (strong) NSMutableArray *activities;
 @property (assign) BOOL loadingMore;
 @end
 
@@ -50,7 +51,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
     self.tableView.displayImage = [UIImage imageNamed:@"no-data-bkg"];
     self.tableView.displayString = NSLocalizedString(@"No Tracks", @"No Tracks To Display Placeholder");
     
-    self.tracks = [NSMutableArray arrayWithCapacity:0];
+    self.activities = [NSMutableArray arrayWithCapacity:0];
   }
   return self;
 }
@@ -68,15 +69,15 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.tracks count];
+  return [self.activities count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
+  SCActivity *activity = [self.activities objectAtIndex:indexPath.row];
   //cheaply filter out the activities that aren't of type 'track'
-  if ([track[@"type"] isEqualToString:@"track"]) {
+  if (activity.activityType == SC_ACTIVITY_TYPE_TRACK) {
+	return [BaseTrackTableViewCell heightForTrackTableViewCellWithInformation:activity containedToSize:CGSizeMake(self.tableView.frame.size.width, CGFLOAT_MAX)];
   }
-  return [BaseTrackTableViewCell heightForTrackTableViewCellWithInformation:track containedToSize:CGSizeMake(self.tableView.frame.size.width, CGFLOAT_MAX)];
 
   return 0.0;
 }
@@ -90,20 +91,20 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
     cell = [[BaseTrackTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellId];
   }
   
-  NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
-  cell.trackInformationDictionary = track;
+  SCActivity *activity = [self.activities objectAtIndex:indexPath.row];
+  cell.trackActivity = activity;
   
   return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  NSDictionary *track = [self.tracks objectAtIndex:indexPath.row];
+  SCActivity *track = [self.activities objectAtIndex:indexPath.row];
   
   NSLog(@"TRACK: %@", track);
   
-  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%@", [track valueForKeyPath:@"origin.id"]]];
-  NSURL *permaLink = [NSURL URLWithString:[track valueForKeyPath:@"origin.permalink_url"]];
+  NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%i", track.media.mediaID]];
+  NSURL *permaLink = track.media.permalinkURL;
   
   //Give priority to SC App, fail over to web.
   if ([[UIApplication sharedApplication] canOpenURL:url]) {
@@ -137,7 +138,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   
   //if we've retreived tracks before, but were unable
   //get the next url cursor, bail.
-  if ([self.tracks count] && !self.nextHREFToLoad) {
+  if ([self.activities count] && !self.nextHREFToLoad) {
     return;
   }
   __weak UserActivitiesViewController *weakSelf = self;
@@ -171,7 +172,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
           NSLog(@"DICT: %@", dictionaryResponse);
         }
         weakSelf.nextHREFToLoad = !nextHREF ? nil : [NSURL URLWithString:nextHREF];
-        [weakSelf mergeNewTracks:collection onTop:NO];
+        [weakSelf mergeNewActivities:collection onTop:NO];
         
         weakSelf.loadingMore = NO;
         [weakSelf.tableView flashScrollIndicators];
@@ -191,27 +192,29 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
            responseHandler:handler];
 }
 
-- (void)mergeNewTracks:(NSArray *)tracksCollection onTop:(BOOL)onTop {
+- (void)mergeNewActivities:(NSArray *)activitiesCollection onTop:(BOOL)onTop {
   [self.tableView beginUpdates];
-  NSInteger beginIndex = onTop ? 0 :[self.tracks count];
-  NSMutableArray *indiciesToInsert = [NSMutableArray arrayWithCapacity:[tracksCollection count]];
+  NSInteger beginIndex = onTop ? 0 :[self.activities count];
+  NSMutableArray *indiciesToInsert = [NSMutableArray arrayWithCapacity:[activitiesCollection count]];
+  NSMutableArray *activititesArray = [NSMutableArray arrayWithCapacity:[activitiesCollection count]];
   
-  for (id track in tracksCollection) {
-    SCActivity *activity = [[SCActivity alloc] initWithDictionary:track];
+  for (NSDictionary *activityDictionary in activitiesCollection) {
+    SCActivity *activity = [[SCActivity alloc] initWithDictionary:activityDictionary];
+	[activititesArray addObject:activity];
     [indiciesToInsert addObject:[NSIndexPath indexPathForRow:beginIndex++ inSection:0]];
   }
   [self.tableView insertRowsAtIndexPaths:indiciesToInsert withRowAnimation:UITableViewRowAnimationAutomatic];
   
   if (onTop) {
-    [self.tracks insertObjects:tracksCollection atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [tracksCollection count])]];
+    [self.activities insertObjects:activititesArray atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [activititesArray count])]];
   } else {
-    [self.tracks addObjectsFromArray:tracksCollection];
+    [self.activities addObjectsFromArray:activititesArray];
   }
   
   [self.tableView endUpdates];
   
   LoadingAndTracksTableFooterView *footer = (LoadingAndTracksTableFooterView *)self.tableView.tableFooterView;
-  footer.soundCount = [self.tracks count];
+  footer.soundCount = [self.activities count];
 }
 
 - (void)refresh:(id)sender {
@@ -233,7 +236,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
           NSDictionary *dictionaryResponse = (NSDictionary *)jsonResponse;
           weakSelf.futureHREF = [NSURL URLWithString:[self splitStringAndAddJSON:dictionaryResponse[kUserActivitiesFutureHREFKey]]];
           NSArray *collection = dictionaryResponse[kUserActivitiesCollectionsKey];
-          [weakSelf mergeNewTracks:collection onTop:YES];
+          [weakSelf mergeNewActivities:collection onTop:YES];
           
           [weakSelf.tableView flashScrollIndicators];
         }
