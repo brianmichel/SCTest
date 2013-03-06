@@ -13,7 +13,7 @@ typedef NS_ENUM(NSUInteger, SC_SHARING_TYPE) {
   SC_SHARING_TYPE_PRIVATE
 };
 
-OBJC_EXTERN struct SCReleaseInfo {
+struct SCReleaseInfo {
   NSUInteger release;
   NSUInteger day;
   NSUInteger month;
@@ -26,6 +26,9 @@ OBJC_EXTERN struct SCReleaseInfo {
  depending on the initialization dictionary.
  */
 @interface SCMedia : NSObject
+
+//default initializer
++ (instancetype)mediaObjectForDictionary:(NSDictionary *)dictionary;
 
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
@@ -44,15 +47,17 @@ OBJC_EXTERN struct SCReleaseInfo {
 @property (assign, readonly) SC_SHARING_TYPE sharing;
 
 @property (strong, readonly) NSDate *createdAt;
-@property (strong, readonly) NSString *description; //Note: This may contain HTML.
-@property (strong, readonly) NSString *title;
 @property (strong, readonly) NSURL *permalinkURL;
 @property (strong, readonly) NSURL *purchaseURL;
 @property (strong, readonly) SCUser *user;
+@property (copy, readonly) NSString *trackDescription; //Note: This may contain HTML.
+@property (copy, readonly) NSString *title;
 @end
 
 @interface SCTrack : SCMedia
 
+@property (strong, readonly) NSURL *waveformURL;
+@property (strong, readonly) NSURL *artworkURL;
 @end
 
 @interface SCPlaylist : SCMedia

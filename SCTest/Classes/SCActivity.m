@@ -46,7 +46,7 @@ NSString * const kSCActivityCreatedAtKey = @"created_at";
     _activityType = SC_ACTIVITY_TYPE_UNKNOWN;
   }
   
-  _media = [[SCMedia alloc] initWithDictionary:origin];
+  _media = [SCMedia mediaObjectForDictionary:origin];
 }
 
 @end
