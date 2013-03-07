@@ -101,7 +101,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
   SCActivity *activity = [self.activities objectAtIndex:indexPath.row];
-  
+#if USE_PLAYER
   if (activity.media.mediaType == SC_MEDIA_TYPE_TRACK) {
 	SCTrack *track = (SCTrack *)activity.media;
     if ([SCPlayer sharedPlayer].active) {
@@ -110,9 +110,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
       [[SCPlayer sharedPlayer] playTrack:track];
     }
   }
-  
-  return;
-  
+#else
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%i", activity.media.mediaID]];
   NSURL *permaLink = activity.media.permalinkURL;
   
@@ -122,6 +120,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   } else if	(permaLink) {
     [[UIApplication sharedApplication] openURL:permaLink];
   }
+#endif
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

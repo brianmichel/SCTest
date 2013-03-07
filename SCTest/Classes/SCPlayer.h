@@ -29,6 +29,7 @@ OBJC_EXTERN NSString * const kSCPlayerUpdatePlayhead;
 
 @property (assign, readonly) BOOL active; //this determines whether or not to generate remote events...
 @property (assign) BOOL autoplay;
+@property (assign) NSArray *allTracks;
 
 @property (strong, readonly) SCTrack *currentTrack;
 

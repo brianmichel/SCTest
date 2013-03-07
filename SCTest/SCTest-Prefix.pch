@@ -31,4 +31,6 @@
   #import "SCPlayer.h"
 
   #define APP_DELEGATE ((AppDelegate *)[UIApplication sharedApplication].delegate)
+
+  #define USE_PLAYER 0
 #endif

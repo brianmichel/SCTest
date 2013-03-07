@@ -27,6 +27,7 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
 @implementation SCPlayer
 
 @synthesize active = _active;
+@dynamic allTracks;
 
 + (instancetype)sharedPlayer {
   static SCPlayer *sharedPlayer = nil;
@@ -110,6 +111,10 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
   }
 }
 
+- (NSArray *)allTracks {
+  return [NSArray arrayWithArray:self.trackQueue];
+}
+
 - (void)enqueueTrack:(SCTrack *)track {
   [self.trackQueue addObject:track];
   [[NSNotificationCenter defaultCenter] postNotificationName:kSCPlayerEnqueueTrack object:track];
@@ -161,6 +166,7 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
     [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.currentTrack.artworkURL options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
       dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *infoDict = @{MPMediaItemPropertyTitle : _currentTrack.title,
+                                   MPMediaItemPropertyLyrics : _currentTrack.description,
                                    MPMediaItemPropertyArtwork : [[MPMediaItemArtwork alloc] initWithImage:image],
                                    MPMediaItemPropertyBeatsPerMinute : @(_currentTrack.beatsPerMinute),
                                    };
