@@ -36,6 +36,10 @@
 		72B32CD416E582D1006237B5 /* LoadingAndTracksTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B32CD316E582D1006237B5 /* LoadingAndTracksTableFooterView.m */; };
 		72B32D4516E78577006237B5 /* SCMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B32D4416E78577006237B5 /* SCMedia.m */; };
 		72B32D4816E78F34006237B5 /* SCActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B32D4716E78F34006237B5 /* SCActivity.m */; };
+		72B32D4A16E80E30006237B5 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B32D4916E80E30006237B5 /* CoreMedia.framework */; };
+		72B32D4D16E81FB6006237B5 /* NowPlayingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72B32D4C16E81FB6006237B5 /* NowPlayingViewController.m */; };
+		72B32D4F16E82AD7006237B5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B32D4E16E82AD7006237B5 /* AudioToolbox.framework */; };
+		72B32D5116E8337E006237B5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72B32D5016E8337E006237B5 /* MediaPlayer.framework */; };
 		72CA4D2216DE8960002C5A1E /* AppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2116DE8960002C5A1E /* AppViewController.m */; };
 		72CA4D2416DE904F002C5A1E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72CA4D2316DE904F002C5A1E /* QuartzCore.framework */; };
 		72CA4D2716DE9152002C5A1E /* EntranceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D2616DE9152002C5A1E /* EntranceViewController.m */; };
@@ -111,6 +115,11 @@
 		72B32D4416E78577006237B5 /* SCMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCMedia.m; path = Classes/SCMedia.m; sourceTree = "<group>"; };
 		72B32D4616E78F34006237B5 /* SCActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCActivity.h; path = Classes/SCActivity.h; sourceTree = "<group>"; };
 		72B32D4716E78F34006237B5 /* SCActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCActivity.m; path = Classes/SCActivity.m; sourceTree = "<group>"; };
+		72B32D4916E80E30006237B5 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		72B32D4B16E81FB6006237B5 /* NowPlayingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NowPlayingViewController.h; path = Classes/NowPlayingViewController.h; sourceTree = "<group>"; };
+		72B32D4C16E81FB6006237B5 /* NowPlayingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NowPlayingViewController.m; path = Classes/NowPlayingViewController.m; sourceTree = "<group>"; };
+		72B32D4E16E82AD7006237B5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		72B32D5016E8337E006237B5 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		72CA4D2016DE8960002C5A1E /* AppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppViewController.h; path = Classes/AppViewController.h; sourceTree = "<group>"; };
 		72CA4D2116DE8960002C5A1E /* AppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppViewController.m; path = Classes/AppViewController.m; sourceTree = "<group>"; };
 		72CA4D2316DE904F002C5A1E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -155,6 +164,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72B32D5116E8337E006237B5 /* MediaPlayer.framework in Frameworks */,
+				72B32D4F16E82AD7006237B5 /* AudioToolbox.framework in Frameworks */,
+				72B32D4A16E80E30006237B5 /* CoreMedia.framework in Frameworks */,
 				7235AA3B16E7F3CD0094C44C /* AVFoundation.framework in Frameworks */,
 				72CA4D2416DE904F002C5A1E /* QuartzCore.framework in Frameworks */,
 				72FD5A2A16DE7B7000B2AA28 /* UIKit.framework in Frameworks */,
@@ -241,6 +253,8 @@
 			children = (
 				7235AA3716E7F35E0094C44C /* SCPlayer.h */,
 				7235AA3816E7F35E0094C44C /* SCPlayer.m */,
+				72B32D4B16E81FB6006237B5 /* NowPlayingViewController.h */,
+				72B32D4C16E81FB6006237B5 /* NowPlayingViewController.m */,
 			);
 			name = Playback;
 			sourceTree = "<group>";
@@ -354,6 +368,9 @@
 		72FD5A2816DE7B7000B2AA28 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				72B32D5016E8337E006237B5 /* MediaPlayer.framework */,
+				72B32D4E16E82AD7006237B5 /* AudioToolbox.framework */,
+				72B32D4916E80E30006237B5 /* CoreMedia.framework */,
 				7235AA3A16E7F3CD0094C44C /* AVFoundation.framework */,
 				72CA4D2316DE904F002C5A1E /* QuartzCore.framework */,
 				72FD5A2916DE7B7000B2AA28 /* UIKit.framework */,
@@ -522,6 +539,7 @@
 				7235AA3216E7D5D40094C44C /* NSDictionary+Helpers.m in Sources */,
 				7235AA3516E7D9570094C44C /* NSDate+Helpers.m in Sources */,
 				7235AA3916E7F35E0094C44C /* SCPlayer.m in Sources */,
+				72B32D4D16E81FB6006237B5 /* NowPlayingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

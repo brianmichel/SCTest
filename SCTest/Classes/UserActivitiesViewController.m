@@ -31,6 +31,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
+    [SCPlayer sharedPlayer].autoplay = YES;
     self.tableView = [[StatusBackgroundTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.tableView.backgroundColor = [Theme	standardLightWhiteColorWithAlpha:1.0];
@@ -103,7 +104,11 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   
   if (activity.media.mediaType == SC_MEDIA_TYPE_TRACK) {
 	SCTrack *track = (SCTrack *)activity.media;
-	[[SCPlayer sharedPlayer] playTrack:track];
+    if ([SCPlayer sharedPlayer].active) {
+      [[SCPlayer sharedPlayer] enqueueTrack:track];
+    } else {
+      [[SCPlayer sharedPlayer] playTrack:track];
+    }
   }
   
   return;

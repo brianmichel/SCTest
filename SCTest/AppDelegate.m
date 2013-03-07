@@ -14,6 +14,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  NSError *sessionError = nil;
+  [[AVAudioSession sharedInstance] setDelegate:self];
+  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
+  UInt32 doChangeDefaultRoute = 1;
+  AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof(doChangeDefaultRoute), &doChangeDefaultRoute);
+  
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   self.viewController = [[AppViewController alloc] init];
   
@@ -54,6 +60,10 @@
 #pragma mark - Actions
 - (void)setupAppearanceProxy {
   [[UINavigationBar appearance] setBackgroundImage:[[UIImage imageNamed:@"navbar-bkg"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 1, 0, 1)] forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)remoteControlReceivedWithEvent:(UIEvent *)event {
+  NSLog(@"THING: %@", event);
 }
 
 @end

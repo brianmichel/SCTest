@@ -14,6 +14,7 @@
 
 #import "EntranceViewController.h"
 #import "DiscoveryViewController.h"
+#import "NowPlayingViewController.h"
 
 #define kAppViewControllerDefaultTransform 
 
@@ -128,8 +129,10 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
 - (void)setupDiscoveryViewController {
   self.discoveryViewController = [[JASidePanelController alloc] init];
   DiscoveryViewController *discovery = [[DiscoveryViewController alloc] initWithNibName:nil bundle:nil];
+  self.discoveryViewController.rightGapPercentage = 0.85;
   self.discoveryViewController.centerPanel = [[UINavigationController alloc] initWithRootViewController:discovery];
   self.discoveryViewController.leftPanel = (UIViewController *)discovery.profileViewController;
+  self.discoveryViewController.rightPanel = [[NowPlayingViewController alloc] initWithNibName:nil bundle:nil];
   
   self.discoveryViewController.view.frame = self.view.bounds;
   [self addChildViewController:self.discoveryViewController];

@@ -13,6 +13,9 @@
   #import <Foundation/Foundation.h>
   #import <QuartzCore/QuartzCore.h>
   #import <AVFoundation/AVFoundation.h>
+  #import <AudioToolbox/AudioToolbox.h>
+  #import <MediaPlayer/MediaPlayer.h>
+  #import <CoreMedia/CoreMedia.h>
   #import <SCRequest.h>
   #import <SCSoundCloud.h>
   #import <JASidePanelController.h>
