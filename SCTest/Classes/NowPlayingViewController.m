@@ -75,28 +75,20 @@
 }
 
 - (void)didPan:(UIPanGestureRecognizer *)panGesture {
-  CGPoint translation = [panGesture translationInView:self.view];
-  CGPoint realTranslation = CGPointMake(translation.x * 0.24, translation.y * 0.24);
   CGPoint location = [panGesture locationInView:self.view.superview];
   
   switch (panGesture.state) {
     case UIGestureRecognizerStateBegan:
     case UIGestureRecognizerStateChanged: {
-      //move it
-      if (realTranslation.y < 0) {
-        if (location.y >= 200) {
-          self.view.frame = CGRectMake(self.view.frame.origin.x, location.y, self.view.frame.size.width, self.view.superview.frame.size.height - location.y);
-        }
-      }
-      NSLog(@"TRANSLATION :%@", NSStringFromCGPoint(location));
+      self.view.frame = CGRectMake(self.view.frame.origin.x, location.y, self.view.frame.size.width, self.view.frame.size.height);
     } break;
-    case UIGestureRecognizerStateEnded: {
-      //open/close
+    case UIGestureRecognizerStateEnded:
+    case UIGestureRecognizerStateFailed: {
       CGFloat originToCloseTo = location.y < self.view.superview.frame.size.height/2 ? 200 : self.view.superview.frame.size.height - 50;
-      [UIView animateWithDuration:0.3 animations:^{
-        self.view.frame = CGRectMake(self.view.frame.origin.x, originToCloseTo, self.view.frame.size.width, self.view.superview.frame.size.height - location.y);
-      }];
-    }  break;
+      [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.view.frame = CGRectMake(self.view.frame.origin.x, originToCloseTo, self.view.frame.size.width, self.view.frame.size.height);
+      } completion:nil];
+    } break;
     default:
       break;
   }

@@ -12,7 +12,8 @@
 
 @interface MiniPlayingView ()
 @property (strong) UIImageView *avatarImageView;
-@property (strong) UILabel  *playingLabel;
+@property (strong) MarqueeLabel *artistLabel;
+@property (strong) MarqueeLabel *titleLabel;
 @property (strong) UIButton *playPauseButton;
 @end
 
@@ -28,17 +29,37 @@
       [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trackBegin:) name:kSCPlayerBeginPlayback object:nil];
       
       self.avatarImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-      self.playingLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-      self.playingLabel.backgroundColor = [UIColor clearColor];
-      self.playingLabel.font = [Theme regularFontWithSize:18.0];
-      self.playingLabel.textColor = [Theme standardLightWhiteColorWithAlpha:1.0];
-      self.playingLabel.numberOfLines = 0;
-      self.playingLabel.adjustsFontSizeToFitWidth = YES;
+      
+      CGFloat animationDelay = 20.0;
+      NSString *originSeperator = @"     ";
+      
+      self.artistLabel = [[MarqueeLabel alloc] initWithFrame:CGRectZero duration:3.0 andFadeLength:10.0f];
+      self.artistLabel.backgroundColor = [UIColor clearColor];
+      self.titleLabel.textAlignment = UITextAlignmentCenter;
+      self.artistLabel.font = [Theme boldFontWithSize:15.0];
+      self.artistLabel.textColor = [Theme standardLightWhiteColorWithAlpha:1.0];
+      self.artistLabel.numberOfLines = 1;
+      self.artistLabel.marqueeType = MLContinuous;
+      self.artistLabel.animationDelay = animationDelay;
+      self.artistLabel.continuousMarqueeSeparator = originSeperator;
+      
+      self.titleLabel = [[MarqueeLabel alloc] initWithFrame:CGRectZero duration:3.0 andFadeLength:10.0f];
+      self.titleLabel.backgroundColor = [UIColor clearColor];
+      self.titleLabel.textAlignment = UITextAlignmentCenter;
+      self.titleLabel.font = [Theme regularFontWithSize:14.0];
+      self.titleLabel.textColor = [Theme standardLightWhiteColorWithAlpha:1.0];
+      self.titleLabel.numberOfLines = 1;
+      self.titleLabel.marqueeType = MLContinuous;
+      self.titleLabel.animationDelay = animationDelay;
+      self.titleLabel.continuousMarqueeSeparator = originSeperator;
+
+      
       self.playPauseButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
       [self.playPauseButton addTarget:self action:@selector(playPause:) forControlEvents:UIControlEventTouchUpInside];
       
       [self addSubview:self.avatarImageView];
-      [self addSubview:self.playingLabel];
+      [self addSubview:self.artistLabel];
+      [self addSubview:self.titleLabel];
       [self addSubview:self.playPauseButton];
     }
     return self;
@@ -48,15 +69,23 @@
   [super layoutSubviews];
   self.avatarImageView.frame = CGRectMake(0, 0, self.frame.size.height, self.frame.size.height);
   self.playPauseButton.frame = CGRectMake(CGRectGetMaxX(self.bounds) - self.frame.size.height, 0, self.frame.size.height, self.frame.size.height);
-  self.playingLabel.frame = CGRectMake(CGRectGetMaxX(self.avatarImageView.frame), 0, self.frame.size.width - (self.frame.size.height * 2.0), self.frame.size.height);
+  self.artistLabel.frame = CGRectMake(CGRectGetMaxX(self.avatarImageView.frame) + MarginSizes.small, 0,  self.frame.size.width - (self.frame.size.height * 2.0) - MarginSizes.small * 2.0, round(self.frame.size.height/2));
+  self.titleLabel.frame = CGRectMake(CGRectGetMaxX(self.avatarImageView.frame) + MarginSizes.small, CGRectGetMaxY(self.artistLabel.frame),  self.frame.size.width - (self.frame.size.height * 2.0) - MarginSizes.small * 2.0, round(self.frame.size.height/2));
 }
 
 #pragma mark - Actions
 - (void)trackBegin:(NSNotification *)notification {
   SCTrack *track = (SCTrack *)notification.object;
-  NSURL *urlToLoad = track.artworkURL ? track.artworkURL : track.user.avatarURL;
+  NSURL *urlToLoad = track.user.avatarURL ? track.user.avatarURL :  track.artworkURL;
   [self.avatarImageView setImageWithURL:urlToLoad];
-  self.playingLabel.text = [NSString stringWithFormat:@"%@ - %@", track.user.username, track.title];
+  self.artistLabel.text = track.user.username;
+  self.titleLabel.text = track.title;
+  
+  [self.artistLabel sizeToFit];
+  [self.titleLabel sizeToFit];
+  
+  self.artistLabel.fadeLength = 10.0f;
+  self.titleLabel.fadeLength = 10.0f;
 }
 
 - (void)playPause:(id)sender {

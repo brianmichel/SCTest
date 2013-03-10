@@ -58,6 +58,7 @@
 		72CA4D4916E50439002C5A1E /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 72CA4D4816E50439002C5A1E /* Theme.m */; };
 		72CA4D4C16E51515002C5A1E /* soundcloud-icon-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 72CA4D4A16E51515002C5A1E /* soundcloud-icon-gray.png */; };
 		72CA4D4D16E51515002C5A1E /* soundcloud-icon-gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72CA4D4B16E51515002C5A1E /* soundcloud-icon-gray@2x.png */; };
+		72F5FEC116ECDC55001FD215 /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F5FEC016ECDC55001FD215 /* MarqueeLabel.m */; };
 		72FD5A2A16DE7B7000B2AA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2916DE7B7000B2AA28 /* UIKit.framework */; };
 		72FD5A2C16DE7B7000B2AA28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */; };
 		72FD5A2E16DE7B7000B2AA28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2D16DE7B7000B2AA28 /* CoreGraphics.framework */; };
@@ -149,6 +150,8 @@
 		72CA4D4816E50439002C5A1E /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Theme.m; path = Classes/Theme.m; sourceTree = "<group>"; };
 		72CA4D4A16E51515002C5A1E /* soundcloud-icon-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud-icon-gray.png"; path = "Resources/soundcloud-icon-gray.png"; sourceTree = "<group>"; };
 		72CA4D4B16E51515002C5A1E /* soundcloud-icon-gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud-icon-gray@2x.png"; path = "Resources/soundcloud-icon-gray@2x.png"; sourceTree = "<group>"; };
+		72F5FEBF16ECDC55001FD215 /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
+		72F5FEC016ECDC55001FD215 /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
 		72FD5A2616DE7B7000B2AA28 /* SCTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72FD5A2916DE7B7000B2AA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -223,6 +226,7 @@
 		7228356C16E2E1EA00C7E6C1 /* Non-Pod Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				72F5FEBE16ECDC55001FD215 /* MarqueeLabel */,
 				7228356D16E2E20900C7E6C1 /* FSNetworking */,
 			);
 			name = "Non-Pod Dependencies";
@@ -355,6 +359,16 @@
 			);
 			name = "Misc UI Components";
 			sourceTree = "<group>";
+		};
+		72F5FEBE16ECDC55001FD215 /* MarqueeLabel */ = {
+			isa = PBXGroup;
+			children = (
+				72F5FEBF16ECDC55001FD215 /* MarqueeLabel.h */,
+				72F5FEC016ECDC55001FD215 /* MarqueeLabel.m */,
+			);
+			name = MarqueeLabel;
+			path = Depedencies/MarqueeLabel;
+			sourceTree = SOURCE_ROOT;
 		};
 		72FD5A1D16DE7B7000B2AA28 = {
 			isa = PBXGroup;
@@ -552,6 +566,7 @@
 				72B32D4D16E81FB6006237B5 /* NowPlayingViewController.m in Sources */,
 				720D2C3E16EB792F00A57E1D /* MiniPlayingView.m in Sources */,
 				720D2C7616EB94EE00A57E1D /* TouchPassingWindow.m in Sources */,
+				72F5FEC116ECDC55001FD215 /* MarqueeLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

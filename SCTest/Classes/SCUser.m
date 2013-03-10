@@ -59,5 +59,6 @@ const struct kSCUserPropertyKeys UserPropertyKeys = {
   _userDescription = SVK(dictionary, UserPropertyKeys.userDescription);
   _fullName = SVK(dictionary, UserPropertyKeys.fullName);
   _country = SVK(dictionary, UserPropertyKeys.country);
+  _avatarURL = [NSURL URLWithString:SVK(dictionary, UserPropertyKeys.avatarURL)];
 }
 @end

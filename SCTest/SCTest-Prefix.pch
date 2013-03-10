@@ -25,6 +25,7 @@
   #import <SORelativeDateTransformer.h>
   #import "AppDelegate.h"
   #import "AppViewController.h"
+  #import "MarqueeLabel.h"
   #import "Theme.h"
   #import "NSDictionary+Helpers.h"
   #import "NSDate+Helpers.h"
