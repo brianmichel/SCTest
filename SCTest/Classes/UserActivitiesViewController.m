@@ -47,7 +47,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
     VinylPullToRefreshControl *pullToRefreshControl = [[VinylPullToRefreshControl alloc] init];
     [pullToRefreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     self.tableView.tableHeaderView = pullToRefreshControl;
-    self.tableView.contentInset = UIEdgeInsetsMake(-(kVinylPullToRefreshControlHeight), 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(-(kVinylPullToRefreshControlHeight), 0, 50, 0);
     
     self.tableView.displayImage = [UIImage imageNamed:@"no-data-bkg"];
     self.tableView.displayString = NSLocalizedString(@"No Tracks", @"No Tracks To Display Placeholder");
@@ -105,12 +105,6 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   if (activity.media.mediaType == SC_MEDIA_TYPE_TRACK) {
     SCTrack *track = (SCTrack *)activity.media;
     [[SCPlayer sharedPlayer] playTrack:track];
-//
-//    if ([SCPlayer sharedPlayer].playing) {
-//      [[SCPlayer sharedPlayer] enqueueTrack:track];
-//    } else {
-//      [[SCPlayer sharedPlayer] playTrack:track];
-//    }
   }
 #else
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%i", activity.media.mediaID]];

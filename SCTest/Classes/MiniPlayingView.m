@@ -31,7 +31,6 @@
       self.avatarImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
       
       CGFloat animationDelay = 20.0;
-      NSString *originSeperator = @"     ";
       
       self.artistLabel = [[MarqueeLabel alloc] initWithFrame:CGRectZero duration:3.0 andFadeLength:10.0f];
       self.artistLabel.backgroundColor = [UIColor clearColor];
@@ -41,7 +40,6 @@
       self.artistLabel.numberOfLines = 1;
       self.artistLabel.marqueeType = MLContinuous;
       self.artistLabel.animationDelay = animationDelay;
-      self.artistLabel.continuousMarqueeSeparator = originSeperator;
       
       self.titleLabel = [[MarqueeLabel alloc] initWithFrame:CGRectZero duration:3.0 andFadeLength:10.0f];
       self.titleLabel.backgroundColor = [UIColor clearColor];
@@ -51,11 +49,10 @@
       self.titleLabel.numberOfLines = 1;
       self.titleLabel.marqueeType = MLContinuous;
       self.titleLabel.animationDelay = animationDelay;
-      self.titleLabel.continuousMarqueeSeparator = originSeperator;
-
       
-      self.playPauseButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+      self.playPauseButton = [UIButton buttonWithType:UIButtonTypeCustom];
       [self.playPauseButton addTarget:self action:@selector(playPause:) forControlEvents:UIControlEventTouchUpInside];
+      [self.playPauseButton setImage:[UIImage imageNamed:@"play-icon"] forState:UIControlStateNormal];
       
       [self addSubview:self.avatarImageView];
       [self addSubview:self.artistLabel];
@@ -99,11 +96,10 @@
 #pragma mark - KVO
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
   if ([keyPath isEqualToString:@"playing"]) {
-    NSLog(@"PLAYING: %@", [SCPlayer sharedPlayer].playing ? @"YES" : @"NO");
     if ([SCPlayer sharedPlayer].playing) {
-      [self.playPauseButton setTitle:@"||" forState:UIControlStateNormal];
+      [self.playPauseButton setImage:[UIImage imageNamed:@"pause-icon"] forState:UIControlStateNormal];
     } else {
-      [self.playPauseButton setTitle:@"|>" forState:UIControlStateNormal];
+      [self.playPauseButton setImage:[UIImage imageNamed:@"play-icon"] forState:UIControlStateNormal];
     }
   }
   

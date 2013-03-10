@@ -59,6 +59,10 @@
 		72CA4D4C16E51515002C5A1E /* soundcloud-icon-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 72CA4D4A16E51515002C5A1E /* soundcloud-icon-gray.png */; };
 		72CA4D4D16E51515002C5A1E /* soundcloud-icon-gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72CA4D4B16E51515002C5A1E /* soundcloud-icon-gray@2x.png */; };
 		72F5FEC116ECDC55001FD215 /* MarqueeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 72F5FEC016ECDC55001FD215 /* MarqueeLabel.m */; };
+		72F5FEC616ECF47B001FD215 /* pause-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 72F5FEC216ECF47A001FD215 /* pause-icon.png */; };
+		72F5FEC716ECF47B001FD215 /* pause-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72F5FEC316ECF47B001FD215 /* pause-icon@2x.png */; };
+		72F5FEC816ECF47B001FD215 /* play-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 72F5FEC416ECF47B001FD215 /* play-icon.png */; };
+		72F5FEC916ECF47B001FD215 /* play-icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 72F5FEC516ECF47B001FD215 /* play-icon@2x.png */; };
 		72FD5A2A16DE7B7000B2AA28 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2916DE7B7000B2AA28 /* UIKit.framework */; };
 		72FD5A2C16DE7B7000B2AA28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */; };
 		72FD5A2E16DE7B7000B2AA28 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD5A2D16DE7B7000B2AA28 /* CoreGraphics.framework */; };
@@ -152,6 +156,10 @@
 		72CA4D4B16E51515002C5A1E /* soundcloud-icon-gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "soundcloud-icon-gray@2x.png"; path = "Resources/soundcloud-icon-gray@2x.png"; sourceTree = "<group>"; };
 		72F5FEBF16ECDC55001FD215 /* MarqueeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarqueeLabel.h; sourceTree = "<group>"; };
 		72F5FEC016ECDC55001FD215 /* MarqueeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarqueeLabel.m; sourceTree = "<group>"; };
+		72F5FEC216ECF47A001FD215 /* pause-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pause-icon.png"; path = "Resources/pause-icon.png"; sourceTree = "<group>"; };
+		72F5FEC316ECF47B001FD215 /* pause-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pause-icon@2x.png"; path = "Resources/pause-icon@2x.png"; sourceTree = "<group>"; };
+		72F5FEC416ECF47B001FD215 /* play-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play-icon.png"; path = "Resources/play-icon.png"; sourceTree = "<group>"; };
+		72F5FEC516ECF47B001FD215 /* play-icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "play-icon@2x.png"; path = "Resources/play-icon@2x.png"; sourceTree = "<group>"; };
 		72FD5A2616DE7B7000B2AA28 /* SCTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SCTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72FD5A2916DE7B7000B2AA28 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		72FD5A2B16DE7B7000B2AA28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -274,6 +282,10 @@
 		726379ED16E408C100C16DBE /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				72F5FEC216ECF47A001FD215 /* pause-icon.png */,
+				72F5FEC316ECF47B001FD215 /* pause-icon@2x.png */,
+				72F5FEC416ECF47B001FD215 /* play-icon.png */,
+				72F5FEC516ECF47B001FD215 /* play-icon@2x.png */,
 				72CA4D4A16E51515002C5A1E /* soundcloud-icon-gray.png */,
 				72CA4D4B16E51515002C5A1E /* soundcloud-icon-gray@2x.png */,
 				726379E916E4045600C16DBE /* soundcloud-icon-white.png */,
@@ -511,6 +523,10 @@
 				72CA4D4C16E51515002C5A1E /* soundcloud-icon-gray.png in Resources */,
 				72CA4D4D16E51515002C5A1E /* soundcloud-icon-gray@2x.png in Resources */,
 				723BD4CF16E541AA00841271 /* Localizable.strings in Resources */,
+				72F5FEC616ECF47B001FD215 /* pause-icon.png in Resources */,
+				72F5FEC716ECF47B001FD215 /* pause-icon@2x.png in Resources */,
+				72F5FEC816ECF47B001FD215 /* play-icon.png in Resources */,
+				72F5FEC916ECF47B001FD215 /* play-icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

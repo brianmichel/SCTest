@@ -55,7 +55,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.activitiesVC.view.frame = self.view.bounds;
-  self.nowPlayingVC.view.frame = CGRectMake(0, CGRectGetMaxY(self.tpWindow.bounds) - 50, self.view.bounds.size.width, 50);
+  self.nowPlayingVC.view.frame = CGRectMake(0, CGRectGetMaxY(self.tpWindow.bounds) - 370, self.view.bounds.size.width, 370);
   
   [self.view addSubview:self.activitiesVC.view];
 }
