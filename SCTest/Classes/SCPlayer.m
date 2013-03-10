@@ -11,6 +11,7 @@
 
 NSString * const kSCPlayerBeginPlayback = @"kSCPlayerBeginPlayback";
 NSString * const kSCPlayerStopPlayback = @"kSCPlayerStopPlayback";
+NSString * const kSCPlayerPausePlayback = @"kSCPlayerPausePlayback";
 NSString * const kSCPlayerFinishedPlayback = @"kSCPlayerFinishedPlayback";
 NSString * const kSCPlayerUpdatePlayhead = @"kSCPlayerUpdatePlayhead";
 NSString * const kSCPlayerEnqueueTrack = @"kSCPlayerEnqueueTrack";
@@ -22,11 +23,12 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
 @property (strong) AVQueuePlayer *currentAudioPlayer;
 @property (strong) id currentPlaybackTimeObserver;
 @property (strong) NSMutableArray *trackQueue;
+@property (strong) SCRequest *currentRequest;
 @end
 
 @implementation SCPlayer
 
-@synthesize active = _active;
+@synthesize playing = _playing;
 @dynamic allTracks;
 
 + (instancetype)sharedPlayer {
@@ -48,22 +50,13 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
   return self;
 }
 
-#pragma mark - Setters / Getters
-- (void)setActive:(BOOL)active {
-  _active = active;
-}
-
-- (BOOL)active {
-  return _active;
-}
-
 #pragma mark - Actions
 
 - (void)playTrack:(SCTrack *)track {
   [self tearDownPlayer];
   
   __weak SCPlayer *weakSelf = self;
-  [SCRequest performMethod:SCRequestMethodHEAD onResource:track.streamURL usingParameters:nil withAccount:[SCSoundCloud account] sendingProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
+  self.currentRequest = [SCRequest performMethod:SCRequestMethodHEAD onResource:track.streamURL usingParameters:nil withAccount:[SCSoundCloud account] sendingProgressHandler:nil responseHandler:^(NSURLResponse *response, NSData *responseData, NSError *error) {
     NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
     if (resp.statusCode == 200) {
       dispatch_async(dispatch_get_main_queue(), ^{
@@ -76,15 +69,23 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
 
 - (void)play {
   if (self.currentAudioPlayer) {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSCPlayerBeginPlayback object:self.currentTrack];
     [self.currentAudioPlayer play];
-    _active = YES;
+    
+    [self willChangeValueForKey:@"playing"];
+    _playing = YES;
+    [self didChangeValueForKey:@"playing"];
   }
 }
 
 - (void)pause {
   if (self.currentAudioPlayer) {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSCPlayerPausePlayback object:self.currentTrack];
     [self.currentAudioPlayer pause];
-    _active = NO;
+    
+    [self willChangeValueForKey:@"playing"];
+    _playing = NO;
+    [self didChangeValueForKey:@"playing"];
   }
 }
 
@@ -94,7 +95,9 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
 
 - (void)_stop:(SC_PLAYER_STOP_REASON)stopReason withError:(NSError *)error {
   [self tearDownPlayer];
-  _active = NO;
+  [self willChangeValueForKey:@"playing"];
+  _playing = NO;
+  [self didChangeValueForKey:@"playing"];
   
   switch (stopReason) {
     case SC_PLAYER_STOP_REASON_ERROR:
@@ -145,7 +148,9 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
 #pragma mark - Helpers
 - (void)beginPlaybackWithURL:(NSURL *)url {
   self.currentAudioPlayer = [AVPlayer playerWithURL:url];
-  self.active = YES;
+  [self willChangeValueForKey:@"playing"];
+  _playing = YES;
+  [self didChangeValueForKey:@"playing"];
   
   __weak SCPlayer *weakSelf = self;
   self.currentPlaybackTimeObserver = [self.currentAudioPlayer addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:self.scPlayerQueue usingBlock:^(CMTime time) {
@@ -176,8 +181,7 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
     }];
   }
   
-  [self.currentAudioPlayer play];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kSCPlayerBeginPlayback object:self.currentTrack];
+  [self play];
 }
 
 - (void)tearDownPlayer {
@@ -186,6 +190,11 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
     [self.currentAudioPlayer removeTimeObserver:self.currentPlaybackTimeObserver];
     self.currentPlaybackTimeObserver = nil;
     self.currentAudioPlayer = nil;
+  }
+  
+  if (self.currentRequest) {
+    [self.currentRequest cancel];
+    self.currentRequest = nil;
   }
 }
 

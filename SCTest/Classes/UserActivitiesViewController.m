@@ -103,12 +103,14 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
   SCActivity *activity = [self.activities objectAtIndex:indexPath.row];
 #if USE_PLAYER
   if (activity.media.mediaType == SC_MEDIA_TYPE_TRACK) {
-	SCTrack *track = (SCTrack *)activity.media;
-    if ([SCPlayer sharedPlayer].active) {
-      [[SCPlayer sharedPlayer] enqueueTrack:track];
-    } else {
-      [[SCPlayer sharedPlayer] playTrack:track];
-    }
+    SCTrack *track = (SCTrack *)activity.media;
+    [[SCPlayer sharedPlayer] playTrack:track];
+//
+//    if ([SCPlayer sharedPlayer].playing) {
+//      [[SCPlayer sharedPlayer] enqueueTrack:track];
+//    } else {
+//      [[SCPlayer sharedPlayer] playTrack:track];
+//    }
   }
 #else
   NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"soundcloud:tracks:%i", activity.media.mediaID]];

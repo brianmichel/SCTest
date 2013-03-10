@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		720D2C3E16EB792F00A57E1D /* MiniPlayingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 720D2C3D16EB792F00A57E1D /* MiniPlayingView.m */; };
+		720D2C7616EB94EE00A57E1D /* TouchPassingWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 720D2C7516EB94EE00A57E1D /* TouchPassingWindow.m */; };
 		7228354C16E0434400C7E6C1 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228354B16E0434400C7E6C1 /* UserProfileViewController.m */; };
 		7228355016E04E2600C7E6C1 /* ProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7228354F16E04E2600C7E6C1 /* ProfileView.m */; };
 		7228355616E0664000C7E6C1 /* avatar-inset.png in Resources */ = {isa = PBXBuildFile; fileRef = 7228355416E0664000C7E6C1 /* avatar-inset.png */; };
@@ -70,6 +72,10 @@
 
 /* Begin PBXFileReference section */
 		4BD8A59E8D9441F2BBD7815E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		720D2C3C16EB792F00A57E1D /* MiniPlayingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MiniPlayingView.h; path = Classes/MiniPlayingView.h; sourceTree = "<group>"; };
+		720D2C3D16EB792F00A57E1D /* MiniPlayingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MiniPlayingView.m; path = Classes/MiniPlayingView.m; sourceTree = "<group>"; };
+		720D2C7416EB94EE00A57E1D /* TouchPassingWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchPassingWindow.h; path = Classes/TouchPassingWindow.h; sourceTree = "<group>"; };
+		720D2C7516EB94EE00A57E1D /* TouchPassingWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouchPassingWindow.m; path = Classes/TouchPassingWindow.m; sourceTree = "<group>"; };
 		7228354A16E0434400C7E6C1 /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserProfileViewController.h; path = Classes/UserProfileViewController.h; sourceTree = "<group>"; };
 		7228354B16E0434400C7E6C1 /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserProfileViewController.m; path = Classes/UserProfileViewController.m; sourceTree = "<group>"; };
 		7228354E16E04E2600C7E6C1 /* ProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileView.h; path = Classes/ProfileView.h; sourceTree = "<group>"; };
@@ -253,6 +259,8 @@
 			children = (
 				7235AA3716E7F35E0094C44C /* SCPlayer.h */,
 				7235AA3816E7F35E0094C44C /* SCPlayer.m */,
+				720D2C3C16EB792F00A57E1D /* MiniPlayingView.h */,
+				720D2C3D16EB792F00A57E1D /* MiniPlayingView.m */,
 				72B32D4B16E81FB6006237B5 /* NowPlayingViewController.h */,
 				72B32D4C16E81FB6006237B5 /* NowPlayingViewController.m */,
 			);
@@ -342,6 +350,8 @@
 				72B32CD016E57055006237B5 /* VinylActivityIndicatorView.m */,
 				72B32CD216E582D1006237B5 /* LoadingAndTracksTableFooterView.h */,
 				72B32CD316E582D1006237B5 /* LoadingAndTracksTableFooterView.m */,
+				720D2C7416EB94EE00A57E1D /* TouchPassingWindow.h */,
+				720D2C7516EB94EE00A57E1D /* TouchPassingWindow.m */,
 			);
 			name = "Misc UI Components";
 			sourceTree = "<group>";
@@ -540,6 +550,8 @@
 				7235AA3516E7D9570094C44C /* NSDate+Helpers.m in Sources */,
 				7235AA3916E7F35E0094C44C /* SCPlayer.m in Sources */,
 				72B32D4D16E81FB6006237B5 /* NowPlayingViewController.m in Sources */,
+				720D2C3E16EB792F00A57E1D /* MiniPlayingView.m in Sources */,
+				720D2C7616EB94EE00A57E1D /* TouchPassingWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, SC_PLAYER_STOP_REASON) {
 
 OBJC_EXTERN NSString * const kSCPlayerBeginPlayback;
 OBJC_EXTERN NSString * const kSCPlayerStopPlayback;
+OBJC_EXTERN NSString * const kSCPlayerPausePlayback;
 OBJC_EXTERN NSString * const kSCPlayerFinishedPlayback;
 OBJC_EXTERN NSString * const kSCPlayerEnqueueTrack;
 OBJC_EXTERN NSString * const kSCPlayerDequeueTrack;
@@ -27,7 +28,7 @@ OBJC_EXTERN NSString * const kSCPlayerUpdatePlayhead;
 
 @interface SCPlayer : NSObject
 
-@property (assign, readonly) BOOL active; //this determines whether or not to generate remote events...
+@property (assign, readonly) BOOL playing; //this determines whether or not to generate remote events...
 @property (assign) BOOL autoplay;
 @property (assign) NSArray *allTracks;
 
