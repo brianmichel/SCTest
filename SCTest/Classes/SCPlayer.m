@@ -8,6 +8,7 @@
 
 #import "SCPlayer.h"
 #import "SCMedia.h"
+#import "SCUser.h"
 
 NSString * const kSCPlayerBeginPlayback = @"kSCPlayerBeginPlayback";
 NSString * const kSCPlayerStopPlayback = @"kSCPlayerStopPlayback";
@@ -174,9 +175,10 @@ NSString * const kSCPlayerUpdatePlayheadProgressKey = @"progress";
     [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.currentTrack.artworkURL options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
       dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *infoDict = @{MPMediaItemPropertyTitle : _currentTrack.title,
-                                   MPMediaItemPropertyLyrics : _currentTrack.description,
+                                   MPMediaItemPropertyLyrics : _currentTrack.trackDescription,
                                    MPMediaItemPropertyArtwork : [[MPMediaItemArtwork alloc] initWithImage:image],
                                    MPMediaItemPropertyBeatsPerMinute : @(_currentTrack.beatsPerMinute),
+								   MPMediaItemPropertyArtist : _currentTrack.user.username
                                    };
         
         [MPNowPlayingInfoCenter defaultCenter].nowPlayingInfo = infoDict;

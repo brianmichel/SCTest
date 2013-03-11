@@ -22,6 +22,7 @@
 
 - (void)commonInit {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newTrack:) name:kSCPlayerBeginPlayback object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishedPlaying:) name:kSCPlayerFinishedPlayback object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePlayhead:) name:kSCPlayerUpdatePlayhead object:nil];
   [[SCPlayer sharedPlayer] addObserver:self forKeyPath:@"playing" options:NSKeyValueObservingOptionInitial context:nil];
   
@@ -33,6 +34,7 @@
   [self.playPauseButton addTarget:self action:@selector(playPause:) forControlEvents:UIControlEventTouchUpInside];
   [self.playPauseButton setImage:[UIImage imageNamed:@"play-icon"] forState:UIControlStateNormal];
   [self.playPauseButton sizeToFit];
+  self.playPauseButton.alpha = 0.0;
   
   self.miniPlayingView = [[MiniPlayingView alloc] initWithFrame:CGRectZero];
   self.miniPlayingView.userInteractionEnabled = NO;
@@ -64,24 +66,29 @@
   [super layoutSubviews];
   self.waveformView.frame = self.bounds;
   self.miniPlayingView.frame = self.bounds;
+  self.playPauseButton.frame = CGRectMake(self.playPauseButton.frame.origin.x, self.playPauseButton.frame.origin.y, self.frame.size.height, self.frame.size.height);
 }
 
-- (void)logSubviews:(NSArray *)subviews {
-  for (UIView *view in subviews) {
-	NSLog(@"SUBVIEW: %@", view);
-	[self logSubviews:view.subviews];
-  }
-}
 #pragma mark - Actions
 - (void)newTrack:(NSNotification *)notification {
   self.track = (SCTrack *)notification.object;
   self.waveformView.waveFormURL = self.track.waveformURL;
-  [self flashInfo];
+  [UIView animateWithDuration:0.3 animations:^{
+	self.playPauseButton.alpha = 1.0;
+  } completion:^(BOOL finished) {
+	[self flashInfo];
+  }];
 }
 
 - (void)updatePlayhead:(NSNotification *)notification {
   NSNumber *progress = notification.userInfo[kSCPlayerUpdatePlayheadProgressKey];
   self.waveformView.progress = [progress doubleValue];
+}
+
+- (void)finishedPlaying:(NSNotification *)notification {
+  [UIView animateWithDuration:0.3 animations:^{
+	self.playPauseButton.alpha = 0.0;
+  }];
 }
 
 - (void)playPause:(id)sender {
@@ -113,6 +120,12 @@
   dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
     [self toggleTrackInfo:nil];
   });
+}
+
+#pragma mark - Overrides
+- (void)setItems:(NSArray *)items animated:(BOOL)animated {
+  [super setItems:items animated:animated];
+  self.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.playPauseButton];
 }
 
 #pragma mark - KVO Callback
