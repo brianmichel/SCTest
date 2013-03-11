@@ -171,8 +171,9 @@ NSString * const kSCPlayerUpdatePlayheadProgressKey = @"progress";
     });
   }];
   
-  if (self.currentTrack.artworkURL) {
-    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:self.currentTrack.artworkURL options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+  NSURL *artworkURL500 = [self.currentTrack artworkURLForSize:SC_ARTWORK_SIZE_500];
+  if (artworkURL500) {
+    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:artworkURL500 options:0 progress:nil completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
       dispatch_async(dispatch_get_main_queue(), ^{
         NSDictionary *infoDict = @{MPMediaItemPropertyTitle : _currentTrack.title,
                                    MPMediaItemPropertyLyrics : _currentTrack.trackDescription,

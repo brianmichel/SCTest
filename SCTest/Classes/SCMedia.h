@@ -19,6 +19,15 @@ typedef NS_ENUM(NSUInteger, SC_MEDIA_TYPE) {
   SC_MEDIA_TYPE_PLAYLIST
 };
 
+typedef NS_ENUM(NSUInteger, SC_ARTWORK_SIZE) {
+  SC_ARTWORK_SIZE_40 = 0,
+  SC_ARTWORK_SIZE_50,
+  SC_ARTWORK_SIZE_200,
+  SC_ARTWORK_SIZE_300,
+  SC_ARTWORK_SIZE_500,
+  SC_ARTWORK_SIZE_ORIGINAL
+};
+
 struct SCReleaseInfo {
   NSUInteger release;
   NSUInteger day;
@@ -39,11 +48,6 @@ struct SCReleaseInfo {
   
   SC_MEDIA_TYPE _mediaType;
 }
-
-//default initializer
-+ (instancetype)mediaObjectForDictionary:(NSDictionary *)dictionary;
-
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 /* Asserts whether or not the current representation is minified or not.
  
@@ -70,6 +74,12 @@ struct SCReleaseInfo {
 @property (strong, readonly) SCUser *user;
 @property (copy, readonly) NSString *trackDescription; //Note: This may contain HTML.
 @property (copy, readonly) NSString *title;
+
+//default initializer
++ (instancetype)mediaObjectForDictionary:(NSDictionary *)dictionary;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+- (NSURL *)artworkURLForSize:(SC_ARTWORK_SIZE)size;
 @end
 
 @interface SCTrack : SCMedia {

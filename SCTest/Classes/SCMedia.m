@@ -65,6 +65,40 @@ NSString * const kSCMediaKindPlaylist = @"playlist";
   return nil;
 }
 
+- (NSURL *)artworkURLForSize:(SC_ARTWORK_SIZE)size {
+  if (self.artworkURL) {
+	NSString *replacementString = nil;
+	switch (size) {
+	  case SC_ARTWORK_SIZE_40:
+		replacementString = @"t40x40";
+		break;
+	  case SC_ARTWORK_SIZE_50:
+		replacementString = @"t50x50";
+		break;
+	  case SC_ARTWORK_SIZE_200:
+		replacementString = @"t200x200";
+		break;
+	  case SC_ARTWORK_SIZE_300:
+		replacementString = @"t300x300";
+		break;
+	  case SC_ARTWORK_SIZE_500:
+		replacementString = @"t500x500";
+		break;
+	  case SC_ARTWORK_SIZE_ORIGINAL:
+		replacementString = @"original";
+		break;
+	  default:
+		// do nothing.
+		break;
+	}
+	if (replacementString) {
+	  NSString *urlString = [[self.artworkURL absoluteString] stringByReplacingOccurrencesOfString:@"large" withString:replacementString options:NSBackwardsSearch range:NSMakeRange(0, [self.artworkURL absoluteString].length)];
+	  return [NSURL URLWithString:urlString];
+	}
+  }
+  return nil;
+}
+
 #pragma mark - Helpers
 + (Class)classTypeForDictionary:(NSDictionary *)dictionary {
   NSString *kindString = dictionary[kSCMediaKindKey];
@@ -93,7 +127,7 @@ NSString * const kSCMediaKindPlaylist = @"playlist";
   _user = [[SCUser alloc] initWithDictionary:dictionary[BaseSharedKeys.user]];
   _artworkURL = [self processPotentialURL:dictionary[BaseSharedKeys.artworkURL]];
   _createdAt = [NSDate dateFromSoundcloudString:dictionary[BaseSharedKeys.createdAt]];
-  
+    
   NSString *sharingString = SVK(dictionary, BaseSharedKeys.sharing);
   _sharing = [sharingString isEqualToString:@"public"] ? SC_SHARING_TYPE_PUBLIC : SC_SHARING_TYPE_PRIVATE;
 }
