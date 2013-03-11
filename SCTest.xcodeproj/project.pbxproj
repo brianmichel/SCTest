@@ -27,6 +27,7 @@
 		7235AA3516E7D9570094C44C /* NSDate+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 7235AA3416E7D9570094C44C /* NSDate+Helpers.m */; };
 		7235AA3916E7F35E0094C44C /* SCPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7235AA3816E7F35E0094C44C /* SCPlayer.m */; };
 		7235AA3B16E7F3CD0094C44C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7235AA3A16E7F3CD0094C44C /* AVFoundation.framework */; };
+		7235AA4316EE3C0E0094C44C /* SCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7235AA4216EE3C0E0094C44C /* SCNavigationBar.m */; };
 		723BD4CF16E541AA00841271 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 723BD4CE16E541AA00841271 /* Localizable.strings */; };
 		726379E516E3FCBD00C16DBE /* signin-highlighted-btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E116E3FCBD00C16DBE /* signin-highlighted-btn.png */; };
 		726379E616E3FCBD00C16DBE /* signin-highlighted-btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 726379E216E3FCBD00C16DBE /* signin-highlighted-btn@2x.png */; };
@@ -111,6 +112,8 @@
 		7235AA3716E7F35E0094C44C /* SCPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCPlayer.h; path = Classes/SCPlayer.h; sourceTree = "<group>"; };
 		7235AA3816E7F35E0094C44C /* SCPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCPlayer.m; path = Classes/SCPlayer.m; sourceTree = "<group>"; };
 		7235AA3A16E7F3CD0094C44C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7235AA4116EE3C0E0094C44C /* SCNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCNavigationBar.h; path = Classes/SCNavigationBar.h; sourceTree = "<group>"; };
+		7235AA4216EE3C0E0094C44C /* SCNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCNavigationBar.m; path = Classes/SCNavigationBar.m; sourceTree = "<group>"; };
 		723BD4CE16E541AA00841271 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Resources/Localizable.strings; sourceTree = "<group>"; };
 		726379E116E3FCBD00C16DBE /* signin-highlighted-btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-highlighted-btn.png"; path = "Resources/signin-highlighted-btn.png"; sourceTree = "<group>"; };
 		726379E216E3FCBD00C16DBE /* signin-highlighted-btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signin-highlighted-btn@2x.png"; path = "Resources/signin-highlighted-btn@2x.png"; sourceTree = "<group>"; };
@@ -368,6 +371,8 @@
 				72B32CD316E582D1006237B5 /* LoadingAndTracksTableFooterView.m */,
 				720D2C7416EB94EE00A57E1D /* TouchPassingWindow.h */,
 				720D2C7516EB94EE00A57E1D /* TouchPassingWindow.m */,
+				7235AA4116EE3C0E0094C44C /* SCNavigationBar.h */,
+				7235AA4216EE3C0E0094C44C /* SCNavigationBar.m */,
 			);
 			name = "Misc UI Components";
 			sourceTree = "<group>";
@@ -420,11 +425,11 @@
 		72FD5A2F16DE7B7000B2AA28 /* SCTest */ = {
 			isa = PBXGroup;
 			children = (
+				72CA4D2D16DEA309002C5A1E /* Main App Hierarchy */,
 				7235AA3616E7F34F0094C44C /* Playback */,
 				7235AA2F16E7D5BD0094C44C /* Categories */,
 				72B32D3F16E78289006237B5 /* Model */,
 				72CA4D3C16E3A909002C5A1E /* Misc UI Components */,
-				72CA4D2D16DEA309002C5A1E /* Main App Hierarchy */,
 				72CA4D2C16DEA2F3002C5A1E /* Entrance (Login) */,
 				72CA4D2B16DEA2EB002C5A1E /* Discovery */,
 				7228355116E05F2700C7E6C1 /* Resources */,
@@ -583,6 +588,7 @@
 				720D2C3E16EB792F00A57E1D /* MiniPlayingView.m in Sources */,
 				720D2C7616EB94EE00A57E1D /* TouchPassingWindow.m in Sources */,
 				72F5FEC116ECDC55001FD215 /* MarqueeLabel.m in Sources */,
+				7235AA4316EE3C0E0094C44C /* SCNavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

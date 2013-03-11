@@ -24,6 +24,8 @@ OBJC_EXTERN NSString * const kSCPlayerDequeueTrack;
 OBJC_EXTERN NSString * const kSCPlayerClearQueue;
 OBJC_EXTERN NSString * const kSCPlayerUpdatePlayhead;
 
+OBJC_EXTERN NSString * const kSCPlayerUpdatePlayheadProgressKey;
+
 @class SCTrack;
 
 @interface SCPlayer : NSObject

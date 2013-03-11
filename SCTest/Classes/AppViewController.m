@@ -14,6 +14,7 @@
 
 #import "EntranceViewController.h"
 #import "DiscoveryViewController.h"
+#import "SCNavigationBar.h"
 
 #define kAppViewControllerDefaultTransform 
 
@@ -129,7 +130,9 @@ NSString * const kSCClientRedirectURL = @"sctest://oauth";
   self.discoveryViewController = [[JASidePanelController alloc] init];
   DiscoveryViewController *discovery = [[DiscoveryViewController alloc] initWithNibName:nil bundle:nil];
   self.discoveryViewController.rightGapPercentage = 0.85;
-  self.discoveryViewController.centerPanel = [[UINavigationController alloc] initWithRootViewController:discovery];
+  UINavigationController *nav = [[UINavigationController alloc] initWithNavigationBarClass:[SCNavigationBar class] toolbarClass:nil];
+  [nav setViewControllers:@[discovery]];
+  self.discoveryViewController.centerPanel = nav;
   self.discoveryViewController.leftPanel = (UIViewController *)discovery.profileViewController;
   
   self.discoveryViewController.view.frame = self.view.bounds;

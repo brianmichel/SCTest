@@ -35,8 +35,8 @@
       self.artistLabel = [[MarqueeLabel alloc] initWithFrame:CGRectZero duration:3.0 andFadeLength:10.0f];
       self.artistLabel.backgroundColor = [UIColor clearColor];
       self.titleLabel.textAlignment = UITextAlignmentCenter;
-      self.artistLabel.font = [Theme boldFontWithSize:15.0];
-      self.artistLabel.textColor = [Theme standardLightWhiteColorWithAlpha:1.0];
+      self.artistLabel.font = [Theme boldFontWithSize:13.0];
+      self.artistLabel.textColor = [Theme standardDarkColorWithAlpha:1.0];
       self.artistLabel.numberOfLines = 1;
       self.artistLabel.marqueeType = MLContinuous;
       self.artistLabel.animationDelay = animationDelay;
@@ -44,8 +44,8 @@
       self.titleLabel = [[MarqueeLabel alloc] initWithFrame:CGRectZero duration:3.0 andFadeLength:10.0f];
       self.titleLabel.backgroundColor = [UIColor clearColor];
       self.titleLabel.textAlignment = UITextAlignmentCenter;
-      self.titleLabel.font = [Theme regularFontWithSize:14.0];
-      self.titleLabel.textColor = [Theme standardLightWhiteColorWithAlpha:1.0];
+      self.titleLabel.font = [Theme regularFontWithSize:13.0];
+      self.titleLabel.textColor = [Theme standardDarkColorWithAlpha:1.0];
       self.titleLabel.numberOfLines = 1;
       self.titleLabel.marqueeType = MLContinuous;
       self.titleLabel.animationDelay = animationDelay;

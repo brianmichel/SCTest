@@ -47,7 +47,7 @@ NSString * const kUserActivitiesCollectionsKey = @"collection";
     VinylPullToRefreshControl *pullToRefreshControl = [[VinylPullToRefreshControl alloc] init];
     [pullToRefreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     self.tableView.tableHeaderView = pullToRefreshControl;
-    self.tableView.contentInset = UIEdgeInsetsMake(-(kVinylPullToRefreshControlHeight), 0, 50, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(-(kVinylPullToRefreshControlHeight), 0, 0, 0);
     
     self.tableView.displayImage = [UIImage imageNamed:@"no-data-bkg"];
     self.tableView.displayString = NSLocalizedString(@"No Tracks", @"No Tracks To Display Placeholder");

@@ -13,4 +13,8 @@
 @property (strong) UIImage *waveFormImage;
 @property (strong) NSURL *waveFormURL;
 
+@property (strong) UIColor *waveFormColor;
+
+@property (assign) double progress;
+
 @end

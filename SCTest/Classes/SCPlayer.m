@@ -18,6 +18,8 @@ NSString * const kSCPlayerEnqueueTrack = @"kSCPlayerEnqueueTrack";
 NSString * const kSCPlayerDequeueTrack = @"kSCPlayerDequeueTrack";
 NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
 
+NSString * const kSCPlayerUpdatePlayheadProgressKey = @"progress";
+
 @interface SCPlayer	()
 @property (assign) dispatch_queue_t scPlayerQueue;
 @property (strong) AVQueuePlayer *currentAudioPlayer;
@@ -155,7 +157,8 @@ NSString * const kSCPlayerClearQueue= @"kSCPlayerClearQueue";
   __weak SCPlayer *weakSelf = self;
   self.currentPlaybackTimeObserver = [self.currentAudioPlayer addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:self.scPlayerQueue usingBlock:^(CMTime time) {
     dispatch_async(dispatch_get_main_queue(), ^{
-      [[NSNotificationCenter defaultCenter] postNotificationName:kSCPlayerUpdatePlayhead object:weakSelf.currentTrack userInfo:nil];
+      [[NSNotificationCenter defaultCenter] postNotificationName:kSCPlayerUpdatePlayhead object:weakSelf.currentTrack userInfo:@{kSCPlayerUpdatePlayheadProgressKey: @((CMTimeGetSeconds(time) * 1000)/weakSelf.currentTrack.durationInMilliseconds)}];
+	  
       if (!CMTimeCompare(time, weakSelf.currentAudioPlayer.currentItem.duration)) {
         SCTrack *track = [weakSelf nextTrack];
         if (track && weakSelf.autoplay) {

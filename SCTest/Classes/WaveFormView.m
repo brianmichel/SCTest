@@ -9,6 +9,8 @@
 #import "WaveFormView.h"
 #import "FSNConnection.h"
 
+#define kWaveFormViewDefaultWaveFormColor [Theme standardDarkColorWithAlpha:0.11]
+
 @interface WaveFormView ()
 @property (strong) FSNConnection *currentConnection;
 @property (strong) NSDictionary *currentSampleDict;
@@ -18,6 +20,8 @@
 
 @synthesize waveFormImage = _waveFormImage;
 @synthesize waveFormURL = _waveFormURL;
+@synthesize waveFormColor = _waveFormColor;
+@synthesize progress = _progress;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -26,6 +30,8 @@
         // Initialization code
       self.backgroundColor = [UIColor clearColor];
 	  self.clipsToBounds = YES;
+	  _waveFormColor = kWaveFormViewDefaultWaveFormColor;
+	  _progress = 0.0;
     }
     return self;
 }
@@ -43,7 +49,7 @@
   CGContextSaveGState(ctx);
   {
     CGContextSetLineWidth(ctx, 1);
-    CGContextSetStrokeColorWithColor(ctx, [Theme standardDarkColorWithAlpha:0.11].CGColor);
+    CGContextSetStrokeColorWithColor(ctx, self.waveFormColor.CGColor);
     
     NSInteger numSamples = [samples count] / self.frame.size.width;
     NSInteger sampleAccumulatorStartPosition = 0;
@@ -69,6 +75,18 @@
     CGContextStrokePath(ctx);
   }
   CGContextRestoreGState(ctx);
+  
+  if (self.progress >= 0) {
+	CGContextSaveGState(ctx);
+	{
+	  CGContextSetBlendMode(ctx, kCGBlendModeSourceIn);
+	  CGFloat width = self.frame.size.width * self.progress;
+	  CGRect progressRect = CGRectMake(0, 0, width, self.frame.size.height);
+	  CGContextSetFillColorWithColor(ctx, [Theme soundCloudOrangeWithAlpha:1.0].CGColor);
+	  CGContextFillRect(ctx, progressRect);
+	}
+	CGContextRestoreGState(ctx);
+  }
 }
 
 #pragma mark - Setters / Getters
@@ -119,6 +137,24 @@
 
 - (UIImage *)waveFormImage {
   return _waveFormImage;
+}
+
+- (void)setWaveFormColor:(UIColor *)waveFormColor {
+  _waveFormColor = waveFormColor ? waveFormColor : kWaveFormViewDefaultWaveFormColor;
+  [self setNeedsDisplay];
+}
+
+- (UIColor *)waveFormColor {
+  return _waveFormColor;
+}
+
+- (void)setProgress:(double)progress {
+  _progress = progress > 1.0 ? 1.0 : progress;
+  [self setNeedsDisplay];
+}
+
+- (double)progress {
+  return _progress;
 }
 
 @end

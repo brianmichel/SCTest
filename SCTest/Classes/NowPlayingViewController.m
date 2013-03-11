@@ -46,7 +46,7 @@
   self.view.layer.shadowRadius = 4.0;
   
   
-  self.miniPlayer.frame = CGRectMake(0, 0, self.view.frame.size.width, 50);
+  self.miniPlayer.frame = CGRectMake(0, 0, self.view.frame.size.width, 30);
   self.imageView.frame = CGRectMake(0, CGRectGetMaxY(self.miniPlayer.frame), self.view.frame.size.width, self.view.frame.size.width);
   
   [self.view addSubview:self.miniPlayer];
@@ -83,13 +83,13 @@
   switch (panGesture.state) {
     case UIGestureRecognizerStateBegan:
     case UIGestureRecognizerStateChanged: {
-      if (location.y >= 200) {
+      if (location.y >= self.view.superview.frame.size.height - 350) {
         self.view.frame = CGRectMake(self.view.frame.origin.x, location.y, self.view.frame.size.width, self.view.frame.size.height);
       }
     } break;
     case UIGestureRecognizerStateEnded:
     case UIGestureRecognizerStateFailed: {
-      CGFloat originToCloseTo = location.y < self.view.superview.frame.size.height/2 ? 200 : self.view.superview.frame.size.height - 50;
+      CGFloat originToCloseTo = location.y < self.view.superview.frame.size.height/2 ? self.view.superview.frame.size.height - 350 : self.view.superview.frame.size.height - 30;
       [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         self.view.frame = CGRectMake(self.view.frame.origin.x, originToCloseTo, self.view.frame.size.width, self.view.frame.size.height);
       } completion:^(BOOL finished) {

@@ -9,13 +9,9 @@
 #import "DiscoveryViewController.h"
 #import "UserActivitiesViewController.h"
 #import "UserProfileViewController.h"
-#import "NowPlayingViewController.h"
-#import "TouchPassingWindow.h"
 
 @interface DiscoveryViewController()
 @property (strong) UserActivitiesViewController *activitiesVC;
-@property (strong) NowPlayingViewController *nowPlayingVC;
-@property (strong) TouchPassingWindow *tpWindow;
 @end
 
 @implementation DiscoveryViewController
@@ -43,20 +39,13 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"soundcloud-icon-gray"]];
     [imageView sizeToFit];
     self.navigationItem.titleView = imageView;
-    
-    self.nowPlayingVC = [[NowPlayingViewController alloc] initWithNibName:nil bundle:nil];
-    self.tpWindow = [[TouchPassingWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.tpWindow.rootViewController = self.nowPlayingVC;
-    self.tpWindow.hidden = NO;
   }
   return self;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.activitiesVC.view.frame = self.view.bounds;
-  self.nowPlayingVC.view.frame = CGRectMake(0, CGRectGetMaxY(self.tpWindow.bounds) - 370, self.view.bounds.size.width, 370);
-  
+  self.activitiesVC.view.frame = self.view.bounds;  
   [self.view addSubview:self.activitiesVC.view];
 }
 
