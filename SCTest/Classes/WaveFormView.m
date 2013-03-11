@@ -11,6 +11,10 @@
 
 #define kWaveFormViewDefaultWaveFormColor [Theme standardDarkColorWithAlpha:0.11]
 
+static inline float lerp(float v0, float v1, float t) {
+  return v0 + (v1 - v0) * t;
+}
+
 @interface WaveFormView ()
 @property (strong) FSNConnection *currentConnection;
 @property (strong) NSDictionary *currentSampleDict;
@@ -49,21 +53,24 @@
   CGContextSaveGState(ctx);
   {
     CGContextSetLineWidth(ctx, 1);
+
     CGContextSetStrokeColorWithColor(ctx, self.waveFormColor.CGColor);
     
-    NSInteger numSamples = [samples count] / self.frame.size.width;
+    CGFloat numSamples = ([samples count] - 1) / (self.frame.size.width - 1);
     NSInteger sampleAccumulatorStartPosition = 0;
+	
 	//resample data to fit our width
-    for (NSInteger i = 0; i < self.frame.size.width; i++) {
-      CGFloat lineHeightAccumulator = 0;
-      for (NSInteger j = sampleAccumulatorStartPosition; j <  (sampleAccumulatorStartPosition + numSamples); j++) {
-        NSNumber *sample = samples[j];
-        CGFloat lineHeight = ([sample floatValue] / [sampleHeight floatValue]) * self.frame.size.height;
-        lineHeightAccumulator += lineHeight;
-      }
-      
-      CGFloat lineHeight = lineHeightAccumulator / numSamples;
-      
+	//same resampling as waveform.js http://waveformjs.org/
+    for (NSInteger i = 1; i < self.frame.size.width; i++) {
+	  CGFloat tmp = i * numSamples;
+	  NSInteger before = floor(tmp);
+	  NSInteger after = ceil(tmp);
+	  CGFloat atPoint = tmp - before;
+	  NSNumber *beforeSample = samples[before];
+	  NSNumber *afterSample = samples[after];
+	  CGFloat lineHeight = lerp([beforeSample floatValue], [afterSample floatValue], atPoint);
+	  lineHeight = (lineHeight/[sampleHeight floatValue]) * self.frame.size.height;
+
       CGMutablePathRef path = CGPathCreateMutable();
       CGPathMoveToPoint(path, NULL, i, CGRectGetMaxY(self.frame));
       CGPathAddLineToPoint(path, NULL, i, CGRectGetMaxY(self.frame) - lineHeight);
