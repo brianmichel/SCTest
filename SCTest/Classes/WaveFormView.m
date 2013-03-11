@@ -51,7 +51,7 @@ static inline float lerp(float v0, float v1, float t) {
     CGContextSetLineWidth(ctx, 1);
     CGContextSetStrokeColorWithColor(ctx, kWaveFormViewDefaultWaveFormColor.CGColor);
     
-    NSInteger numSamples = [samples count] / self.frame.size.width;
+    CGFloat numSamples = [samples count] / self.frame.size.width;
     NSInteger sampleAccumulatorStartPosition = 0;
 	
 	//resample data to fit our width
